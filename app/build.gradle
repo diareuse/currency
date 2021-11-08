@@ -3,12 +3,39 @@ plugins {
 }
 
 android {
+
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
     buildFeatures {
         viewBinding true
+        compose true
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.0.5'
+    }
+
+    packagingOptions {
+        pickFirst 'META-INF/AL2.0'
+        pickFirst 'META-INF/LGPL2.1'
+    }
+
 }
 
 dependencies {
+
+    implementation 'androidx.compose.ui:ui:1.0.5'
+    implementation 'androidx.compose.ui:ui-tooling:1.0.5'
+    implementation 'androidx.compose.foundation:foundation:1.0.5'
+    implementation 'androidx.compose.material:material:1.0.5'
+    implementation 'androidx.activity:activity-compose:1.4.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0'
+
+    androidTestImplementation 'androidx.compose.ui:ui-test-junit4:1.0.5'
+    androidTestImplementation 'androidx.compose.ui:ui-test-manifest:1.0.5'
 
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'com.google.truth:truth:1.1.3'
