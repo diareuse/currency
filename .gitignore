@@ -7,3 +7,5 @@ local.properties
 *.apk
 data
 *.orig
+keystore.properties
+keystore.jks

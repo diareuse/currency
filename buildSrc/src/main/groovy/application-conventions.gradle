@@ -1,0 +1,56 @@
+plugins {
+    id 'com.android.application'
+    id 'common-conventions'
+}
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+
+    defaultConfig {
+        applicationId "org.billthefarmer.currency"
+        versionCode 139
+        versionName "1.39"
+    }
+
+    signingConfigs {
+
+        root {
+            storeFile rootProject.file("keystore.jks")
+            storePassword keystoreProperties["store.password"]
+        }
+
+        debug {
+            initWith(root)
+            keyAlias keystoreProperties["key.debug.name"]
+            keyPassword keystoreProperties["key.debug.password"]
+        }
+
+        release {
+            initWith(root)
+            keyAlias keystoreProperties["key.release.name"]
+            keyPassword keystoreProperties["key.release.password"]
+        }
+
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled = true
+            shrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            signingConfig = signingConfigs.release
+        }
+
+        debug {
+            applicationIdSuffix ".dev"
+            signingConfig = signingConfigs.debug
+        }
+
+    }
+
+}
