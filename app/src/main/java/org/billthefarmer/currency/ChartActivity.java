@@ -39,7 +39,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -440,54 +439,51 @@ public class ChartActivity extends Activity
     public boolean onOptionsItemSelected(MenuItem item) {
         // Get id
         int id = item.getItemId();
-        switch (id) {
-            // Home
-            case android.R.id.home:
-                finish();
-                break;
+        // Home
+        if (id == android.R.id.home) {
+            finish();
 
             // Invert chart
-            case R.id.action_invert:
-                return onInvertClick();
+        } else if (id == R.id.action_invert) {
+            return onInvertClick();
 
             // New chart
-            case R.id.action_new_chart:
-                return onNewClick();
+        } else if (id == R.id.action_new_chart) {
+            return onNewClick();
 
             // Refresh chart
-            case R.id.action_refresh:
-                return onRefreshClick(ECB_QUARTER_URL);
+        } else if (id == R.id.action_refresh) {
+            return onRefreshClick(ECB_QUARTER_URL);
 
             // Refresh with historical data
-            case R.id.action_hist:
-                return onRefreshClick(ECB_HIST_URL);
+        } else if (id == R.id.action_hist) {
+            return onRefreshClick(ECB_HIST_URL);
 
             // Week
-            case R.id.action_week:
-                return onWeekClick(item);
+        } else if (id == R.id.action_week) {
+            return onWeekClick(item);
 
             // Month
-            case R.id.action_month:
-                return onMonthClick(item);
+        } else if (id == R.id.action_month) {
+            return onMonthClick(item);
 
             // Quarter
-            case R.id.action_quarter:
-                return onQuarterClick(item);
+        } else if (id == R.id.action_quarter) {
+            return onQuarterClick(item);
 
             // Year
-            case R.id.action_year:
-                return onYearClick(item);
+        } else if (id == R.id.action_year) {
+            return onYearClick(item);
 
             // Years
-            case R.id.action_years:
-                return onYearsClick(item);
+        } else if (id == R.id.action_years) {
+            return onYearsClick(item);
 
             // Max
-            case R.id.action_max:
-                return onMaxClick(item);
-
-            default:
-                return false;
+        } else if (id == R.id.action_max) {
+            return onMaxClick(item);
+        } else {
+            return false;
         }
 
         return true;
