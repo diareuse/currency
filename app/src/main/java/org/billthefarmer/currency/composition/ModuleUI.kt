@@ -1,6 +1,6 @@
 package org.billthefarmer.currency.composition
 
-import org.billthefarmer.currency.composition.core.Compositor
+import org.billthefarmer.composition.core.Compositor
 
 fun Compositor.Builder.uiModule() = apply {
 

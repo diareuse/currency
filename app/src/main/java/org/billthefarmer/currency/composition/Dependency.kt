@@ -1,8 +1,8 @@
 package org.billthefarmer.currency.composition
 
-import org.billthefarmer.currency.composition.core.Alias
-import org.billthefarmer.currency.composition.core.buildCompositor
-import org.billthefarmer.currency.composition.core.get
+import org.billthefarmer.composition.core.Alias
+import org.billthefarmer.composition.core.buildCompositor
+import org.billthefarmer.composition.core.get
 
 object Dependency {
 

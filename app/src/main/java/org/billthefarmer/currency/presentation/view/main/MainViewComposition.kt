@@ -1,6 +1,6 @@
 package org.billthefarmer.currency.presentation.view.main
 
-import org.billthefarmer.currency.composition.core.Alias
+import org.billthefarmer.composition.core.Alias
 import org.billthefarmer.currency.presentation.model.MainViewModel
 import org.billthefarmer.currency.presentation.view.ViewComposition
 
