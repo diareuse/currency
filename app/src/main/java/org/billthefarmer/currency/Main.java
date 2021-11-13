@@ -638,42 +638,41 @@ public class Main extends Activity
     public boolean onOptionsItemSelected(MenuItem item) {
         // Get id
         int id = item.getItemId();
-        switch (id) {
-            // Add
-            case R.id.action_add:
-                return onAddClick();
+        // Add
+        if (id == R.id.action_add) {
+            return onAddClick();
 
             // Refresh
-            case R.id.action_refresh:
-                return onRefreshClick();
+        } else if (id == R.id.action_refresh) {
+            return onRefreshClick();
 
             // Update
-            case R.id.action_update:
-                return onUpdateClick();
+        } else if (id == R.id.action_update) {
+            return onUpdateClick();
 
             // Help
-            case R.id.action_help:
-                return onHelpClick();
+        } else if (id == R.id.action_help) {
+            return onHelpClick();
 
             // Settings
-            case R.id.action_settings:
-                return onSettingsClick();
+        } else if (id == R.id.action_settings) {
+            return onSettingsClick();
 
             // Clear
-            case R.id.action_clear:
-                return onClearClick();
+        } else if (id == R.id.action_clear) {
+            return onClearClick();
 
             // Remove
-            case R.id.action_remove:
-                return onRemoveClick();
+        } else if (id == R.id.action_remove) {
+            return onRemoveClick();
 
             // Chart
-            case R.id.action_chart:
-                return onChartClick();
+        } else if (id == R.id.action_chart) {
+            return onChartClick();
 
             // Copy
-            case R.id.action_copy:
-                return onCopyClick();
+        } else if (id == R.id.action_copy) {
+            return onCopyClick();
         }
 
         return false;
