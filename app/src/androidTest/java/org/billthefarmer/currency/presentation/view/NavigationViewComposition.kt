@@ -13,6 +13,7 @@ class NavigationViewComposition : ComposeTest() {
     fun hasNavigation() = inCompose {
         val composition: ViewComposition<MainViewModel> = composed(Main)
         composition.Compose(model = MainViewModel())
+    } asserts {
         onNodeWithTag("navigation").assertExists()
     }
 
