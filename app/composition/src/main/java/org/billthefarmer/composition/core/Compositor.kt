@@ -3,23 +3,20 @@ package org.billthefarmer.composition.core
 import org.billthefarmer.composition.holder.InstanceCollector
 import org.billthefarmer.composition.holder.InstanceHolder
 import org.billthefarmer.composition.holder.MutableInstanceHolder
-import org.billthefarmer.composition.instance.Creator
-import org.billthefarmer.composition.instance.CreatorFactory
-import org.billthefarmer.composition.instance.FactoryCreator
-import org.billthefarmer.composition.instance.SingleCreator
+import org.billthefarmer.composition.instance.*
 
 class Compositor(
     private val registry: InstanceHolder<Class<*>, Creator<*>>
 ) : CompositionScope {
 
-    override fun <T> get(type: Class<T>, alias: Alias?): T {
+    override fun <T> get(type: Class<T>, alias: Alias?, params: Array<out Any?>): T {
         val creator = registry.get(type, alias)
         requireNotNull(creator) {
             "Creator for class=$type and alias=$alias is null. Did you register it?"
         }
 
         @Suppress("UNCHECKED_CAST")
-        return creator.getValue(this) as T
+        return creator.getValue(this, Parameters(params)) as T
     }
 
     // assume no side effects

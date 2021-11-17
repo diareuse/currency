@@ -4,17 +4,17 @@ import org.billthefarmer.composition.core.CompositionScope
 
 class SingleCreator<T : Any>(private val factory: CreatorFactory<T>) : Creator<T> {
 
-    private var instance: T? = null
+    private val instances: HashMap<Parameters, T> = HashMap()
 
-    override fun getValue(scope: CompositionScope): T {
-        return instance ?: synchronized(this) {
-            instance ?: return createInstance(scope).also { newInstance ->
-                instance = newInstance
+    override fun getValue(scope: CompositionScope, parameters: Parameters): T {
+        return instances[parameters] ?: synchronized(this) {
+            instances[parameters] ?: createInstance(scope, parameters).also {
+                instances[parameters] = it
             }
         }
     }
 
-    private fun createInstance(scope: CompositionScope) =
-        scope.run { factory.run { create() } }
+    private fun createInstance(scope: CompositionScope, parameters: Parameters) =
+        scope.run { factory.run { create(parameters) } }
 
 }

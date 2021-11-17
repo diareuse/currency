@@ -1,5 +1,6 @@
 package org.billthefarmer.composition.instance
 
+import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
 import org.billthefarmer.composition.tooling.getNoopScope
 import org.junit.Test
@@ -37,6 +38,19 @@ class SingleCreatorTest {
                 assertThat(instance).isSameInstanceAs(next)
             }
         }
+    }
+
+    @Test
+    fun `returns different value when used with different parameters`() {
+        val creator = SingleCreator { (value: Int) -> ParametersTest.Value(value) }
+        val scope = getNoopScope()
+        var value = creator.getValue(scope, Parameters(1))
+
+        Truth.assertThat(value).isEqualTo(ParametersTest.Value(1))
+
+        value = creator.getValue(scope, Parameters(2))
+
+        Truth.assertThat(value).isEqualTo(ParametersTest.Value(2))
     }
 
 }

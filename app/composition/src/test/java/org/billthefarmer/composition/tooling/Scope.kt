@@ -5,7 +5,7 @@ import org.billthefarmer.composition.core.CompositionScope
 
 fun getNoopScope(): CompositionScope {
     return object : CompositionScope {
-        override fun <T> get(type: Class<T>, alias: Alias?): T {
+        override fun <T> get(type: Class<T>, alias: Alias?, params: Array<out Any?>): T {
             throw NotImplementedError()
         }
     }

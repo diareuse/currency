@@ -9,7 +9,7 @@ class CompositionScopeTest {
     fun `scope retrieves value`() {
         val instance = Any()
         val scope = object : CompositionScope {
-            override fun <T> get(type: Class<T>, alias: Alias?): T {
+            override fun <T> get(type: Class<T>, alias: Alias?, params: Array<out Any?>): T {
                 assertThat(type).isSameInstanceAs(instance::class.java)
                 assertThat(alias).isNull()
                 return instance as T
