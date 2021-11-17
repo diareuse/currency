@@ -2,4 +2,6 @@ package org.billthefarmer.composition.instance
 
 import org.billthefarmer.composition.core.CompositionScope
 
-typealias CreatorFactory<T> = CompositionScope.() -> T
+fun interface CreatorFactory<T : Any> {
+    fun CompositionScope.create(): T
+}

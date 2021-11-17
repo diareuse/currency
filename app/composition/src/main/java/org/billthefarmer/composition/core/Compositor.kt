@@ -23,7 +23,7 @@ class Compositor(
     }
 
     // assume no side effects
-    fun getKeys(): Map<Class<*>, List<Alias?>> {
+    internal fun getKeys(): Map<Class<*>, List<Alias?>> {
         return registry.getKeys()
     }
 
@@ -53,10 +53,10 @@ inline fun buildCompositor(builder: Compositor.Builder.() -> Unit): Compositor {
 
 inline fun <reified T : Any> Compositor.Builder.single(
     alias: Alias? = null,
-    noinline creator: CreatorFactory<T>
+    creator: CreatorFactory<T>
 ) = single(T::class.java, alias, creator)
 
 inline fun <reified T : Any> Compositor.Builder.factory(
     alias: Alias? = null,
-    noinline creator: CreatorFactory<T>
+    creator: CreatorFactory<T>
 ) = factory(T::class.java, alias, creator)
