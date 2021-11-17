@@ -1,6 +1,7 @@
 package org.billthefarmer.currency.composition
 
 import androidx.test.platform.app.InstrumentationRegistry
+import org.billthefarmer.composition.extra.ParametersNotSpecifiedException
 import org.junit.BeforeClass
 import org.junit.Test
 
@@ -24,7 +25,11 @@ class DependencyTest {
 
         for ((type, aliases) in entries) {
             for (alias in aliases) {
-                compositor.get(type, alias)
+                try {
+                    compositor.get(type, alias)
+                } catch (e: ParametersNotSpecifiedException) {
+                    println(e.message + " for type $type")
+                }
             }
         }
     }

@@ -24,7 +24,7 @@ class CompositionScopeDefault(
     }
 
     // assume no side effects
-    internal fun getKeys(): Map<Class<*>, List<Alias?>> {
+    fun getKeys(): Map<Class<*>, List<Alias?>> {
         return registry.getKeys()
     }
 
