@@ -11,11 +11,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import org.billthefarmer.currency.composition.composedViewModel
 import org.billthefarmer.currency.composition.rememberComposed
-import org.billthefarmer.currency.presentation.model.MainViewModel
 import org.billthefarmer.currency.presentation.view.dashboard.Dashboard
 import org.billthefarmer.currency.presentation.view.dashboard.DashboardViewComposition
 import org.billthefarmer.currency.presentation.view.detail.Detail
 import org.billthefarmer.currency.presentation.view.detail.DetailViewComposition
+import org.billthefarmer.currency.ui.MainViewModel
 
 class MainViewCompositionNavigation : MainViewComposition {
 

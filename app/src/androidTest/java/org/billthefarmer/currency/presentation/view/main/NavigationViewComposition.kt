@@ -1,10 +1,10 @@
-package org.billthefarmer.currency.presentation.view
+package org.billthefarmer.currency.presentation.view.main
 
 import androidx.compose.ui.test.onNodeWithTag
 import org.billthefarmer.currency.composition.composed
-import org.billthefarmer.currency.presentation.model.MainViewModel
-import org.billthefarmer.currency.presentation.view.main.Main
+import org.billthefarmer.currency.presentation.view.ViewComposition
 import org.billthefarmer.currency.tooling.ComposeTest
+import org.billthefarmer.currency.ui.MainViewModel
 import org.junit.Test
 
 class NavigationViewComposition : ComposeTest() {
