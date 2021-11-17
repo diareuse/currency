@@ -2,6 +2,7 @@ package org.billthefarmer.currency.domain.adapter
 
 import com.google.common.truth.Truth.assertThat
 import org.billthefarmer.currency.domain.model.ExchangeRate
+import org.billthefarmer.currency.domain.model.PersistedCurrency
 import org.billthefarmer.currency.domain.model.PersistedRate
 import org.billthefarmer.currency.domain.network.NetworkServiceImplTest
 import org.billthefarmer.currency.tooling.MockableTest
@@ -39,6 +40,26 @@ class ExchangeRatesAdapterImplTest : MockableTest() {
         val expected = ExchangeRate(Currency.getInstance("USD"), 0.0, date)
 
         assertThat(result).isEqualTo(expected)
+    }
+
+    @Test
+    fun `returns translated object to persisted rate`() {
+        val date = Date()
+        val expected = ExchangeRate(Currency.getInstance("USD"), 0.0, date)
+        val result = adapter.adapt(expected)
+        val persisted = PersistedRate(Currency.getInstance("USD"), 0.0, date)
+
+        assertThat(result).isEqualTo(persisted)
+    }
+
+    @Test
+    fun `returns translated object to persisted currency`() {
+        val date = Date()
+        val expected = ExchangeRate(Currency.getInstance("USD"), 0.0, date)
+        val result = adapter.adaptCurrency(expected)
+        val persisted = PersistedCurrency(Currency.getInstance("USD"))
+
+        assertThat(result).isEqualTo(persisted)
     }
 
     companion object {

@@ -1,6 +1,7 @@
 package org.billthefarmer.currency.domain.adapter
 
 import org.billthefarmer.currency.domain.model.ExchangeRate
+import org.billthefarmer.currency.domain.model.PersistedCurrency
 import org.billthefarmer.currency.domain.model.PersistedRate
 import org.billthefarmer.currency.domain.tooling.optionalTag
 import org.billthefarmer.currency.domain.tooling.skipEntry
@@ -27,6 +28,14 @@ class ExchangeRatesAdapterImpl(
         parser.setInput(stream, null)
         parser.nextTag()
         return xml.adapt(parser)
+    }
+
+    override fun adapt(rate: ExchangeRate): PersistedRate {
+        return PersistedRate(rate.currency, rate.rate, rate.time)
+    }
+
+    override fun adaptCurrency(rate: ExchangeRate): PersistedCurrency {
+        return PersistedCurrency(rate.currency)
     }
 
     private class XmlAdapter(
