@@ -3,19 +3,17 @@ package org.billthefarmer.currency.domain.rate
 import org.billthefarmer.currency.domain.adapter.ExchangeRatesAdapter
 import org.billthefarmer.currency.domain.database.DaoRate
 import org.billthefarmer.currency.domain.model.ExchangeRate
-import org.billthefarmer.currency.domain.tooling.setToDayEnd
-import org.billthefarmer.currency.domain.tooling.setToDayStart
-import java.util.*
+import org.billthefarmer.currency.domain.time.TimeRangeFactory
 
 class ExchangeRatesDatabase(
     private val rate: DaoRate,
-    private val adapter: ExchangeRatesAdapter
+    private val adapter: ExchangeRatesAdapter,
+    private val timeRange: TimeRangeFactory
 ) : ExchangeRates {
 
     override fun getCurrentRates(): List<ExchangeRate> {
-        val dayStart = Calendar.getInstance().setToDayStart().timeInMillis
-        val dayEnd = Calendar.getInstance().setToDayEnd().timeInMillis
-        val stored = rate.getRatesInRange(dayStart, dayEnd)
+        val range = timeRange.getTimeRange()
+        val stored = rate.getRatesInRange(range.first, range.last)
         return stored.map(adapter::adapt)
     }
 

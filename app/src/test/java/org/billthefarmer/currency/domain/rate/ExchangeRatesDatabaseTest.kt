@@ -25,7 +25,7 @@ class ExchangeRatesDatabaseTest : MockableTest() {
 
     @Before
     fun prepare() {
-        rates = ExchangeRatesDatabase(dao, adapter)
+        rates = ExchangeRatesDatabase(dao, adapter) { LongRange.EMPTY }
     }
 
     @Test(expected = IllegalStateException::class)
