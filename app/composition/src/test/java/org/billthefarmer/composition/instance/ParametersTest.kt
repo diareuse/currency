@@ -1,6 +1,9 @@
 package org.billthefarmer.composition.instance
 
 import com.google.common.truth.Truth
+import org.billthefarmer.composition.extra.Parameters
+import org.billthefarmer.composition.extra.ParametersNotSpecifiedException
+import org.billthefarmer.composition.extra.TypeMismatchException
 import org.billthefarmer.composition.tooling.getNoopScope
 import org.junit.Test
 
@@ -8,7 +11,7 @@ class ParametersTest {
 
     @Test
     fun `returns value when used with parameters`() {
-        val creator = SingleCreator { (value: Int) -> Value(value) }
+        val creator = CreatorSingle { (value: Int) -> Value(value) }
         val scope = getNoopScope()
 
         val value = creator.getValue(scope, Parameters(1))
@@ -17,7 +20,7 @@ class ParametersTest {
 
     @Test
     fun `returns value even if provided with more parameters`() {
-        val creator = SingleCreator { (value: Int) -> Value(value) }
+        val creator = CreatorSingle { (value: Int) -> Value(value) }
         val scope = getNoopScope()
         val value = creator.getValue(scope, Parameters(1, 2, 3))
 
@@ -26,7 +29,7 @@ class ParametersTest {
 
     @Test
     fun `returns value even if provided with null`() {
-        val creator = SingleCreator { (value: Int?) -> Value(value ?: -1) }
+        val creator = CreatorSingle { (value: Int?) -> Value(value ?: -1) }
         val scope = getNoopScope()
         val value = creator.getValue(scope, Parameters(null))
 
@@ -35,14 +38,14 @@ class ParametersTest {
 
     @Test(expected = TypeMismatchException::class)
     fun `fails when provided with mismatched parameters type`() {
-        val creator = SingleCreator { (value: Int) -> Value(value) }
+        val creator = CreatorSingle { (value: Int) -> Value(value) }
         val scope = getNoopScope()
         creator.getValue(scope, Parameters("1"))
     }
 
     @Test(expected = ParametersNotSpecifiedException::class)
     fun `fails when provided with no parameters`() {
-        val creator = SingleCreator { (value: Int) -> Value(value) }
+        val creator = CreatorSingle { (value: Int) -> Value(value) }
         val scope = getNoopScope()
         creator.getValue(scope)
     }

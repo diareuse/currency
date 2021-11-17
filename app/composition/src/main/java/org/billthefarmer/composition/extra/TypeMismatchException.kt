@@ -1,3 +1,3 @@
-package org.billthefarmer.composition.instance
+package org.billthefarmer.composition.extra
 
 class TypeMismatchException(override val cause: Throwable?) : RuntimeException()

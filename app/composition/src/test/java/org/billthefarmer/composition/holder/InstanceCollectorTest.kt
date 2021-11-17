@@ -1,7 +1,7 @@
 package org.billthefarmer.composition.holder
 
 import com.google.common.truth.Truth.assertThat
-import org.billthefarmer.composition.core.Alias
+import org.billthefarmer.composition.extra.Alias
 import org.billthefarmer.composition.tooling.nextString
 import org.billthefarmer.composition.tooling.nextStringNot
 import org.junit.Test

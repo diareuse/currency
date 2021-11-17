@@ -1,7 +1,7 @@
 package org.billthefarmer.composition.tooling
 
-import org.billthefarmer.composition.core.Alias
-import org.billthefarmer.composition.core.CompositionScope
+import org.billthefarmer.composition.extra.Alias
+import org.billthefarmer.composition.scope.CompositionScope
 
 fun getNoopScope(): CompositionScope {
     return object : CompositionScope {

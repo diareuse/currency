@@ -1,7 +1,7 @@
 package org.billthefarmer.currency.composition
 
-import org.billthefarmer.composition.core.Compositor
+import org.billthefarmer.composition.scope.CompositionScopeDefault
 
-fun Compositor.Builder.uiModule() = apply {
+fun CompositionScopeDefault.Builder.uiModule() = apply {
 
 }

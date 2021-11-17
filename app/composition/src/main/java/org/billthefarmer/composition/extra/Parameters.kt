@@ -1,4 +1,4 @@
-package org.billthefarmer.composition.instance
+package org.billthefarmer.composition.extra
 
 
 @JvmInline

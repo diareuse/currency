@@ -2,14 +2,15 @@ package org.billthefarmer.composition.instance
 
 import com.google.common.truth.Truth
 import com.google.common.truth.Truth.assertThat
+import org.billthefarmer.composition.extra.Parameters
 import org.billthefarmer.composition.tooling.getNoopScope
 import org.junit.Test
 
-class SingleCreatorTest {
+class CreatorSingleTest {
 
     @Test
     fun `returns same value on single thread`() {
-        val creator = SingleCreator { Any() }
+        val creator = CreatorSingle { Any() }
         val scope = getNoopScope()
         val firstValue = creator.getValue(scope)
 
@@ -18,7 +19,7 @@ class SingleCreatorTest {
 
     @Test
     fun `returns same value on 2 concurrent threads`() {
-        val creator = SingleCreator { Any() }
+        val creator = CreatorSingle { Any() }
         val scope = getNoopScope()
         val instances = mutableListOf<Any>()
 
@@ -42,7 +43,7 @@ class SingleCreatorTest {
 
     @Test
     fun `returns different value when used with different parameters`() {
-        val creator = SingleCreator { (value: Int) -> ParametersTest.Value(value) }
+        val creator = CreatorSingle { (value: Int) -> ParametersTest.Value(value) }
         val scope = getNoopScope()
         var value = creator.getValue(scope, Parameters(1))
 

@@ -1,17 +1,17 @@
 package org.billthefarmer.currency.composition
 
 import android.content.Context
-import org.billthefarmer.composition.core.Alias
-import org.billthefarmer.composition.core.buildCompositor
-import org.billthefarmer.composition.core.factory
-import org.billthefarmer.composition.core.get
+import org.billthefarmer.composition.extra.Alias
+import org.billthefarmer.composition.scope.buildComposition
+import org.billthefarmer.composition.scope.factory
+import org.billthefarmer.composition.scope.get
 import java.lang.ref.WeakReference
 
 class Dependency private constructor(
     private val context: WeakReference<Context>
 ) {
 
-    private val compositor = buildCompositor {
+    private val compositor = buildComposition {
         factory { requireNotNull(context.get()) }
         domainModule()
         presentationModule()

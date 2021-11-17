@@ -1,16 +1,17 @@
-package org.billthefarmer.composition.core
+package org.billthefarmer.composition.scope
 
 import com.google.common.truth.Truth.assertThat
+import org.billthefarmer.composition.extra.Alias
 import org.billthefarmer.composition.tooling.nextString
 import org.billthefarmer.composition.tooling.nextStringNot
 import org.junit.Test
 
-class CompositorTest {
+class CompositionScopeDefaultTest {
 
     @Test
     fun `returns single value defined in builder`() {
         val instance = Any()
-        val compositor = buildCompositor {
+        val compositor = buildComposition {
             single { instance }
         }
 
@@ -23,7 +24,7 @@ class CompositorTest {
     fun `returns single value with alias defined in builder`() {
         val instance = Any()
         val alias = nextString()
-        val compositor = buildCompositor {
+        val compositor = buildComposition {
             single(Alias(alias)) { instance }
         }
 
@@ -36,7 +37,7 @@ class CompositorTest {
     fun `get single throws when used no alias on only aliased components`() {
         val instance = Any()
         val alias = nextString()
-        val compositor = buildCompositor {
+        val compositor = buildComposition {
             single(Alias(alias)) { instance }
         }
 
@@ -48,7 +49,7 @@ class CompositorTest {
         val instance = Any()
         val alias = nextString()
         val alias2 = nextStringNot(alias)
-        val compositor = buildCompositor {
+        val compositor = buildComposition {
             single(Alias(alias)) { instance }
         }
 
@@ -57,7 +58,7 @@ class CompositorTest {
 
     @Test
     fun `returns factory value defined in builder`() {
-        val compositor = buildCompositor {
+        val compositor = buildComposition {
             factory { Any() }
         }
 
@@ -66,7 +67,7 @@ class CompositorTest {
 
     @Test
     fun `returns factory value with alias defined in builder`() {
-        val compositor = buildCompositor {
+        val compositor = buildComposition {
             factory(Alias("")) { Any() }
         }
 
@@ -76,7 +77,7 @@ class CompositorTest {
     @Test
     fun `returns distinct single values defined in builder`() {
         val alias = nextString()
-        val compositor = buildCompositor {
+        val compositor = buildComposition {
             single(Alias(alias)) { Any() }
             single { Any() }
         }
@@ -87,7 +88,7 @@ class CompositorTest {
     @Test(expected = IllegalArgumentException::class)
     fun `get factory throws when used no alias on only aliased components`() {
         val alias = nextString()
-        val compositor = buildCompositor {
+        val compositor = buildComposition {
             factory(Alias(alias)) { Any() }
         }
 
@@ -98,7 +99,7 @@ class CompositorTest {
     fun `get factory throws when used different alias on same component`() {
         val alias = nextString()
         val alias2 = nextStringNot(alias)
-        val compositor = buildCompositor {
+        val compositor = buildComposition {
             factory(Alias(alias)) { Any() }
         }
 
@@ -108,7 +109,7 @@ class CompositorTest {
     @Test
     fun `returns resolved transitive dependency`() {
         val instance = Any()
-        val compositor = buildCompositor {
+        val compositor = buildComposition {
             single { instance }
             factory { Transitive(get()) }
         }
@@ -121,7 +122,7 @@ class CompositorTest {
 
     @Test
     fun `returns all defined keys`() {
-        val compositor = buildCompositor {
+        val compositor = buildComposition {
             single { Any() }
             single(Alias("any-single")) { Any() }
             factory { Any() }

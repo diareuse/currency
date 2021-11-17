@@ -1,7 +1,8 @@
 package org.billthefarmer.currency.composition
 
 import android.util.Xml
-import org.billthefarmer.composition.core.*
+import org.billthefarmer.composition.extra.Alias
+import org.billthefarmer.composition.scope.*
 import org.billthefarmer.currency.domain.adapter.ExchangeRatesAdapter
 import org.billthefarmer.currency.domain.adapter.ExchangeRatesAdapterImpl
 import org.billthefarmer.currency.domain.database.DatabaseStorage
@@ -19,7 +20,7 @@ val RatesToday = Alias("rate-today")
 val Rates90Days = Alias("rate-90-days")
 val RatesAllTime = Alias("rate-all-time")
 
-fun Compositor.Builder.domainModule() = apply {
+fun CompositionScopeDefault.Builder.domainModule() = apply {
     single { SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH) }
     single { Xml.newPullParser() }
     single<ExchangeRatesAdapter> { ExchangeRatesAdapterImpl(get(), get()) }

@@ -1,4 +1,4 @@
-package org.billthefarmer.composition.core
+package org.billthefarmer.composition.extra
 
 @JvmInline
 value class Alias(val name: String)

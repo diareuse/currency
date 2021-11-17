@@ -4,11 +4,11 @@ import com.google.common.truth.Truth
 import org.billthefarmer.composition.tooling.getNoopScope
 import org.junit.Test
 
-class FactoryCreatorTest {
+class CreatorFactoryTest {
 
     @Test
     fun `returns different value on single thread`() {
-        val creator = FactoryCreator { Any() }
+        val creator = CreatorFactory { Any() }
         val scope = getNoopScope()
         val firstValue = creator.getValue(scope)
 
@@ -17,7 +17,7 @@ class FactoryCreatorTest {
 
     @Test
     fun `returns different value on 2 concurrent threads`() {
-        val creator = FactoryCreator { Any() }
+        val creator = CreatorFactory { Any() }
         val scope = getNoopScope()
         val instances = mutableListOf<Any>()
 

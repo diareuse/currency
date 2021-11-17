@@ -1,8 +1,9 @@
 package org.billthefarmer.composition.instance
 
-import org.billthefarmer.composition.core.CompositionScope
+import org.billthefarmer.composition.extra.Parameters
+import org.billthefarmer.composition.scope.CompositionScope
 
-class SingleCreator<T : Any>(private val factory: CreatorFactory<T>) : Creator<T> {
+class CreatorSingle<T : Any>(private val factory: Creator.Factory<T>) : Creator<T> {
 
     private val instances: HashMap<Parameters, T> = HashMap()
 

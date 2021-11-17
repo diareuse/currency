@@ -1,6 +1,6 @@
 package org.billthefarmer.composition.holder
 
-import org.billthefarmer.composition.core.Alias
+import org.billthefarmer.composition.extra.Alias
 
 interface InstanceHolder<Type, Value> {
 

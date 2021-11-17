@@ -1,7 +1,12 @@
 package org.billthefarmer.composition.instance
 
-import org.billthefarmer.composition.core.CompositionScope
+import org.billthefarmer.composition.extra.Parameters
+import org.billthefarmer.composition.scope.CompositionScope
 
-fun interface CreatorFactory<T : Any> {
-    fun CompositionScope.create(parameters: Parameters): T
+class CreatorFactory<T : Any>(private val factory: Creator.Factory<T>) : Creator<T> {
+
+    override fun getValue(scope: CompositionScope, parameters: Parameters): T {
+        return scope.run { factory.run { create(parameters) } }
+    }
+
 }

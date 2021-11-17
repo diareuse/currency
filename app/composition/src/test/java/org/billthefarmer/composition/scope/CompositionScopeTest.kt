@@ -1,6 +1,7 @@
-package org.billthefarmer.composition.core
+package org.billthefarmer.composition.scope
 
 import com.google.common.truth.Truth.assertThat
+import org.billthefarmer.composition.extra.Alias
 import org.junit.Test
 
 class CompositionScopeTest {
