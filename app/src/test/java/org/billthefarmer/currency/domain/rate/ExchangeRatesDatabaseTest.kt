@@ -8,7 +8,7 @@ import org.billthefarmer.currency.domain.model.PersistedRate
 import org.billthefarmer.currency.tooling.MockableTest
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Matchers.anyLong
+import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.Mock
 import org.mockito.Mockito
 import java.util.*
@@ -24,7 +24,7 @@ class ExchangeRatesDatabaseTest : MockableTest() {
     lateinit var adapter: ExchangeRatesAdapter
 
     @Before
-    fun prepare() {
+    override fun prepare() {
         rates = ExchangeRatesDatabase(dao, adapter) { LongRange.EMPTY }
     }
 

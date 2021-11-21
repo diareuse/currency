@@ -1,6 +1,7 @@
 package org.billthefarmer.currency.presentation.model
 
 import android.content.Context
+import org.billthefarmer.currency.R
 import org.billthefarmer.currency.domain.model.ExchangeRate
 
 data class CurrencyModel(
@@ -11,7 +12,9 @@ data class CurrencyModel(
         val currencyCode = rate.currency.currencyCode
         val resources = context.resources
         val resourceName = "flag_${currencyCode}".lowercase()
-        return resources.getIdentifier(resourceName, "drawable", context.packageName)
+        return resources
+            .getIdentifier(resourceName, "drawable", context.packageName)
+            .takeUnless { it == 0 } ?: R.drawable.flag_ext
     }
 
 }

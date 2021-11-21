@@ -11,6 +11,7 @@ class ExchangeRatesErrorDefault(
         return try {
             source.getCurrentRates()
         } catch (e: Throwable) {
+            e.printStackTrace()
             onError.getCurrentRates()
         }
     }

@@ -19,7 +19,7 @@ class ExchangeRatesErrorDefaultTest : MockableTest() {
     lateinit var onError: ExchangeRates
 
     @Before
-    fun prepare() {
+    override fun prepare() {
         rates = ExchangeRatesErrorDefault(source, onError)
     }
 

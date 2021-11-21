@@ -32,7 +32,7 @@ class ExchangeRatesSavingTest : MockableTest() {
     lateinit var source: ExchangeRates
 
     @Before
-    fun prepare() {
+    override fun prepare() {
         mockAdapter()
         mockSource()
         rates = ExchangeRatesSaving(source, currency, rate, adapter)

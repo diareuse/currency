@@ -57,7 +57,6 @@ class DashboardViewCompositionScaffold(
                     modifier = Modifier
                         .testTag("scaffold-content")
                         .weight(1f)
-                        .padding(32.dp)
                 ) {
                     content.Compose(model = model)
                 }

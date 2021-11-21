@@ -73,7 +73,7 @@ private fun CompositionScope.createExchangeRates(
     database = ExchangeRatesErrorDefault(database, ExchangeRatesEmpty())
 
     var network: ExchangeRates = ExchangeRatesNetwork(url, get(), get())
-    network = ExchangeRatesSaving(network, get(), get(), get())
+    network = ExchangeRatesErrorDefault(ExchangeRatesSaving(network, get(), get(), get()), network)
     network = ExchangeRatesEmptyFork(database, network)
     network = ExchangeRatesErrorDefault(network, database)
 

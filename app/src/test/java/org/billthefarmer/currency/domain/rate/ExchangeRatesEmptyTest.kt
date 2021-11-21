@@ -10,7 +10,7 @@ class ExchangeRatesEmptyTest : MockableTest() {
     private lateinit var rates: ExchangeRatesEmpty
 
     @Before
-    fun prepare() {
+    override fun prepare() {
         rates = ExchangeRatesEmpty()
     }
 

@@ -17,7 +17,7 @@ class ExchangeRatesCacheTest : MockableTest() {
     lateinit var source: ExchangeRates
 
     @Before
-    fun prepare() {
+    override fun prepare() {
         cache = ExchangeRatesCache(source)
     }
 

@@ -52,7 +52,10 @@ class DashboardViewCompositionInput : DashboardViewComposition {
         value: String,
         onValueChange: (String) -> Unit
     ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            modifier = Modifier.height(IntrinsicSize.Max),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             Image(
                 modifier = Modifier
                     .fillMaxHeight()

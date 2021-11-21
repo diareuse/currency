@@ -24,7 +24,7 @@ class ExchangeRatesNetworkTest : MockableTest() {
     lateinit var adapter: ExchangeRatesAdapter
 
     @Before
-    fun prepare() {
+    override fun prepare() {
         url = URL("https://localhost")
         rates = ExchangeRatesNetwork(url, network, adapter)
 
