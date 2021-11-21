@@ -8,7 +8,6 @@ import org.billthefarmer.currency.domain.model.ExchangeRate
 import org.billthefarmer.currency.presentation.model.CurrencyModel
 import org.billthefarmer.currency.tooling.ComposeTest
 import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
-import org.junit.Before
 import org.junit.Test
 import java.util.*
 import kotlin.random.Random.Default.nextDouble
@@ -18,8 +17,7 @@ class DashboardViewCompositionInputTest : ComposeTest() {
     private lateinit var view: DashboardViewCompositionInput
     private lateinit var viewModel: DashboardViewModel
 
-    @Before
-    fun prepare() {
+    override fun prepare() {
         viewModel = DashboardViewModel()
         view = DashboardViewCompositionInput()
     }

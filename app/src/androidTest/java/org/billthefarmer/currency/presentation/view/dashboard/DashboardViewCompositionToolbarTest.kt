@@ -4,7 +4,6 @@ import androidx.compose.ui.test.*
 import androidx.compose.ui.unit.dp
 import org.billthefarmer.currency.tooling.ComposeTest
 import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
-import org.junit.Before
 import org.junit.Test
 
 class DashboardViewCompositionToolbarTest : ComposeTest() {
@@ -12,8 +11,7 @@ class DashboardViewCompositionToolbarTest : ComposeTest() {
     private lateinit var viewModel: DashboardViewModel
     private lateinit var view: DashboardViewCompositionToolbar
 
-    @Before
-    fun prepare() {
+    override fun prepare() {
         viewModel = DashboardViewModel()
         view = DashboardViewCompositionToolbar()
     }

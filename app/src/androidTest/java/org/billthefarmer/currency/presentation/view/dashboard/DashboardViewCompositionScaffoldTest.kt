@@ -6,7 +6,6 @@ import androidx.compose.ui.test.onNodeWithTag
 import org.billthefarmer.currency.presentation.view.ViewCompositionNoop
 import org.billthefarmer.currency.tooling.ComposeTest
 import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
-import org.junit.Before
 import org.junit.Test
 
 class DashboardViewCompositionScaffoldTest : ComposeTest() {
@@ -14,8 +13,7 @@ class DashboardViewCompositionScaffoldTest : ComposeTest() {
     private lateinit var viewModel: DashboardViewModel
     private lateinit var view: DashboardViewCompositionScaffold
 
-    @Before
-    fun prepare() {
+    override fun prepare() {
         viewModel = DashboardViewModel()
         view = DashboardViewCompositionScaffold(
             ViewCompositionNoop(),
