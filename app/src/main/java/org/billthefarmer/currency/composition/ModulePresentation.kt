@@ -4,14 +4,10 @@ import org.billthefarmer.composition.scope.CompositionScope
 import org.billthefarmer.composition.scope.CompositionScopeDefault
 import org.billthefarmer.composition.scope.factory
 import org.billthefarmer.currency.presentation.view.ViewCompositionNoop
-import org.billthefarmer.currency.presentation.view.dashboard.Dashboard
-import org.billthefarmer.currency.presentation.view.dashboard.DashboardViewComposition
+import org.billthefarmer.currency.presentation.view.dashboard.*
 import org.billthefarmer.currency.presentation.view.detail.Detail
 import org.billthefarmer.currency.presentation.view.detail.DetailViewComposition
-import org.billthefarmer.currency.presentation.view.main.Main
-import org.billthefarmer.currency.presentation.view.main.MainViewComposition
-import org.billthefarmer.currency.presentation.view.main.MainViewCompositionNavController
-import org.billthefarmer.currency.presentation.view.main.MainViewCompositionNavigation
+import org.billthefarmer.currency.presentation.view.main.*
 
 fun CompositionScopeDefault.Builder.presentationModule() = apply {
     factory(Main) { createMainViewComposition() }
@@ -20,7 +16,14 @@ fun CompositionScopeDefault.Builder.presentationModule() = apply {
 }
 
 private fun CompositionScope.createDashboardViewComposition(): DashboardViewComposition {
-    return ViewCompositionNoop()
+    return DashboardViewCompositionScaffold(
+        toolbar = DashboardViewCompositionToolbar(),
+        content = DashboardViewCompositionContent(),
+        input = DashboardViewCompositionCurrencyFork(
+            onSelected = DashboardViewCompositionInput(),
+            onMissing = DashboardViewCompositionInputHint(),
+        )
+    )
 }
 
 private fun CompositionScope.createDetailViewComposition(): DetailViewComposition {
@@ -30,5 +33,6 @@ private fun CompositionScope.createDetailViewComposition(): DetailViewCompositio
 private fun CompositionScope.createMainViewComposition(): MainViewComposition {
     var result: MainViewComposition = MainViewCompositionNavigation()
     result = MainViewCompositionNavController(result)
+    result = MainViewCompositionTheme(result)
     return result
 }

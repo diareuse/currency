@@ -2,6 +2,7 @@ package org.billthefarmer.currency.composition
 
 import androidx.test.platform.app.InstrumentationRegistry
 import org.billthefarmer.composition.extra.ParametersNotSpecifiedException
+import org.billthefarmer.currency.domain.startup.StartupComposition
 import org.junit.BeforeClass
 import org.junit.Test
 
@@ -13,7 +14,7 @@ class DependencyTest {
         @BeforeClass
         fun createDependencies() {
             val context = InstrumentationRegistry.getInstrumentation().context
-            Dependency.start(context)
+            StartupComposition().create(context)
         }
 
     }
