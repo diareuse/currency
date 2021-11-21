@@ -56,7 +56,8 @@ class DashboardViewCompositionInput : DashboardViewComposition {
             Image(
                 modifier = Modifier
                     .fillMaxHeight()
-                    .width(112.dp),
+                    .width(95.dp)
+                    .height(56.dp),
                 painter = painterResource(id = flagResource)
             )
             Spacer(modifier = Modifier.size(32.dp))

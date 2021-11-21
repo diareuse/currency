@@ -6,6 +6,7 @@ import org.billthefarmer.currency.presentation.model.CurrencyModel
 
 class DashboardViewModel : ViewModel() {
 
+    val currencies = MutableStateFlow<List<CurrencyModel>>(emptyList())
     val selectedCurrency = MutableStateFlow<CurrencyModel?>(null)
     val amount = MutableStateFlow("")
 
