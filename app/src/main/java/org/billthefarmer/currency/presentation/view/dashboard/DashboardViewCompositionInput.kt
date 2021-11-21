@@ -33,12 +33,13 @@ class DashboardViewCompositionInput : DashboardViewComposition {
     @Composable
     override fun Compose(model: DashboardViewModel) {
         val amount by model.amount.collectAsState()
-        val currency by model.selectedCurrency.collectAsState()
+        val currencyState = model.selectedCurrency.collectAsState()
+        val currency = currencyState.value ?: return
         val context = LocalContext.current
 
         Compose(
-            flagResource = currency?.getFlagResource(context) ?: return,
-            currency = currency?.rate?.currency ?: return,
+            flagResource = currency.getFlagResource(context),
+            currency = currency.rate.currency,
             value = amount,
             onValueChange = { model.amount.value = it }
         )
