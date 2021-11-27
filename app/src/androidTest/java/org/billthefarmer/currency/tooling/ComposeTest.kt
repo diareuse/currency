@@ -19,7 +19,8 @@ abstract class ComposeTest {
     @After
     open fun tearDown() = Unit
 
-    fun inCompose(body: @Composable () -> Unit): TestableExpression {
+    fun inCompose(before: () -> Unit = {}, body: @Composable () -> Unit): TestableExpression {
+        before()
         compose.setContent(body)
         return TestableExpression()
     }

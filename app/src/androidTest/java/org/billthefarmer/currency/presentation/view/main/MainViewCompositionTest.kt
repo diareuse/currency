@@ -6,7 +6,7 @@ import org.billthefarmer.currency.tooling.ComposeTest
 import org.billthefarmer.currency.ui.MainViewModel
 import org.junit.Test
 
-class NavigationViewComposition : ComposeTest() {
+class MainViewCompositionTest : ComposeTest() {
 
     private lateinit var view: MainViewComposition
 

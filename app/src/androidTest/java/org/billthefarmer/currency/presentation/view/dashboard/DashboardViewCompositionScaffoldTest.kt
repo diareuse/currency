@@ -36,7 +36,6 @@ class DashboardViewCompositionScaffoldTest : ComposeTest() {
         view.Compose(model = viewModel)
     } asserts {
         onNodeWithTag("scaffold-content").assertExists()
-            .assertIsDisplayed()
             .assertHasNoClickAction()
     }
 

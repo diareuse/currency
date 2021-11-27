@@ -41,5 +41,6 @@ private fun CompositionScope.createMainViewComposition(): MainViewComposition {
     var result: MainViewComposition = MainViewCompositionNavigation()
     result = MainViewCompositionNavController(result)
     result = MainViewCompositionTheme(result)
+    result = MainViewCompositionInsets(result)
     return result
 }
