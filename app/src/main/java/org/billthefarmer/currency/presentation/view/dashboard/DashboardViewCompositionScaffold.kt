@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.insets.navigationBarsWithImePadding
+import com.google.accompanist.insets.statusBarsPadding
 import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
 
 class DashboardViewCompositionScaffold(
@@ -50,6 +52,7 @@ class DashboardViewCompositionScaffold(
                         .testTag("scaffold-toolbar")
                         .defaultMinSize(minHeight = 56.dp)
                         .padding(32.dp)
+                        .statusBarsPadding()
                 ) {
                     toolbar.Compose(model = model)
                 }
@@ -71,6 +74,7 @@ class DashboardViewCompositionScaffold(
                 .testTag("scaffold-input")
                 .defaultMinSize(minHeight = 56.dp)
                 .padding(32.dp)
+                .navigationBarsWithImePadding()
         ) {
             input.Compose(model = model)
         }
