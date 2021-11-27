@@ -12,6 +12,7 @@ class CurrencyModelAdapterImplTest : MockableTest() {
     private lateinit var adapter: CurrencyModelAdapterImpl
 
     override fun prepare() {
+        super.prepare()
         adapter = CurrencyModelAdapterImpl()
     }
 

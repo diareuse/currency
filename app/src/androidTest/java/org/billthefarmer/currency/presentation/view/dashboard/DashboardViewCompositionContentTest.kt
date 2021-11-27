@@ -24,8 +24,9 @@ class DashboardViewCompositionContentTest : ComposeTest() {
     }
 
     @Test
-    fun contains_sameAmountOfItems() = inCompose {
-        viewModel.currencies.value = getCurrencies(count = nextInt(0, 10))
+    fun contains_sameAmountOfItems() = inCompose(
+        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+    ) {
         view.Compose(model = viewModel)
     } asserts {
         onAllNodesWithTag("content-exchange-rate-holder")
@@ -33,8 +34,9 @@ class DashboardViewCompositionContentTest : ComposeTest() {
     }
 
     @Test
-    fun contains_allCurrencyNames() = inCompose {
-        viewModel.currencies.value = getCurrencies(count = nextInt(0, 10))
+    fun contains_allCurrencyNames() = inCompose(
+        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+    ) {
         view.Compose(model = viewModel)
     } asserts {
         val nodes = onAllNodesWithTag("content-currency-name")
@@ -46,8 +48,9 @@ class DashboardViewCompositionContentTest : ComposeTest() {
     }
 
     @Test
-    fun contains_allCurrencyValues() = inCompose {
-        viewModel.currencies.value = getCurrencies(count = nextInt(0, 10))
+    fun contains_allCurrencyValues() = inCompose(
+        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+    ) {
         view.Compose(model = viewModel)
     } asserts {
         val nodes = onAllNodesWithTag("content-currency-value")
@@ -59,8 +62,9 @@ class DashboardViewCompositionContentTest : ComposeTest() {
     }
 
     @Test
-    fun contains_allCurrencyFlags() = inCompose {
-        viewModel.currencies.value = getCurrencies(count = nextInt(0, 10))
+    fun contains_allCurrencyFlags() = inCompose(
+        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+    ) {
         view.Compose(model = viewModel)
     } asserts {
         val nodes = onAllNodesWithTag("content-currency-value")
@@ -72,8 +76,9 @@ class DashboardViewCompositionContentTest : ComposeTest() {
     }
 
     @Test
-    fun holder_hasClickAction() = inCompose {
-        viewModel.currencies.value = getCurrencies(count = nextInt(0, 10))
+    fun holder_hasClickAction() = inCompose(
+        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+    ) {
         view.Compose(model = viewModel)
     } asserts {
         val nodes = onAllNodesWithTag("content-exchange-rate-holder")

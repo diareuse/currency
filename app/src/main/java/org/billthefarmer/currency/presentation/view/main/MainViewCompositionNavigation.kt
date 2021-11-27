@@ -39,14 +39,14 @@ class MainViewCompositionNavigation : MainViewComposition {
     @Composable
     private fun Dashboard(entry: NavBackStackEntry) {
         val view = rememberComposed<DashboardViewComposition>(Dashboard)
-        view.Compose(composedViewModel(screen = entry.destination.displayName))
+        view.Compose(composedViewModel(screen = entry.destination.navigatorName))
     }
 
     @Composable
     private fun Detail(entry: NavBackStackEntry) {
         val arguments = entry.arguments ?: Bundle.EMPTY
         val view = rememberComposed<DetailViewComposition>(Detail, arguments)
-        view.Compose(composedViewModel(screen = entry.destination.displayName))
+        view.Compose(composedViewModel(screen = entry.destination.navigatorName))
     }
 
 }

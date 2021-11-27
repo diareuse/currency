@@ -1,5 +1,6 @@
 package org.billthefarmer.currency.tooling
 
+import androidx.annotation.CallSuper
 import org.junit.After
 import org.junit.Before
 import org.mockito.MockitoAnnotations
@@ -7,12 +8,10 @@ import org.mockito.MockitoAnnotations
 abstract class MockableTest {
 
     @Before
-    fun prepareMocks() {
+    @CallSuper
+    open fun prepare() {
         MockitoAnnotations.openMocks(this).close()
     }
-
-    @Before
-    abstract fun prepare()
 
     @After
     open fun tearDown() = Unit

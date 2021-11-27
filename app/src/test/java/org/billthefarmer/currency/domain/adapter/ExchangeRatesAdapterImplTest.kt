@@ -18,6 +18,7 @@ class ExchangeRatesAdapterImplTest : MockableTest() {
 
     @Before
     override fun prepare() {
+        super.prepare()
         val parser = XmlPullParserFactory.newInstance().newPullParser()
         val formatter = SimpleDateFormat("yyyy-MM-dd")
         adapter = ExchangeRatesAdapterImpl(parser, formatter)

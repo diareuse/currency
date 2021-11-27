@@ -33,6 +33,7 @@ class ExchangeRatesSavingTest : MockableTest() {
 
     @Before
     override fun prepare() {
+        super.prepare()
         mockAdapter()
         mockSource()
         rates = ExchangeRatesSaving(source, currency, rate, adapter)

@@ -17,6 +17,7 @@ class ExchangeRatesAppendBaselineTest : MockableTest() {
     lateinit var source: ExchangeRates
 
     override fun prepare() {
+        super.prepare()
         rates = ExchangeRatesAppendBaseline(source)
     }
 

@@ -23,8 +23,9 @@ class DashboardViewCompositionInputTest : ComposeTest() {
     }
 
     @Test
-    fun hasFlag() = inCompose {
-        viewModel.selectedCurrency.value = CurrencyModel(getExchangeRate())
+    fun hasFlag() = inCompose(
+        before = { viewModel.selectedCurrency.value = CurrencyModel(getExchangeRate()) }
+    ) {
         view.Compose(model = viewModel)
     } asserts {
         onNodeWithContentDescription("flag").assertExists()
@@ -34,8 +35,9 @@ class DashboardViewCompositionInputTest : ComposeTest() {
     }
 
     @Test
-    fun hasTextInput() = inCompose {
-        viewModel.selectedCurrency.value = CurrencyModel(getExchangeRate())
+    fun hasTextInput() = inCompose(
+        before = { viewModel.selectedCurrency.value = CurrencyModel(getExchangeRate()) }
+    ) {
         view.Compose(model = viewModel)
     } asserts {
         onNodeWithTag("input-text").assertExists()

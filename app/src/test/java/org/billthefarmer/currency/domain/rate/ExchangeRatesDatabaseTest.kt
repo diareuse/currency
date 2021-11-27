@@ -25,6 +25,7 @@ class ExchangeRatesDatabaseTest : MockableTest() {
 
     @Before
     override fun prepare() {
+        super.prepare()
         rates = ExchangeRatesDatabase(dao, adapter) { LongRange.EMPTY }
     }
 

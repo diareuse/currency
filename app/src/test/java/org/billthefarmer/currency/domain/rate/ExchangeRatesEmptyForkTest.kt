@@ -22,6 +22,7 @@ class ExchangeRatesEmptyForkTest : MockableTest() {
 
     @Before
     override fun prepare() {
+        super.prepare()
         rates = ExchangeRatesEmptyFork(first, second)
     }
 
