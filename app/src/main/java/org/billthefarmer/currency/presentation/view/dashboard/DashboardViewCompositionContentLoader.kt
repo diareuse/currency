@@ -21,6 +21,7 @@ class DashboardViewCompositionContentLoader(
         source.Compose(model = model)
         LaunchedEffect(model) {
             model.currencies.value = getCurrencies()
+            model.selectedCurrency.value = model.currencies.value.first { it.rate.rate == 1.0 }
         }
     }
 

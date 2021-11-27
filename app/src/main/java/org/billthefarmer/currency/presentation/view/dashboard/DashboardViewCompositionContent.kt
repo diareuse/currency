@@ -18,8 +18,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import org.billthefarmer.currency.domain.model.ExchangeRate
@@ -105,13 +108,16 @@ class DashboardViewCompositionContent : DashboardViewComposition {
                 modifier = Modifier.testTag("content-currency-name"),
                 text = currency.displayName,
                 style = MaterialTheme.typography.subtitle1,
-                fontWeight = FontWeight.Black,
+                fontWeight = FontWeight.Thin,
                 overflow = TextOverflow.Ellipsis,
-                color = color.copy(alpha = .5f),
+                color = color,
             )
             Text(
                 modifier = Modifier.testTag("content-currency-value"),
-                text = "%s %.2f".format(currency.symbol, rate),
+                text = buildAnnotatedString {
+                    withStyle(SpanStyle(fontWeight = FontWeight.Thin)) { append(currency.symbol) }
+                    withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("%.2f".format(rate)) }
+                },
                 style = MaterialTheme.typography.h5,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
