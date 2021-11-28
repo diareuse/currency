@@ -17,7 +17,7 @@ class SelectionViewModel : ViewModel() {
         }
     }
 
-    fun removePending(model: CurrencyModel) {
+    fun removePending(model: List<CurrencyModel>) {
         synchronized(pendingCurrencies) {
             val currentList = pendingCurrencies.value.toMutableList()
             currentList -= model
