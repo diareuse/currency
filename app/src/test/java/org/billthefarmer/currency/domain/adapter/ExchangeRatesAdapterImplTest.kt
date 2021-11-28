@@ -20,7 +20,7 @@ class ExchangeRatesAdapterImplTest : MockableTest() {
     override fun prepare() {
         super.prepare()
         val parser = XmlPullParserFactory.newInstance().newPullParser()
-        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
         adapter = ExchangeRatesAdapterImpl(parser, formatter)
     }
 
@@ -65,7 +65,9 @@ class ExchangeRatesAdapterImplTest : MockableTest() {
 
     companion object {
 
-        val date = Date(1636671600000)
+        val date = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+            .parse("2021-11-12")
+            .let { requireNotNull(it) }
         val singleResponse = listOf(
             ExchangeRate(Currency.getInstance("USD"), 1.1448, date),
             ExchangeRate(Currency.getInstance("JPY"), 130.50, date),
