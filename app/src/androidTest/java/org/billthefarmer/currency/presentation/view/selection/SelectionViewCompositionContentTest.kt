@@ -1,27 +1,27 @@
-package org.billthefarmer.currency.presentation.view.dashboard
+package org.billthefarmer.currency.presentation.view.selection
 
 import androidx.compose.ui.test.*
 import org.billthefarmer.currency.tooling.ComposeTest
 import org.billthefarmer.currency.tooling.forEach
 import org.billthefarmer.currency.tooling.forEachIndexed
 import org.billthefarmer.currency.tooling.getCurrencies
-import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
+import org.billthefarmer.currency.ui.selection.SelectionViewModel
 import org.junit.Test
-import kotlin.random.Random.Default.nextInt
+import kotlin.random.Random
 
-class DashboardViewCompositionContentTest : ComposeTest() {
+class SelectionViewCompositionContentTest : ComposeTest() {
 
-    private lateinit var viewModel: DashboardViewModel
-    private lateinit var view: DashboardViewCompositionContent
+    private lateinit var viewModel: SelectionViewModel
+    private lateinit var view: SelectionViewComposition
 
     override fun prepare() {
-        viewModel = DashboardViewModel()
-        view = DashboardViewCompositionContent()
+        viewModel = SelectionViewModel()
+        view = SelectionViewCompositionContent()
     }
 
     @Test
     fun contains_sameAmountOfItems() = inCompose(
-        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+        before = { viewModel.currencies.value = getCurrencies(count = Random.nextInt(0, 10)) }
     ) {
         view.Compose(model = viewModel)
     } asserts {
@@ -31,7 +31,7 @@ class DashboardViewCompositionContentTest : ComposeTest() {
 
     @Test
     fun contains_allCurrencyNames() = inCompose(
-        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+        before = { viewModel.currencies.value = getCurrencies(count = Random.nextInt(0, 10)) }
     ) {
         view.Compose(model = viewModel)
     } asserts {
@@ -45,7 +45,7 @@ class DashboardViewCompositionContentTest : ComposeTest() {
 
     @Test
     fun contains_allCurrencyValues() = inCompose(
-        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+        before = { viewModel.currencies.value = getCurrencies(count = Random.nextInt(0, 10)) }
     ) {
         view.Compose(model = viewModel)
     } asserts {
@@ -59,7 +59,7 @@ class DashboardViewCompositionContentTest : ComposeTest() {
 
     @Test
     fun contains_allCurrencyFlags() = inCompose(
-        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+        before = { viewModel.currencies.value = getCurrencies(count = Random.nextInt(0, 10)) }
     ) {
         view.Compose(model = viewModel)
     } asserts {
@@ -73,7 +73,7 @@ class DashboardViewCompositionContentTest : ComposeTest() {
 
     @Test
     fun holder_hasClickAction() = inCompose(
-        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+        before = { viewModel.currencies.value = getCurrencies(count = Random.nextInt(0, 10)) }
     ) {
         view.Compose(model = viewModel)
     } asserts {
