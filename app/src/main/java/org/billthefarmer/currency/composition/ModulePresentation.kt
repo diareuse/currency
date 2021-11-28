@@ -11,6 +11,8 @@ import org.billthefarmer.currency.presentation.view.dashboard.*
 import org.billthefarmer.currency.presentation.view.detail.Detail
 import org.billthefarmer.currency.presentation.view.detail.DetailViewComposition
 import org.billthefarmer.currency.presentation.view.main.*
+import org.billthefarmer.currency.presentation.view.selection.Selection
+import org.billthefarmer.currency.presentation.view.selection.SelectionViewComposition
 
 fun CompositionScopeDefault.Builder.presentationModule() = apply {
     factory<CurrencyModelAdapter> { CurrencyModelAdapterImpl() }
@@ -18,6 +20,11 @@ fun CompositionScopeDefault.Builder.presentationModule() = apply {
     factory(Main) { createMainViewComposition() }
     factory(Detail) { createDetailViewComposition() }
     factory(Dashboard) { createDashboardViewComposition() }
+    factory(Selection) { createSelectionViewComposition() }
+}
+
+private fun CompositionScope.createSelectionViewComposition(): SelectionViewComposition {
+    return ViewCompositionNoop()
 }
 
 private fun CompositionScope.createDashboardViewComposition(): DashboardViewComposition {

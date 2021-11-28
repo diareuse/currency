@@ -15,6 +15,8 @@ import org.billthefarmer.currency.presentation.view.dashboard.Dashboard
 import org.billthefarmer.currency.presentation.view.dashboard.DashboardViewComposition
 import org.billthefarmer.currency.presentation.view.detail.Detail
 import org.billthefarmer.currency.presentation.view.detail.DetailViewComposition
+import org.billthefarmer.currency.presentation.view.selection.Selection
+import org.billthefarmer.currency.presentation.view.selection.SelectionViewComposition
 import org.billthefarmer.currency.ui.MainViewModel
 
 class MainViewCompositionNavigation : MainViewComposition {
@@ -33,6 +35,7 @@ class MainViewCompositionNavigation : MainViewComposition {
         ) {
             composable("dashboard") { Dashboard(it) }
             composable("detail/{currency}", listOf(argCurrency)) { Detail(it) }
+            composable("selection") { Selection(it) }
         }
     }
 
@@ -46,6 +49,12 @@ class MainViewCompositionNavigation : MainViewComposition {
     private fun Detail(entry: NavBackStackEntry) {
         val arguments = entry.arguments ?: Bundle.EMPTY
         val view = rememberComposed<DetailViewComposition>(Detail, arguments)
+        view.Compose(composedViewModel(screen = entry.destination.navigatorName))
+    }
+
+    @Composable
+    private fun Selection(entry: NavBackStackEntry) {
+        val view = rememberComposed<SelectionViewComposition>(Selection)
         view.Compose(composedViewModel(screen = entry.destination.navigatorName))
     }
 
