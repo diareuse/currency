@@ -14,11 +14,11 @@ import org.junit.Test
 class SelectionViewCompositionScaffoldTest : ComposeTest() {
 
     private lateinit var viewModel: SelectionViewModel
-    private lateinit var composition: SelectionViewComposition
+    private lateinit var view: SelectionViewComposition
 
     override fun prepare() {
         viewModel = SelectionViewModel()
-        composition = SelectionViewCompositionScaffold(
+        view = SelectionViewCompositionScaffold(
             toolbar = ViewComposition { Box(modifier = Modifier.testTag("drawn-toolbar")) },
             content = ViewComposition { Box(modifier = Modifier.testTag("drawn-content")) }
         )
@@ -26,7 +26,7 @@ class SelectionViewCompositionScaffoldTest : ComposeTest() {
 
     @Test
     fun hasToolbar() = inCompose {
-        composition.Compose(model = viewModel)
+        view.Compose(model = viewModel)
     } asserts {
         onNodeWithTag("scaffold-toolbar").assertExists()
             .assertIsDisplayed()
@@ -35,14 +35,14 @@ class SelectionViewCompositionScaffoldTest : ComposeTest() {
 
     @Test
     fun hasProvidedToolbar() = inCompose {
-        composition.Compose(model = viewModel)
+        view.Compose(model = viewModel)
     } asserts {
         onNodeWithTag("drawn-toolbar").assertExists()
     }
 
     @Test
     fun hasContent() = inCompose {
-        composition.Compose(model = viewModel)
+        view.Compose(model = viewModel)
     } asserts {
         onNodeWithTag("scaffold-content").assertExists()
             .assertIsDisplayed()
@@ -51,7 +51,7 @@ class SelectionViewCompositionScaffoldTest : ComposeTest() {
 
     @Test
     fun hasProvidedContent() = inCompose {
-        composition.Compose(model = viewModel)
+        view.Compose(model = viewModel)
     } asserts {
         onNodeWithTag("drawn-content").assertExists()
     }
