@@ -7,6 +7,7 @@ import org.billthefarmer.composition.scope.get
 import org.billthefarmer.currency.presentation.adapter.CurrencyModelAdapter
 import org.billthefarmer.currency.presentation.adapter.CurrencyModelAdapterImpl
 import org.billthefarmer.currency.presentation.view.ViewCompositionNoop
+import org.billthefarmer.currency.presentation.view.ViewCompositionSnackbar
 import org.billthefarmer.currency.presentation.view.dashboard.*
 import org.billthefarmer.currency.presentation.view.detail.Detail
 import org.billthefarmer.currency.presentation.view.detail.DetailViewComposition
@@ -34,6 +35,7 @@ private fun CompositionScope.createSelectionViewComposition(): SelectionViewComp
         get(ExchangeRateModel),
         get(ExchangeRateModel)
     )
+    result = ViewCompositionSnackbar(result)
     return result
 }
 

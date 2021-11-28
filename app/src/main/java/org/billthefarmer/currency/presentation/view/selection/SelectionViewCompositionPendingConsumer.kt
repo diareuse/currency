@@ -10,6 +10,8 @@ import org.billthefarmer.currency.domain.model.ExchangeRatePreference
 import org.billthefarmer.currency.domain.preference.ExchangeRatePreferenceReader
 import org.billthefarmer.currency.domain.preference.ExchangeRatePreferenceWriter
 import org.billthefarmer.currency.presentation.model.CurrencyModel
+import org.billthefarmer.currency.presentation.view.LocalSnackbarController
+import org.billthefarmer.currency.presentation.view.show
 import org.billthefarmer.currency.ui.selection.SelectionViewModel
 
 class SelectionViewCompositionPendingConsumer(
@@ -25,10 +27,12 @@ class SelectionViewCompositionPendingConsumer(
         if (pending.isEmpty()) {
             return
         }
+        val snackbar = LocalSnackbarController.current
         LaunchedEffect(pending) {
             val preference = readPreference().addAll(pending)
             writePreference(preference)
             model.removePending(pending)
+            snackbar.show("Added ${pending.first().rate.currency.currencyCode}")
         }
     }
 
