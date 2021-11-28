@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.billthefarmer.currency.R
+import org.billthefarmer.currency.presentation.view.main.LocalNavHostController
 import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
 import org.billthefarmer.currency.ui.style.AnticipateOvershootEasing
 
@@ -38,9 +39,12 @@ class DashboardViewCompositionToolbar : DashboardViewComposition {
     @Composable
     private fun Compose() {
         Row(verticalAlignment = Alignment.CenterVertically) {
+            val controller = LocalNavHostController.current
             Toolbar(modifier = Modifier.weight(1f))
             Spacer(modifier = Modifier.size(32.dp))
-            Button(modifier = Modifier.size(56.dp)) { TODO() }
+            Button(modifier = Modifier.size(56.dp)) {
+                controller.navigate("selection")
+            }
         }
     }
 

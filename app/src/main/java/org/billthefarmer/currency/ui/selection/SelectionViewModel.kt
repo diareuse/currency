@@ -23,6 +23,9 @@ class SelectionViewModel : ViewModel() {
             currentList -= model
             pendingCurrencies.value = currentList
         }
+        val currentList = currencies.value.toMutableList()
+        currentList -= model
+        currencies.value = currentList
     }
 
 }

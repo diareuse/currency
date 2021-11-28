@@ -57,7 +57,6 @@ class SelectionViewCompositionScaffold(
         Box(
             modifier = modifier
                 .fillMaxWidth()
-                .height(IntrinsicSize.Max)
         ) {
             content.Compose(model = model)
         }
