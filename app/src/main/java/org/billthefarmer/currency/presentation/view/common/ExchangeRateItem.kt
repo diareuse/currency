@@ -44,8 +44,8 @@ fun ExchangeRateItem(
         val flagResource = model.getFlagResource(context)
         Image(
             modifier = Modifier
-                .width(122.dp)
-                .height(72.dp),
+                .width(95.dp)
+                .height(56.dp),
             painter = painterResource(id = flagResource),
             currency = model.rate.currency
         )
