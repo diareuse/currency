@@ -22,7 +22,7 @@ class RateCalculatorPivotTest : MockableTest() {
     @Test
     fun `returns translated value`() {
         val output = calculator.getAdjustedRate(300.0)
-        assertThat(output).isEqualTo(570.7317073171)
+        assertThat(output).isWithin(0.01).of(570.7317073171)
     }
 
 }
