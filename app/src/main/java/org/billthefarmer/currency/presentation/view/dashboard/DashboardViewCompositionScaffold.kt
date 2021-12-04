@@ -1,5 +1,9 @@
 package org.billthefarmer.currency.presentation.view.dashboard
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
@@ -11,9 +15,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.insets.LocalWindowInsets
 import com.google.accompanist.insets.navigationBarsWithImePadding
 import com.google.accompanist.insets.statusBarsPadding
 import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
+import org.billthefarmer.currency.screen.style.AnticipateOvershootEasing
 
 class DashboardViewCompositionScaffold(
     private val toolbar: DashboardViewComposition,
@@ -38,6 +44,7 @@ class DashboardViewCompositionScaffold(
 
     @Composable
     private fun Content(modifier: Modifier, model: DashboardViewModel) {
+        val insets = LocalWindowInsets.current
         Surface(
             modifier = modifier,
             color = MaterialTheme.colors.surface,
@@ -47,14 +54,20 @@ class DashboardViewCompositionScaffold(
             )
         ) {
             Column {
-                Box(
-                    modifier = Modifier
-                        .testTag("scaffold-toolbar")
-                        .defaultMinSize(minHeight = 56.dp)
-                        .padding(32.dp)
-                        .statusBarsPadding()
+                AnimatedVisibility(
+                    visible = !insets.ime.isVisible,
+                    enter = slideInVertically(tween(easing = AnticipateOvershootEasing)) { -it },
+                    exit = slideOutVertically(tween(easing = AnticipateOvershootEasing)) { -it }
                 ) {
-                    toolbar.Compose(model = model)
+                    Box(
+                        modifier = Modifier
+                            .testTag("scaffold-toolbar")
+                            .defaultMinSize(minHeight = 56.dp)
+                            .padding(32.dp)
+                            .statusBarsPadding()
+                    ) {
+                        toolbar.Compose(model = model)
+                    }
                 }
                 Box(
                     modifier = Modifier

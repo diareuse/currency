@@ -1,6 +1,5 @@
 package org.billthefarmer.currency.presentation.view.dashboard
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -13,6 +12,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.insets.LocalWindowInsets
+import com.google.accompanist.insets.WindowInsets
+import com.google.accompanist.insets.rememberInsetsPaddingValues
 import org.billthefarmer.currency.domain.model.ExchangeRate
 import org.billthefarmer.currency.domain.rate.RateCalculator
 import org.billthefarmer.currency.domain.rate.RateCalculatorPivot
@@ -46,9 +48,18 @@ class DashboardViewCompositionContent : DashboardViewComposition {
         calculator: RateCalculator,
         onCurrencyClick: (CurrencyModel) -> Unit
     ) {
+        val insets = LocalWindowInsets.current
+        val padding = rememberInsetsPaddingValues(
+            if (insets.ime.isVisible) insets.statusBars
+            else WindowInsets.Type.Empty,
+            additionalStart = 32.dp,
+            additionalTop = 32.dp,
+            additionalBottom = 32.dp,
+            additionalEnd = 32.dp
+        )
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(32.dp)
+            contentPadding = padding
         ) {
             items(currencies) {
                 ExchangeRateItem(it, calculator, onCurrencyClick)
