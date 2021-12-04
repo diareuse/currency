@@ -54,7 +54,7 @@ class SelectionViewCompositionContent : SelectionViewComposition {
     ) {
         LazyColumn(contentPadding = padding) {
             items(currencies) {
-                ExchangeRateItem(it, onCurrencyClick)
+                ExchangeRateItem(it, onCurrencyClick = onCurrencyClick)
                 Spacer(modifier = Modifier.height(16.dp))
             }
         }

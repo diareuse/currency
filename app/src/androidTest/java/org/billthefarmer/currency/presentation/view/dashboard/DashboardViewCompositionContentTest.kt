@@ -1,12 +1,15 @@
 package org.billthefarmer.currency.presentation.view.dashboard
 
 import androidx.compose.ui.test.*
+import org.billthefarmer.currency.domain.model.ExchangeRate
+import org.billthefarmer.currency.presentation.model.CurrencyModel
 import org.billthefarmer.currency.tooling.ComposeTest
 import org.billthefarmer.currency.tooling.forEach
 import org.billthefarmer.currency.tooling.forEachIndexed
 import org.billthefarmer.currency.tooling.getCurrencies
 import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
 import org.junit.Test
+import java.util.*
 import kotlin.random.Random.Default.nextInt
 
 class DashboardViewCompositionContentTest : ComposeTest() {
@@ -63,7 +66,7 @@ class DashboardViewCompositionContentTest : ComposeTest() {
     ) {
         view.Compose(model = viewModel)
     } asserts {
-        val nodes = onAllNodesWithTag("content-currency-value")
+        val nodes = onAllNodesWithTag("content-flag")
         val currencies = viewModel.currencies.value
         nodes.forEachIndexed { index, it ->
             val text = currencies[index].rate.currency.displayName
@@ -96,6 +99,42 @@ class DashboardViewCompositionContentTest : ComposeTest() {
         val value = requireNotNull(viewModel.selectedCurrency.value)
         onNodeWithText(value.rate.currency.currencyCode).assertDoesNotExist()
         onNodeWithText(value.rate.currency.displayName).assertDoesNotExist()
+    }
+
+    @Test
+    fun contains_calculatedValues() = inCompose(
+        before = {
+            val currencies = listOf(
+                CurrencyModel(
+                    ExchangeRate(
+                        currency = Currency.getInstance("USD"),
+                        rate = 1.13,
+                        time = Date()
+                    )
+                )
+            )
+            viewModel.currencyPivot.value = ExchangeRate(
+                currency = Currency.getInstance("EUR"),
+                rate = 1.0,
+                time = Date()
+            )
+            viewModel.selectedCurrency.value = CurrencyModel(
+                ExchangeRate(
+                    currency = Currency.getInstance("PHP"),
+                    rate = 57.08,
+                    time = Date()
+                )
+            )
+            viewModel.currencies.value = currencies
+            viewModel.amount.value = "5000"
+        }
+    ) {
+        view.Compose(model = viewModel)
+    } asserts {
+        val nodes = onAllNodesWithTag("content-currency-value")
+        nodes.forEach {
+            it.assertTextContains("98.98")
+        }
     }
 
 }

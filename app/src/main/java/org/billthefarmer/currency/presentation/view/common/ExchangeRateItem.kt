@@ -15,17 +15,24 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import org.billthefarmer.currency.domain.rate.RateCalculator
 import org.billthefarmer.currency.presentation.model.CurrencyModel
 import java.util.*
 
 @Composable
-fun ExchangeRateItem(model: CurrencyModel, onCurrencyClick: (CurrencyModel) -> Unit) {
+fun ExchangeRateItem(
+    model: CurrencyModel,
+    calculator: RateCalculator = ExchangeRateItemDefaults.Calculator,
+    onCurrencyClick: (CurrencyModel) -> Unit
+) {
     Row(
         modifier = Modifier
             .testTag("content-exchange-rate-holder")
@@ -46,7 +53,7 @@ fun ExchangeRateItem(model: CurrencyModel, onCurrencyClick: (CurrencyModel) -> U
         Labels(
             modifier = Modifier.weight(1f),
             currency = model.rate.currency,
-            rate = model.rate.rate
+            rate = calculator.getAdjustedRate(model.rate.rate)
         )
     }
 }
@@ -61,6 +68,7 @@ private fun Image(modifier: Modifier, painter: Painter, currency: Currency) {
         Image(
             modifier = Modifier
                 .testTag("content-flag")
+                .semantics { contentDescription = currency.displayName }
                 .fillMaxSize(),
             painter = painter,
             contentScale = ContentScale.FillBounds,
