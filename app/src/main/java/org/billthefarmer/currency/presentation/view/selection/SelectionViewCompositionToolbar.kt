@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.dp
 import org.billthefarmer.currency.R
 import org.billthefarmer.currency.presentation.view.dashboard.DashboardViewCompositionToolbar
 import org.billthefarmer.currency.presentation.view.main.LocalNavHostController
+import org.billthefarmer.currency.screen.selection.SelectionViewModel
 import org.billthefarmer.currency.tooling.Duplicates
-import org.billthefarmer.currency.ui.selection.SelectionViewModel
 
 @Duplicates(DashboardViewCompositionToolbar::class)
 class SelectionViewCompositionToolbar : SelectionViewComposition {

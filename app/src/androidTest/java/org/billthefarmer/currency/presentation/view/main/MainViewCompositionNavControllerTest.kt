@@ -2,8 +2,8 @@ package org.billthefarmer.currency.presentation.view.main
 
 import androidx.compose.runtime.Composable
 import com.google.common.truth.Truth.assertThat
+import org.billthefarmer.currency.screen.MainViewModel
 import org.billthefarmer.currency.tooling.ComposeTest
-import org.billthefarmer.currency.ui.MainViewModel
 import org.junit.Test
 
 class MainViewCompositionNavControllerTest : ComposeTest() {

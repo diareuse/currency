@@ -6,8 +6,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.google.common.truth.Truth.assertThat
 import org.billthefarmer.currency.presentation.view.ViewComposition
+import org.billthefarmer.currency.screen.MainViewModel
 import org.billthefarmer.currency.tooling.ComposeTest
-import org.billthefarmer.currency.ui.MainViewModel
 import org.junit.Test
 
 class MainViewCompositionThemeTest : ComposeTest() {

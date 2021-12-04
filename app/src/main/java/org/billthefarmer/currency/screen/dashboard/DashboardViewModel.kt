@@ -1,4 +1,4 @@
-package org.billthefarmer.currency.ui.dashboard
+package org.billthefarmer.currency.screen.dashboard
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

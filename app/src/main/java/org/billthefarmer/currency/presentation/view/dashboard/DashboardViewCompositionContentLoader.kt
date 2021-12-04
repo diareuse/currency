@@ -8,7 +8,7 @@ import org.billthefarmer.currency.domain.model.ExchangeRate
 import org.billthefarmer.currency.domain.rate.ExchangeRates
 import org.billthefarmer.currency.presentation.adapter.CurrencyModelAdapter
 import org.billthefarmer.currency.presentation.model.CurrencyModel
-import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
+import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
 
 class DashboardViewCompositionContentLoader(
     private val source: DashboardViewComposition,

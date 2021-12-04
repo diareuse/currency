@@ -7,8 +7,8 @@ import androidx.compose.ui.test.assertHasNoClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithTag
 import org.billthefarmer.currency.presentation.view.ViewComposition
+import org.billthefarmer.currency.screen.selection.SelectionViewModel
 import org.billthefarmer.currency.tooling.ComposeTest
-import org.billthefarmer.currency.ui.selection.SelectionViewModel
 import org.junit.Test
 
 class SelectionViewCompositionScaffoldTest : ComposeTest() {

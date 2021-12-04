@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
+import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
 
 class DashboardViewCompositionInputHint : DashboardViewComposition {
 

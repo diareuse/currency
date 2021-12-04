@@ -2,7 +2,7 @@ package org.billthefarmer.currency.presentation.view.dashboard
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
+import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
 
 class DashboardViewCompositionCurrencyFork(
     private val onSelected: DashboardViewComposition,

@@ -15,8 +15,8 @@ import com.google.accompanist.insets.LocalWindowInsets
 import org.billthefarmer.currency.presentation.model.CurrencyModel
 import org.billthefarmer.currency.presentation.view.common.ExchangeRateItem
 import org.billthefarmer.currency.presentation.view.dashboard.DashboardViewCompositionContent
+import org.billthefarmer.currency.screen.selection.SelectionViewModel
 import org.billthefarmer.currency.tooling.Duplicates
-import org.billthefarmer.currency.ui.selection.SelectionViewModel
 
 @Duplicates(DashboardViewCompositionContent::class)
 class SelectionViewCompositionContent : SelectionViewComposition {

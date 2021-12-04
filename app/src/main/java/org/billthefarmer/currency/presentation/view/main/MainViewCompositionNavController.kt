@@ -5,7 +5,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import org.billthefarmer.currency.ui.MainViewModel
+import org.billthefarmer.currency.screen.MainViewModel
 
 class MainViewCompositionNavController(
     private val composition: MainViewComposition

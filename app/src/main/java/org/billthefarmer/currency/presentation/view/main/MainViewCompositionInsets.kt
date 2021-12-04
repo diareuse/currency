@@ -2,7 +2,7 @@ package org.billthefarmer.currency.presentation.view.main
 
 import androidx.compose.runtime.Composable
 import com.google.accompanist.insets.ProvideWindowInsets
-import org.billthefarmer.currency.ui.MainViewModel
+import org.billthefarmer.currency.screen.MainViewModel
 
 class MainViewCompositionInsets(
     private val source: MainViewComposition

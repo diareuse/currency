@@ -4,8 +4,8 @@ import androidx.compose.ui.test.assertHasNoClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.onNodeWithTag
 import org.billthefarmer.currency.presentation.view.ViewCompositionNoop
+import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
 import org.billthefarmer.currency.tooling.ComposeTest
-import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
 import org.junit.Test
 
 class DashboardViewCompositionScaffoldTest : ComposeTest() {

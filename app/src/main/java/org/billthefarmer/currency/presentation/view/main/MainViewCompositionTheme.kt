@@ -1,8 +1,8 @@
 package org.billthefarmer.currency.presentation.view.main
 
 import androidx.compose.runtime.Composable
-import org.billthefarmer.currency.ui.MainViewModel
-import org.billthefarmer.currency.ui.style.CurrencyTheme
+import org.billthefarmer.currency.screen.MainViewModel
+import org.billthefarmer.currency.screen.style.CurrencyTheme
 
 class MainViewCompositionTheme(
     private val source: MainViewComposition

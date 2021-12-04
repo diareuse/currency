@@ -13,7 +13,7 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.navigationBarsWithImePadding
 import com.google.accompanist.insets.statusBarsPadding
-import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
+import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
 
 class DashboardViewCompositionScaffold(
     private val toolbar: DashboardViewComposition,

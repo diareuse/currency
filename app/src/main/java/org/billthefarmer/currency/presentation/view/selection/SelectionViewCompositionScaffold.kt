@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.statusBarsPadding
-import org.billthefarmer.currency.ui.selection.SelectionViewModel
+import org.billthefarmer.currency.screen.selection.SelectionViewModel
 
 class SelectionViewCompositionScaffold(
     private val toolbar: SelectionViewComposition,

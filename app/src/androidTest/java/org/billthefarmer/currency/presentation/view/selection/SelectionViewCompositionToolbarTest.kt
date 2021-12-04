@@ -2,8 +2,8 @@ package org.billthefarmer.currency.presentation.view.selection
 
 import androidx.compose.ui.test.*
 import androidx.compose.ui.unit.dp
+import org.billthefarmer.currency.screen.selection.SelectionViewModel
 import org.billthefarmer.currency.tooling.ComposeTest
-import org.billthefarmer.currency.ui.selection.SelectionViewModel
 import org.junit.Test
 
 class SelectionViewCompositionToolbarTest : ComposeTest() {

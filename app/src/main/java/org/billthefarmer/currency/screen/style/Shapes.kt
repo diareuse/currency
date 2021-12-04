@@ -1,4 +1,4 @@
-package org.billthefarmer.currency.ui.style
+package org.billthefarmer.currency.screen.style
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

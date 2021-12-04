@@ -1,4 +1,4 @@
-package org.billthefarmer.currency.ui.selection
+package org.billthefarmer.currency.screen.selection
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

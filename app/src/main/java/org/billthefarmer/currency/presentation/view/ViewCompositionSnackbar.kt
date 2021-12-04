@@ -21,7 +21,7 @@ import com.google.accompanist.insets.navigationBarsWithImePadding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import org.billthefarmer.currency.ui.style.AnticipateOvershootEasing
+import org.billthefarmer.currency.screen.style.AnticipateOvershootEasing
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 

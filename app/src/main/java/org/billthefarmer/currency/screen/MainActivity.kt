@@ -1,4 +1,4 @@
-package org.billthefarmer.currency.ui
+package org.billthefarmer.currency.screen
 
 import android.os.Bundle
 import androidx.activity.compose.setContent

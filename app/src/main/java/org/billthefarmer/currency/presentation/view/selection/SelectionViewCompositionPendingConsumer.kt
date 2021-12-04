@@ -12,7 +12,7 @@ import org.billthefarmer.currency.domain.preference.ExchangeRatePreferenceWriter
 import org.billthefarmer.currency.presentation.model.CurrencyModel
 import org.billthefarmer.currency.presentation.view.LocalSnackbarController
 import org.billthefarmer.currency.presentation.view.show
-import org.billthefarmer.currency.ui.selection.SelectionViewModel
+import org.billthefarmer.currency.screen.selection.SelectionViewModel
 
 class SelectionViewCompositionPendingConsumer(
     private val source: SelectionViewComposition,

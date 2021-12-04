@@ -3,8 +3,8 @@ package org.billthefarmer.currency.presentation.view.main
 import com.google.accompanist.insets.LocalWindowInsets
 import com.google.common.truth.Truth.assertThat
 import org.billthefarmer.currency.presentation.view.ViewComposition
+import org.billthefarmer.currency.screen.MainViewModel
 import org.billthefarmer.currency.tooling.ComposeTest
-import org.billthefarmer.currency.ui.MainViewModel
 import org.junit.Test
 
 class MainViewCompositionInsetsTest : ComposeTest() {

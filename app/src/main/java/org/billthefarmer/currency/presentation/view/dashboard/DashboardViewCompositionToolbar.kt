@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.billthefarmer.currency.R
 import org.billthefarmer.currency.presentation.view.main.LocalNavHostController
-import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
-import org.billthefarmer.currency.ui.style.AnticipateOvershootEasing
+import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
+import org.billthefarmer.currency.screen.style.AnticipateOvershootEasing
 
 class DashboardViewCompositionToolbar : DashboardViewComposition {
 

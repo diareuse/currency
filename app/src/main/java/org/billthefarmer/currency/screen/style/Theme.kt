@@ -1,4 +1,4 @@
-package org.billthefarmer.currency.ui.style
+package org.billthefarmer.currency.screen.style
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable

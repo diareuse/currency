@@ -17,7 +17,7 @@ import org.billthefarmer.currency.presentation.view.detail.Detail
 import org.billthefarmer.currency.presentation.view.detail.DetailViewComposition
 import org.billthefarmer.currency.presentation.view.selection.Selection
 import org.billthefarmer.currency.presentation.view.selection.SelectionViewComposition
-import org.billthefarmer.currency.ui.MainViewModel
+import org.billthefarmer.currency.screen.MainViewModel
 
 class MainViewCompositionNavigation : MainViewComposition {
 

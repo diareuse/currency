@@ -9,8 +9,8 @@ import org.billthefarmer.currency.domain.rate.ExchangeRates
 import org.billthefarmer.currency.presentation.adapter.CurrencyModelAdapter
 import org.billthefarmer.currency.presentation.model.CurrencyModel
 import org.billthefarmer.currency.presentation.view.dashboard.DashboardViewCompositionContentLoader
+import org.billthefarmer.currency.screen.selection.SelectionViewModel
 import org.billthefarmer.currency.tooling.Duplicates
-import org.billthefarmer.currency.ui.selection.SelectionViewModel
 
 @Duplicates(DashboardViewCompositionContentLoader::class)
 class SelectionViewCompositionContentLoader(

@@ -6,7 +6,7 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.NavHostController
 import org.billthefarmer.currency.presentation.view.main.LocalNavHostController
-import org.billthefarmer.currency.ui.MainActivity
+import org.billthefarmer.currency.screen.MainActivity
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule

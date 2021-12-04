@@ -1,11 +1,11 @@
 package org.billthefarmer.currency.presentation.view.selection
 
 import androidx.compose.ui.test.*
+import org.billthefarmer.currency.screen.selection.SelectionViewModel
 import org.billthefarmer.currency.tooling.ComposeTest
 import org.billthefarmer.currency.tooling.forEach
 import org.billthefarmer.currency.tooling.forEachIndexed
 import org.billthefarmer.currency.tooling.getCurrencies
-import org.billthefarmer.currency.ui.selection.SelectionViewModel
 import org.junit.Test
 import kotlin.random.Random
 

@@ -1,4 +1,4 @@
-package org.billthefarmer.currency.ui.detail
+package org.billthefarmer.currency.screen.detail
 
 import androidx.lifecycle.ViewModel
 import java.util.*

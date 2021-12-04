@@ -6,8 +6,8 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import org.billthefarmer.currency.domain.model.ExchangeRate
 import org.billthefarmer.currency.presentation.model.CurrencyModel
+import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
 import org.billthefarmer.currency.tooling.ComposeTest
-import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
 import org.junit.Test
 import java.util.*
 import kotlin.random.Random.Default.nextDouble

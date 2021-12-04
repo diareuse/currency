@@ -19,7 +19,7 @@ import org.billthefarmer.currency.domain.rate.RateCalculatorPivot
 import org.billthefarmer.currency.presentation.model.CurrencyModel
 import org.billthefarmer.currency.presentation.view.common.ExchangeRateItem
 import org.billthefarmer.currency.presentation.view.common.ExchangeRateItemDefaults
-import org.billthefarmer.currency.ui.dashboard.DashboardViewModel
+import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
 import java.util.*
 import kotlin.random.Random.Default.nextDouble
 
