@@ -12,9 +12,8 @@ fun getCurrencies(count: Int): List<CurrencyModel> = buildList {
     }
 }
 
-private fun getModel() = CurrencyModel(
-    getRate()
-)
+private fun getModel() =
+    CurrencyModel(getRate())
 
 private fun getRate(): ExchangeRate {
     return ExchangeRate(CurrencyPool.random(), Random.nextDouble(0.0, Double.MAX_VALUE), Date())

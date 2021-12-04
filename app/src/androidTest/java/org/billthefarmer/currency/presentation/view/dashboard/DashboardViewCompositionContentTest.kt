@@ -21,7 +21,7 @@ class DashboardViewCompositionContentTest : ComposeTest() {
 
     @Test
     fun contains_sameAmountOfItems() = inCompose(
-        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+        before = { viewModel.currencies.value = getCurrencies(count = nextInt(1, 10)) }
     ) {
         view.Compose(model = viewModel)
     } asserts {
@@ -31,7 +31,7 @@ class DashboardViewCompositionContentTest : ComposeTest() {
 
     @Test
     fun contains_allCurrencyNames() = inCompose(
-        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+        before = { viewModel.currencies.value = getCurrencies(count = nextInt(1, 10)) }
     ) {
         view.Compose(model = viewModel)
     } asserts {
@@ -45,7 +45,7 @@ class DashboardViewCompositionContentTest : ComposeTest() {
 
     @Test
     fun contains_allCurrencyValues() = inCompose(
-        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+        before = { viewModel.currencies.value = getCurrencies(count = nextInt(1, 10)) }
     ) {
         view.Compose(model = viewModel)
     } asserts {
@@ -59,7 +59,7 @@ class DashboardViewCompositionContentTest : ComposeTest() {
 
     @Test
     fun contains_allCurrencyFlags() = inCompose(
-        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+        before = { viewModel.currencies.value = getCurrencies(count = nextInt(1, 10)) }
     ) {
         view.Compose(model = viewModel)
     } asserts {
@@ -73,7 +73,7 @@ class DashboardViewCompositionContentTest : ComposeTest() {
 
     @Test
     fun holder_hasClickAction() = inCompose(
-        before = { viewModel.currencies.value = getCurrencies(count = nextInt(0, 10)) }
+        before = { viewModel.currencies.value = getCurrencies(count = nextInt(1, 10)) }
     ) {
         view.Compose(model = viewModel)
     } asserts {
@@ -81,6 +81,21 @@ class DashboardViewCompositionContentTest : ComposeTest() {
         nodes.forEach {
             it.assertHasClickAction()
         }
+    }
+
+    @Test
+    fun containsNot_selectedItem() = inCompose(
+        before = {
+            val currencies = getCurrencies(count = 4)
+            viewModel.selectedCurrency.value = currencies.random()
+            viewModel.currencies.value = currencies
+        }
+    ) {
+        view.Compose(model = viewModel)
+    } asserts {
+        val value = requireNotNull(viewModel.selectedCurrency.value)
+        onNodeWithText(value.rate.currency.currencyCode).assertDoesNotExist()
+        onNodeWithText(value.rate.currency.displayName).assertDoesNotExist()
     }
 
 }

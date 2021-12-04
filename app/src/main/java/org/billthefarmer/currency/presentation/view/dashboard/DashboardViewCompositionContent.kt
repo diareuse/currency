@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -22,9 +23,10 @@ class DashboardViewCompositionContent : DashboardViewComposition {
 
     @Composable
     override fun Compose(model: DashboardViewModel) {
-        val currenciesState = model.currencies.collectAsState()
+        val currenciesState by model.currencies.collectAsState()
+        val selected by model.selectedCurrency.collectAsState()
         Compose(
-            currencies = currenciesState.value,
+            currencies = currenciesState.filter { it != selected },
             onCurrencyClick = { model.selectedCurrency.value = it }
         )
     }
