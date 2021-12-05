@@ -93,8 +93,8 @@ private fun Labels(modifier: Modifier, currency: Currency, rate: Double) {
         Text(
             modifier = Modifier.testTag("content-currency-value"),
             text = buildAnnotatedString {
-                withStyle(SpanStyle(fontWeight = FontWeight.Thin)) { append(currency.symbol) }
                 withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("%.2f".format(rate)) }
+                withStyle(SpanStyle(fontWeight = FontWeight.Thin)) { append(currency.symbol) }
             },
             style = MaterialTheme.typography.h5,
             maxLines = 1,
