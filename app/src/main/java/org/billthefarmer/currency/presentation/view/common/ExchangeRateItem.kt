@@ -63,7 +63,8 @@ private fun Image(modifier: Modifier, painter: Painter, currency: Currency) {
     Surface(
         modifier = modifier,
         shape = MaterialTheme.shapes.medium,
-        color = MaterialTheme.colors.surface
+        color = MaterialTheme.colors.surface,
+        elevation = 16.dp
     ) {
         Image(
             modifier = Modifier

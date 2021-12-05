@@ -93,7 +93,8 @@ class DashboardViewCompositionToolbar : DashboardViewComposition {
                 .testTag("toolbar-action-button")
                 .clickable(onClickLabel = "Add a currency", role = Role.Button, onClick = onClick),
             shape = MaterialTheme.shapes.medium,
-            color = MaterialTheme.colors.background
+            color = MaterialTheme.colors.primary,
+            elevation = 16.dp
         ) {
             Image(
                 modifier = Modifier.size(24.dp),

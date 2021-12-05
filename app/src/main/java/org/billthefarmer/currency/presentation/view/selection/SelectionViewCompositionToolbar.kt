@@ -46,7 +46,8 @@ class SelectionViewCompositionToolbar : SelectionViewComposition {
                 .testTag("toolbar-action-button")
                 .clickable(onClickLabel = "Go Back", role = Role.Button, onClick = onClick),
             shape = MaterialTheme.shapes.medium,
-            color = MaterialTheme.colors.background
+            color = MaterialTheme.colors.primary,
+            elevation = 16.dp
         ) {
             Image(
                 modifier = Modifier.size(24.dp),

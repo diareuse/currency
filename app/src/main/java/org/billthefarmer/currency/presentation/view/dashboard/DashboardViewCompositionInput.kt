@@ -79,7 +79,8 @@ class DashboardViewCompositionInput : DashboardViewComposition {
             modifier = modifier
                 .testTag("input-flag"),
             shape = MaterialTheme.shapes.medium,
-            color = MaterialTheme.colors.surface
+            color = MaterialTheme.colors.surface,
+            elevation = 8.dp
         ) {
             Image(
                 modifier = Modifier.fillMaxSize(),
