@@ -12,6 +12,7 @@ import org.billthefarmer.currency.domain.network.NetworkServiceImpl
 import org.billthefarmer.currency.domain.preference.*
 import org.billthefarmer.currency.domain.rate.*
 import org.billthefarmer.currency.domain.time.TimeRangeFactory
+import org.billthefarmer.currency.domain.time.TimeRangeFactoryLastWorkday
 import org.billthefarmer.currency.domain.tooling.setToDayEnd
 import org.billthefarmer.currency.domain.tooling.setToDayStart
 import java.net.URL
@@ -24,6 +25,8 @@ val Rates90Days = Alias("rate-90-days")
 val RatesAllTime = Alias("rate-all-time")
 
 val ExchangeRateModel = Alias("exchange-rate-model")
+
+val TimeRangeWorkday = Alias("time-range-workday")
 
 fun CompositionScopeDefault.Builder.domainModule() = apply {
     single { SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH) }
@@ -39,6 +42,8 @@ fun CompositionScopeDefault.Builder.domainModule() = apply {
     single { get<DatabaseStorage>().getRates() }
 
     factory<NetworkService> { NetworkServiceImpl() }
+
+    factory<TimeRangeFactory>(TimeRangeWorkday) { TimeRangeFactoryLastWorkday() }
 
     factory(RatesNotSelected) { createExchangeRatesNotSelected() }
     factory(RatesToday) { createExchangeRatesToday() }
@@ -63,20 +68,12 @@ private fun CompositionScope.createSharedPreferenceProvider(name: String): Share
 
 private fun CompositionScope.createExchangeRatesToday(): ExchangeRates {
     val url = URL("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml")
-    return createExchangeRates(url) {
-        val start = Calendar.getInstance().setToDayStart().timeInMillis
-        val end = Calendar.getInstance().setToDayEnd().timeInMillis
-        start..end
-    }
+    return createExchangeRates(url, get(TimeRangeWorkday))
 }
 
 private fun CompositionScope.createExchangeRatesNotSelected(): ExchangeRates {
     val url = URL("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml")
-    var result = createExchangeRatesUnbiased(url) {
-        val start = Calendar.getInstance().setToDayStart().timeInMillis
-        val end = Calendar.getInstance().setToDayEnd().timeInMillis
-        start..end
-    }
+    var result = createExchangeRatesUnbiased(url, get(TimeRangeWorkday))
     result = ExchangeRatesFilterNotSelected(result, get(ExchangeRateModel))
     return result
 }
