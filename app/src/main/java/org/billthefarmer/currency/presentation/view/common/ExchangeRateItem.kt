@@ -30,13 +30,14 @@ import java.util.*
 @Composable
 fun ExchangeRateItem(
     model: CurrencyModel,
+    modifier: Modifier = Modifier,
     calculator: RateCalculator = ExchangeRateItemDefaults.Calculator,
-    onCurrencyClick: (CurrencyModel) -> Unit
+    onCurrencyClick: () -> Unit
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .testTag("content-exchange-rate-holder")
-            .clickable { onCurrencyClick(model) }
+            .clickable(onClick = onCurrencyClick)
             .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {

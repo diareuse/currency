@@ -18,6 +18,7 @@ import org.billthefarmer.currency.presentation.view.detail.DetailViewComposition
 import org.billthefarmer.currency.presentation.view.selection.Selection
 import org.billthefarmer.currency.presentation.view.selection.SelectionViewComposition
 import org.billthefarmer.currency.screen.MainViewModel
+import java.util.*
 
 class MainViewCompositionNavigation : MainViewComposition {
 
@@ -48,8 +49,14 @@ class MainViewCompositionNavigation : MainViewComposition {
     @Composable
     private fun Detail(entry: NavBackStackEntry) {
         val arguments = entry.arguments ?: Bundle.EMPTY
-        val view = rememberComposed<DetailViewComposition>(Detail, arguments)
-        view.Compose(composedViewModel(screen = entry.destination.navigatorName))
+        val currency = Currency.getInstance(arguments.getString("currency"))
+        val view = rememberComposed<DetailViewComposition>(Detail)
+        view.Compose(
+            composedViewModel(
+                screen = entry.destination.navigatorName,
+                params = arrayOf(currency)
+            )
+        )
     }
 
     @Composable

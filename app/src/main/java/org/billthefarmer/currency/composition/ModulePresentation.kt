@@ -49,6 +49,12 @@ private fun CompositionScope.createDashboardViewComposition(): DashboardViewComp
         )
     )
     result = DashboardViewCompositionContentLoader(result, get(RatesToday), get())
+    result = DashboardViewCompositionDeletionConsumer(
+        result,
+        get(ExchangeRateModel),
+        get(ExchangeRateModel)
+    )
+    result = ViewCompositionSnackbar(result)
     return result
 }
 
