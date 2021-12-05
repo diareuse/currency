@@ -3,6 +3,7 @@ package org.billthefarmer.currency.domain.database
 import androidx.annotation.WorkerThread
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import org.billthefarmer.currency.domain.model.PersistedRate
 
@@ -14,7 +15,7 @@ interface DaoRate {
     fun getRatesInRange(start: Long, end: Long): List<PersistedRate>
 
     @WorkerThread
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(item: PersistedRate)
 
 }
