@@ -14,7 +14,10 @@ data class CurrencyModel(
         val resourceName = "flag_${currencyCode}".lowercase()
         return resources
             .getIdentifier(resourceName, "drawable", context.packageName)
-            .takeUnless { it == 0 } ?: R.drawable.flag_ext
+            .takeUnless { it == 0 } ?: let {
+            println("Currency $currencyCode not found")
+            R.drawable.flag__unknown
+        }
     }
 
 }

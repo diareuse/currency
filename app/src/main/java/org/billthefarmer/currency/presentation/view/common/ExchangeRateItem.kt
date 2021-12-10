@@ -73,7 +73,7 @@ private fun Image(modifier: Modifier, painter: Painter, currency: Currency) {
                 .semantics { contentDescription = currency.displayName }
                 .fillMaxSize(),
             painter = painter,
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.Crop,
             contentDescription = currency.displayName
         )
     }

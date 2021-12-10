@@ -137,10 +137,10 @@ public class Main extends Activity
                     R.drawable.flag_try, R.drawable.flag_aud, R.drawable.flag_brl,
                     R.drawable.flag_cad, R.drawable.flag_cny, R.drawable.flag_hkd,
                     R.drawable.flag_idr, R.drawable.flag_ils, R.drawable.flag_inr,
-                    R.drawable.flag_isk, R.drawable.flag_kpw, R.drawable.flag_mxn,
+                    R.drawable.flag_isk, R.drawable.flag_krw, R.drawable.flag_mxn,
                     R.drawable.flag_myr, R.drawable.flag_nzd, R.drawable.flag_php,
                     R.drawable.flag_sgd, R.drawable.flag_thb, R.drawable.flag_zar,
-                    R.drawable.flag_ext
+                    R.drawable.flag__unknown
             };
 
     public static final String TAG = "Currency";

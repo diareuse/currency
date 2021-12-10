@@ -85,7 +85,7 @@ class DashboardViewCompositionInput : DashboardViewComposition {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = painter,
-                contentScale = ContentScale.FillBounds,
+                contentScale = ContentScale.Crop,
                 contentDescription = "flag"
             )
         }
