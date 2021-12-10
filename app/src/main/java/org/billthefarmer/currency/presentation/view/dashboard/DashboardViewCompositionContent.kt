@@ -75,7 +75,7 @@ class DashboardViewCompositionContent : DashboardViewComposition {
             modifier = Modifier.fillMaxSize(),
             contentPadding = padding
         ) {
-            items(currencies) {
+            items(currencies, key = { it.rate.currency.currencyCode }) {
                 ListItem(
                     item = it,
                     calculator = calculator,

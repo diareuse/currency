@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
@@ -42,7 +43,9 @@ fun ExchangeRateItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         val context = LocalContext.current
-        val flagResource = model.getFlagResource(context)
+        val flagResource = remember(model) {
+            model.getFlagResource(context)
+        }
         Image(
             modifier = Modifier
                 .width(95.dp)
@@ -54,7 +57,9 @@ fun ExchangeRateItem(
         Labels(
             modifier = Modifier.weight(1f),
             currency = model.rate.currency,
-            rate = calculator.getAdjustedRate(model.rate.rate)
+            rate = remember(calculator, model) {
+                calculator.getAdjustedRate(model.rate.rate)
+            }
         )
     }
 }
@@ -88,14 +93,17 @@ private fun Labels(modifier: Modifier, currency: Currency, rate: Double) {
             text = currency.displayName,
             style = MaterialTheme.typography.subtitle1,
             fontWeight = FontWeight.Thin,
+            maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             color = color,
         )
         Text(
             modifier = Modifier.testTag("content-currency-value"),
-            text = buildAnnotatedString {
-                withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("%.2f".format(rate)) }
-                withStyle(SpanStyle(fontWeight = FontWeight.Thin)) { append(currency.symbol) }
+            text = remember(currency, rate) {
+                buildAnnotatedString {
+                    withStyle(SpanStyle(fontWeight = FontWeight.Bold)) { append("%.2f".format(rate)) }
+                    withStyle(SpanStyle(fontWeight = FontWeight.Thin)) { append(currency.symbol) }
+                }
             },
             style = MaterialTheme.typography.h5,
             maxLines = 1,

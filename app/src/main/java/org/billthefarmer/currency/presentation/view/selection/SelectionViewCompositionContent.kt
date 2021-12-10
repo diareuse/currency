@@ -53,7 +53,7 @@ class SelectionViewCompositionContent : SelectionViewComposition {
         onCurrencyClick: (CurrencyModel) -> Unit
     ) {
         LazyColumn(contentPadding = padding) {
-            items(currencies) {
+            items(currencies, key = { it.rate.currency.currencyCode }) {
                 ExchangeRateItem(it, onCurrencyClick = { onCurrencyClick(it) })
                 Spacer(modifier = Modifier.height(16.dp))
             }
