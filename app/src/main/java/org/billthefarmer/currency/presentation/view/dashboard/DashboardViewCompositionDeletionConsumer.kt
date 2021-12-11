@@ -32,7 +32,7 @@ class DashboardViewCompositionDeletionConsumer(
             val preference = readPreference().removeAll(pending)
             writePreference(preference)
             model.removePendingDeletion(pending)
-            snackbar.show("Removed ${pending.first().rate.currency.currencyCode}")
+            snackbar.show("Removed ${pending.first().rate.currency.displayName}")
         }
     }
 

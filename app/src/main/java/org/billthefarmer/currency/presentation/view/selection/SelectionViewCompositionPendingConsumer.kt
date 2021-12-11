@@ -32,7 +32,7 @@ class SelectionViewCompositionPendingConsumer(
             val preference = readPreference().addAll(pending)
             writePreference(preference)
             model.removePending(pending)
-            snackbar.show("Added ${pending.first().rate.currency.currencyCode}")
+            snackbar.show("Added ${pending.first().rate.currency.displayName}")
         }
     }
 
