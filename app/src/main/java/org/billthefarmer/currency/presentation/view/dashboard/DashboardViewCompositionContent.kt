@@ -24,10 +24,10 @@ import org.billthefarmer.currency.R
 import org.billthefarmer.currency.domain.model.ExchangeRate
 import org.billthefarmer.currency.domain.rate.RateCalculator
 import org.billthefarmer.currency.domain.rate.RateCalculatorPivot
+import org.billthefarmer.currency.presentation.gesture.swipeable
 import org.billthefarmer.currency.presentation.model.CurrencyModel
 import org.billthefarmer.currency.presentation.view.common.ExchangeRateItem
 import org.billthefarmer.currency.presentation.view.common.ExchangeRateItemDefaults
-import org.billthefarmer.currency.presentation.view.common.swipeable
 import org.billthefarmer.currency.presentation.view.main.LocalNavHostController
 import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
 import java.util.*

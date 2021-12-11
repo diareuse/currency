@@ -1,4 +1,4 @@
-package org.billthefarmer.currency.presentation.view.common
+package org.billthefarmer.currency.presentation.gesture
 
 import androidx.compose.ui.unit.dp
 

@@ -25,8 +25,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.billthefarmer.currency.R
-import org.billthefarmer.currency.presentation.view.common.DismissDirectionVertical
-import org.billthefarmer.currency.presentation.view.common.dismissVertically
+import org.billthefarmer.currency.presentation.gesture.DismissDirectionVertical
+import org.billthefarmer.currency.presentation.gesture.dismissVertically
 import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
 import java.util.*
 import kotlin.math.max
