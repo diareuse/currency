@@ -46,7 +46,10 @@ class DashboardViewCompositionContent : DashboardViewComposition {
         }
         val navigator = LocalNavHostController.current
         Compose(
-            currencies = currenciesState.filter { it != selected },
+            currencies = remember(
+                currenciesState,
+                selected
+            ) { currenciesState.filter { it != selected } },
             calculator = calculator,
             onCurrencyClick = { model.selectedCurrency.value = it },
             onDeleteClick = { model.addPendingDeletion(it) },
