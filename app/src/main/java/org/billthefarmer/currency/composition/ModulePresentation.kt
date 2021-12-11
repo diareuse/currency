@@ -6,6 +6,8 @@ import org.billthefarmer.composition.scope.factory
 import org.billthefarmer.composition.scope.get
 import org.billthefarmer.currency.presentation.adapter.CurrencyModelAdapter
 import org.billthefarmer.currency.presentation.adapter.CurrencyModelAdapterImpl
+import org.billthefarmer.currency.presentation.adapter.DaySnapshotAdapter
+import org.billthefarmer.currency.presentation.adapter.DaySnapshotAdapterImpl
 import org.billthefarmer.currency.presentation.view.ViewCompositionScaffold
 import org.billthefarmer.currency.presentation.view.ViewCompositionSnackbar
 import org.billthefarmer.currency.presentation.view.dashboard.*
@@ -15,6 +17,7 @@ import org.billthefarmer.currency.presentation.view.selection.*
 
 fun CompositionScopeDefault.Builder.presentationModule() = apply {
     factory<CurrencyModelAdapter> { CurrencyModelAdapterImpl() }
+    factory<DaySnapshotAdapter> { DaySnapshotAdapterImpl() }
 
     factory(Main) { createMainViewComposition() }
     factory(Detail) { createDetailViewComposition() }
@@ -64,6 +67,7 @@ private fun CompositionScope.createDetailViewComposition(): DetailViewCompositio
         content = DetailViewCompositionContent()
     )
     result = DetailViewCompositionContentLoader(result, get(Rates90Days), get())
+    result = ViewCompositionSnackbar(result)
     return result
 }
 

@@ -68,19 +68,19 @@ private fun CompositionScope.createSharedPreferenceProvider(name: String): Share
 
 private fun CompositionScope.createExchangeRatesToday(): ExchangeRates {
     val url = URL("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml")
-    return createExchangeRates(url, get(TimeRangeWorkday))
+    return createExchangeRates(url, 0, get(TimeRangeWorkday))
 }
 
 private fun CompositionScope.createExchangeRatesNotSelected(): ExchangeRates {
     val url = URL("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml")
-    var result = createExchangeRatesUnbiased(url, get(TimeRangeWorkday))
+    var result = createExchangeRatesUnbiased(url, 0, get(TimeRangeWorkday))
     result = ExchangeRatesFilterNotSelected(result, get(ExchangeRateModel))
     return result
 }
 
 private fun CompositionScope.createExchangeRates90Days(): ExchangeRates {
     val url = URL("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml")
-    return createExchangeRates(url) {
+    return createExchangeRates(url, 58) {
         val start = Calendar.getInstance().setToDayStart()
             .also { it[Calendar.DAY_OF_YEAR] -= 90 }
             .timeInMillis
@@ -91,7 +91,7 @@ private fun CompositionScope.createExchangeRates90Days(): ExchangeRates {
 
 private fun CompositionScope.createExchangeRatesAllTime(): ExchangeRates {
     val url = URL("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml")
-    return createExchangeRates(url) {
+    return createExchangeRates(url, 66) {
         val start = 0L
         val end = Calendar.getInstance().setToDayEnd().timeInMillis
         start..end
@@ -100,6 +100,7 @@ private fun CompositionScope.createExchangeRatesAllTime(): ExchangeRates {
 
 private fun CompositionScope.createExchangeRatesUnbiased(
     url: URL,
+    networkRequestAtCount: Int,
     factory: TimeRangeFactory
 ): ExchangeRates {
     var network: ExchangeRates = ExchangeRatesNetwork(url, get(), get())
@@ -111,16 +112,17 @@ private fun CompositionScope.createExchangeRatesUnbiased(
     database = ExchangeRatesErrorDefault(database, ExchangeRatesEmpty())
 
     var result: ExchangeRates
-    result = ExchangeRatesEmptyFork(database, network)
+    result = ExchangeRatesCountLessFork(database, network, networkRequestAtCount)
     result = ExchangeRatesSort(result)
     return result
 }
 
 private fun CompositionScope.createExchangeRates(
     url: URL,
+    networkRequestAtCount: Int,
     factory: TimeRangeFactory
 ): ExchangeRates {
-    var network = createExchangeRatesUnbiased(url, factory)
+    var network = createExchangeRatesUnbiased(url, networkRequestAtCount, factory)
     network = ExchangeRatesFilterSelected(network, get(ExchangeRateModel))
     return network
 }

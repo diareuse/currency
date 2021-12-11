@@ -9,6 +9,7 @@ import org.billthefarmer.currency.domain.rate.ExchangeRates
 import org.billthefarmer.currency.presentation.adapter.DaySnapshotAdapter
 import org.billthefarmer.currency.presentation.model.DaySnapshot
 import org.billthefarmer.currency.screen.detail.DetailViewModel
+import java.util.*
 
 class DetailViewCompositionContentLoader(
     private val source: DetailViewComposition,
@@ -20,12 +21,17 @@ class DetailViewCompositionContentLoader(
     override fun Compose(model: DetailViewModel) {
         source.Compose(model = model)
         LaunchedEffect(model) {
-            model.rates.value = getRates()
+            model.rates.value = getRates(model.currency)
         }
     }
 
-    private suspend fun getRates(): List<DaySnapshot> {
-        return getExchangeRates().map(adapter::adapt)
+    private suspend fun getRates(currency: Currency): List<DaySnapshot> {
+        return getExchangeRates()
+            .asSequence()
+            .filter { it.currency == currency }
+            .map(adapter::adapt)
+            .toList()
+            .asReversed()
     }
 
     private suspend fun getExchangeRates(): List<ExchangeRate> {

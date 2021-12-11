@@ -10,9 +10,9 @@ import org.mockito.Mockito
 import java.util.*
 import kotlin.random.Random.Default.nextDouble
 
-class ExchangeRatesEmptyForkTest : MockableTest() {
+class ExchangeRatesCountLessForkTest : MockableTest() {
 
-    private lateinit var rates: ExchangeRatesEmptyFork
+    private lateinit var rates: ExchangeRatesCountLessFork
 
     @Mock
     lateinit var first: ExchangeRates
@@ -23,7 +23,7 @@ class ExchangeRatesEmptyForkTest : MockableTest() {
     @Before
     override fun prepare() {
         super.prepare()
-        rates = ExchangeRatesEmptyFork(first, second)
+        rates = ExchangeRatesCountLessFork(first, second, 0)
     }
 
     @Test
