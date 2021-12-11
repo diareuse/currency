@@ -103,8 +103,8 @@ private fun CompositionScope.createExchangeRatesUnbiased(
     factory: TimeRangeFactory
 ): ExchangeRates {
     var network: ExchangeRates = ExchangeRatesNetwork(url, get(), get())
-    network = ExchangeRatesErrorDefault(ExchangeRatesSaving(network, get(), get(), get()), network)
     network = ExchangeRatesAppendBaseline(network)
+    network = ExchangeRatesErrorDefault(ExchangeRatesSaving(network, get(), get(), get()), network)
 
     var database: ExchangeRates = ExchangeRatesDatabase(get(), get(), factory)
     database = ExchangeRatesErrorDefault(database, ExchangeRatesEmpty())
