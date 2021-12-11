@@ -8,11 +8,13 @@ class ExchangeRatesAppendBaseline(
 ) : ExchangeRates {
 
     override fun getCurrentRates(): List<ExchangeRate> {
-        return source.getCurrentRates() + getBaseline()
+        val rates = source.getCurrentRates()
+        val date = rates.firstOrNull()?.time ?: Date()
+        return rates + getBaseline(date)
     }
 
-    private fun getBaseline(): ExchangeRate {
-        return ExchangeRate(Currency.getInstance("EUR"), 1.0, Date())
+    private fun getBaseline(date: Date): ExchangeRate {
+        return ExchangeRate(Currency.getInstance("EUR"), 1.0, date)
     }
 
 }
