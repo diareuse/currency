@@ -105,6 +105,7 @@ private fun CompositionScope.createExchangeRatesUnbiased(
     var network: ExchangeRates = ExchangeRatesNetwork(url, get(), get())
     network = ExchangeRatesAppendBaseline(network)
     network = ExchangeRatesErrorDefault(ExchangeRatesSaving(network, get(), get(), get()), network)
+    network = ExchangeRatesCache(network)
 
     var database: ExchangeRates = ExchangeRatesDatabase(get(), get(), factory)
     database = ExchangeRatesErrorDefault(database, ExchangeRatesEmpty())
