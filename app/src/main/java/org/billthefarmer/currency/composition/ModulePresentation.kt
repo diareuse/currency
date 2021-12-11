@@ -6,11 +6,10 @@ import org.billthefarmer.composition.scope.factory
 import org.billthefarmer.composition.scope.get
 import org.billthefarmer.currency.presentation.adapter.CurrencyModelAdapter
 import org.billthefarmer.currency.presentation.adapter.CurrencyModelAdapterImpl
-import org.billthefarmer.currency.presentation.view.ViewCompositionNoop
+import org.billthefarmer.currency.presentation.view.ViewCompositionScaffold
 import org.billthefarmer.currency.presentation.view.ViewCompositionSnackbar
 import org.billthefarmer.currency.presentation.view.dashboard.*
-import org.billthefarmer.currency.presentation.view.detail.Detail
-import org.billthefarmer.currency.presentation.view.detail.DetailViewComposition
+import org.billthefarmer.currency.presentation.view.detail.*
 import org.billthefarmer.currency.presentation.view.main.*
 import org.billthefarmer.currency.presentation.view.selection.*
 
@@ -25,7 +24,7 @@ fun CompositionScopeDefault.Builder.presentationModule() = apply {
 
 private fun CompositionScope.createSelectionViewComposition(): SelectionViewComposition {
     var result: SelectionViewComposition
-    result = SelectionViewCompositionScaffold(
+    result = ViewCompositionScaffold(
         toolbar = SelectionViewCompositionToolbar(),
         content = SelectionViewCompositionContent()
     )
@@ -59,7 +58,13 @@ private fun CompositionScope.createDashboardViewComposition(): DashboardViewComp
 }
 
 private fun CompositionScope.createDetailViewComposition(): DetailViewComposition {
-    return ViewCompositionNoop()
+    var result: DetailViewComposition
+    result = ViewCompositionScaffold(
+        toolbar = DetailViewCompositionToolbar(),
+        content = DetailViewCompositionContent()
+    )
+    result = DetailViewCompositionContentLoader(result, get(Rates90Days), get())
+    return result
 }
 
 private fun CompositionScope.createMainViewComposition(): MainViewComposition {

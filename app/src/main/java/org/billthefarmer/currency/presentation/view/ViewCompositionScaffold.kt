@@ -1,4 +1,4 @@
-package org.billthefarmer.currency.presentation.view.selection
+package org.billthefarmer.currency.presentation.view
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -8,22 +8,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.statusBarsPadding
-import org.billthefarmer.currency.screen.selection.SelectionViewModel
 
-class SelectionViewCompositionScaffold(
-    private val toolbar: SelectionViewComposition,
-    private val content: SelectionViewComposition
-) : SelectionViewComposition {
+class ViewCompositionScaffold<Model>(
+    private val toolbar: ViewComposition<Model>,
+    private val content: ViewComposition<Model>
+) : ViewComposition<Model> {
 
     @Composable
-    override fun Compose(model: SelectionViewModel) {
+    override fun Compose(model: Model) {
         Surface(color = MaterialTheme.colors.surface) {
             ComposeLayout(model = model)
         }
     }
 
     @Composable
-    private fun ComposeLayout(model: SelectionViewModel) {
+    private fun ComposeLayout(model: Model) {
         Column(modifier = Modifier.fillMaxSize()) {
             Toolbar(
                 modifier = Modifier
@@ -40,7 +39,7 @@ class SelectionViewCompositionScaffold(
     }
 
     @Composable
-    private fun Toolbar(modifier: Modifier, model: SelectionViewModel) {
+    private fun Toolbar(modifier: Modifier, model: Model) {
         Box(
             modifier = modifier
                 .fillMaxWidth()
@@ -53,7 +52,7 @@ class SelectionViewCompositionScaffold(
     }
 
     @Composable
-    private fun Content(modifier: Modifier, model: SelectionViewModel) {
+    private fun Content(modifier: Modifier, model: Model) {
         Box(
             modifier = modifier
                 .fillMaxWidth()
