@@ -110,7 +110,10 @@ private fun CompositionScope.createExchangeRatesUnbiased(
     var database: ExchangeRates = ExchangeRatesDatabase(get(), get(), factory)
     database = ExchangeRatesErrorDefault(database, ExchangeRatesEmpty())
 
-    return ExchangeRatesEmptyFork(database, network)
+    var result: ExchangeRates
+    result = ExchangeRatesEmptyFork(database, network)
+    result = ExchangeRatesSort(result)
+    return result
 }
 
 private fun CompositionScope.createExchangeRates(
