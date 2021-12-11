@@ -25,8 +25,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.billthefarmer.currency.R
+import org.billthefarmer.currency.presentation.view.common.DismissDirectionVertical
+import org.billthefarmer.currency.presentation.view.common.dismissVertically
 import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
 import java.util.*
+import kotlin.math.max
 
 class DashboardViewCompositionInput : DashboardViewComposition {
 
@@ -41,7 +44,8 @@ class DashboardViewCompositionInput : DashboardViewComposition {
             flagResource = currency.getFlagResource(context),
             currency = currency.rate.currency,
             value = amount,
-            onValueChange = { model.amount.value = it }
+            onValueChange = { model.amount.value = it },
+            onDismiss = { model.selectedCurrency.value = null }
         )
     }
 
@@ -50,10 +54,16 @@ class DashboardViewCompositionInput : DashboardViewComposition {
         flagResource: Int,
         currency: Currency,
         value: String,
-        onValueChange: (String) -> Unit
+        onValueChange: (String) -> Unit,
+        onDismiss: () -> Unit
     ) {
         Row(
-            modifier = Modifier.height(IntrinsicSize.Max),
+            modifier = Modifier
+                .height(IntrinsicSize.Max)
+                .dismissVertically(
+                    dismissDirection = DismissDirectionVertical.Up,
+                    onDismiss = onDismiss
+                ),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
@@ -98,15 +108,14 @@ class DashboardViewCompositionInput : DashboardViewComposition {
         value: String,
         onValueChange: (String) -> Unit
     ) {
-        val textColor = LocalContentColor.current
-        val textStyle = LocalTextStyle.current
-
         Surface(
             modifier = modifier
                 .testTag("input-text"),
             shape = MaterialTheme.shapes.medium,
             color = MaterialTheme.colors.surface
         ) {
+            val textColor = LocalContentColor.current
+            val textStyle = LocalTextStyle.current
             BasicTextField(
                 modifier = Modifier
                     .fillMaxSize()
@@ -115,7 +124,8 @@ class DashboardViewCompositionInput : DashboardViewComposition {
                 onValueChange = onValueChange,
                 textStyle = textStyle.copy(
                     fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
+                    color = textColor
                 ),
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Number,
@@ -141,7 +151,7 @@ class DashboardViewCompositionInput : DashboardViewComposition {
                     offset + fragmentCurrency.length
 
                 override fun transformedToOriginal(offset: Int) =
-                    offset - fragmentCurrency.length
+                    max(0, offset - fragmentCurrency.length)
             }
             TransformedText(jointString, offset)
         }
@@ -165,7 +175,8 @@ class DashboardViewCompositionInput : DashboardViewComposition {
                 flagResource = R.drawable.flag_aud,
                 currency = Currency.getInstance("USD"),
                 value = value,
-                onValueChange = { value = it }
+                onValueChange = { value = it },
+                onDismiss = {}
             )
         }
     }
