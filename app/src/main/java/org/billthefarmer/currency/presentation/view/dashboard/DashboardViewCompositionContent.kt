@@ -22,6 +22,7 @@ import com.google.accompanist.insets.WindowInsets
 import com.google.accompanist.insets.rememberInsetsPaddingValues
 import org.billthefarmer.currency.R
 import org.billthefarmer.currency.domain.model.ExchangeRate
+import org.billthefarmer.currency.domain.rate.ExchangeRatesConstants
 import org.billthefarmer.currency.domain.rate.RateCalculator
 import org.billthefarmer.currency.domain.rate.RateCalculatorPivot
 import org.billthefarmer.currency.presentation.gesture.swipeable
@@ -111,7 +112,10 @@ class DashboardViewCompositionContent : DashboardViewComposition {
             ) {
                 Icon(
                     modifier = Modifier
-                        .clickable(role = Role.Button) {
+                        .clickable(
+                            role = Role.Button,
+                            enabled = item.rate.currency != ExchangeRatesConstants.Baseline
+                        ) {
                             offset = 0f
                             onDetailClick()
                         }
