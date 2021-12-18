@@ -1,123 +1,94 @@
-# ![Logo](src/main/res/drawable-hdpi/ic_launcher.png) Currency [![.github/workflows/main.yml](https://github.com/billthefarmer/currency/workflows/.github/workflows/main.yml/badge.svg)](https://github.com/billthefarmer/currency/actions) [![Release](https://img.shields.io/github/release/billthefarmer/currency.svg?logo=github)](https://github.com/billthefarmer/currency/releases) [![Available on F-Droid](https://f-droid.org/wiki/images/c/ca/F-Droid-button_available-on_smaller.png)](https://f-droid.org/packages/org.billthefarmer.currency)
+# Currency
 
-Android currency conversion. The app is available on [F-Droid](https://f-droid.org/packages/org.billthefarmer.currency) and [here](https://github.com/billthefarmer/currency/releases).
-
-## Extra currencies
-For extra currencies please see my
-[Specie](https://github.com/billthefarmer/specie) app with 150
-currencies.
-
-More ~currencies~, ~crypto-currencies~ and lots of other conversions
-are in [Equate](https://github.com/EvanRespaut/Equate).
-
-![](https://raw.githubusercontent.com/billthefarmer/billthefarmer.github.io/master/images/currency/currency.png) ![](https://raw.githubusercontent.com/billthefarmer/billthefarmer.github.io/master/images/currency/choose.png)
-
-![](https://raw.githubusercontent.com/billthefarmer/billthefarmer.github.io/master/images/currency/settings.png) ![](https://raw.githubusercontent.com/billthefarmer/billthefarmer.github.io/master/images/currency/about.png)
-
-![](https://raw.githubusercontent.com/billthefarmer/billthefarmer.github.io/master/images/currency/chart.png)
-
-![](https://raw.githubusercontent.com/billthefarmer/billthefarmer.github.io/master/images/currency/hist.png)
+Android currency conversion.
 
  * Currency rates from the [European Central Bank](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html)
  * 32 international currencies
- * Currency rates updated daily
- * Last rate update retained for use offline
- * Extra currency for unsupported currencies
- * Ukrainian, German, Italian, French, Spanish, Indonesian, Russian
-   and Norwegian translation
+ * Currency rates updated every workday
+ * All rates downloaded prior to being offline retained for use offline
 
-## Usage
-### Edit
-Touch the current currency value field to edit the value. The display
-will be updated dynamically as you type. Touch the **Done** button on
-the numeric keypad to update the value field.  The whole value field
-is selected by default when touched so it will be overwritten by
-typing in a new value. To deselect the text, touch an adjacent area,
-like the currency flag.
+### Light Mode
 
-### Toolbar
-The icons in the toolbar from left to right are:
-* **Add** a currency to the list. A scrollable list of currencies will
-   pop up. Touch an entry to add it or touch the **Cancel** button
-   below the list. Long touch an entry to select it. Once one currency
-   is selected others may be added or removed from the selection by
-   touching them. Another long touch on another currency will clear
-   the list and select the new currency. Touch the **Clear** button to
-   clear the selection. Touch the **Select** button to add the
-   selection. The entries will be added to the list in the order
-   selected.
-* **Refresh** Get the day's currency rates from the
-  [ECB](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html). The
-  date shown on the left above the currency list will be updated if
-  new rates are available. It may show the previous day because the
-  rates are updated at around 14:15 CET. The status display on the
-  right above the currency list will show 'OK', 'No Connection', 'No
-  WiFi' or 'Roaming' according to the update settings. It may show
-  'Failed' if the connection times out or fails to connect.
-* **Update** Update the currency rate for the extra currency against
-  the Euro. A dialog will pop up with the current extra currency
-  rate. Update the value and touch the OK button. The display will
-  refresh if the extra currency is displayed.
-* **Help** Display help text.
-* **Settings** Display the settings screen.
+<p float="left">
+    <img src="images/light/dashboard.png" width=40% height=40%>
+    <img src="images/light/selected.png" width=40% height=40%>
+</p>
+<p float="left">
+    <img src="images/light/choose.png" width=40% height=40%>
+    <img src="images/light/chart.png" width=40% height=40%>
+</p>
 
-### Edit currency list
-Touch a currency entry in the list to make it current. The old current
-currency will move to the top of the list. Long touch a currency entry
-to select it. Once one currency is selected others may be added or
-removed from the selection by touching them. Another long touch on
-another currency will clear the list and select the new currency. The
-icons in the toolbar will change to:
-* **Clear** the selection.
-* **Remove** the selected currencies.
-* **Chart** Display a chart of selected currencies. If one is
-  selected, the chart will be of the current currency and the selected
-  currency. If more than one currency is selected the chart will be of
-  the last two selected currencies.  Selecting the extra currency will
-  produce a blank chart.
-* **Copy** selection value to clipboard. Only one value will be copied.
+### Dark Mode
 
-## Chart
-The display shows an interactive chart of the last 90 days of
-historical rates from the
-[ECB](https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/index.en.html). The
-chart responds to two finger pinch and expand gestures and will scroll
-once expanded. The toolbar icons from left to right are:
-* **Invert** the chart.
-* **New chart** The scrollable list of currencies will pop up. Select
-  one or two currencies from the list as above to replace the current
-  currencies in the chart.
-* **Refresh** the chart.
-* **Historical** The chart will be updated with nearly eighteen years
-  of historical data currently dating from 1 January 1999. Not all the
-  currencies go back this far. **Caution** - this will take a while,
-  depending on the connection, and will download more than 6Mb of
-  data.
-* **Range** Change the chart range. The chart will show the latest
-  data, but will scroll back. **Note** - ranges greater than a quarter
-  will have no effect unless the chart is updated with the historical
-  data.
-  * **Week** One week
-  * **Month** One month
-  * **Quarter** Three months
-  * **Year** One year
-  * **5 Years** 5 Years
-  * **Max** Maximum current range
+<p float="left">
+    <img src="images/dark/dashboard.png" width=40% height=40%>
+    <img src="images/dark/selected.png" width=40% height=40%>
+</p>
+<p float="left">
+    <img src="images/dark/choose.png" width=40% height=40%>
+    <img src="images/dark/chart.png" width=40% height=40%>
+</p>
 
-## Settings
-### Update
-* **WiFi** Update while connected on WiFi only
-* **Roaming** Update while roaming
+## Technical Details
 
-### Numbers
-* **Fraction digits** Select the number of digits to display after the
-  decimal point. A popup list of options will be displayed.
+This app is not meant to be "production ready", rather it demonstrates _a better way_ (at least in my opinion) of writing Android apps.
+That generally means:
 
-### Chart
-* **Fill** Fill the chart trace.
+ * No more libraries than is absolutely necessary
+ * Code is tested before being written
+ * No abuse of View Models as "do-it-all"
+ * Separation of view composition from the view itself
+    * _allows for the entire UI to be hot-swappable at run-time_
 
-### Theme
-* **Dark** Use dark theme
+### Libraries Used
 
-### About
-* **About** Display the version, copyright and licence.
+ * AndroidX (Jetpack)
+    * Compose
+    * Compose Navigation
+    * Compose Activity
+    * Compose ViewModel
+    * Startup
+    * Room
+ * Material
+ * Accompanist
+    * Insets
+ * Truth
+ * Mockito Kotlin
+ * JUnit
+
+And that's it.
+
+### Architecture
+
+App is divisible into basically 4 layers:
+
+ * Domain
+ * Presentation
+ * Composition
+ * UI
+
+#### UI
+
+The absolutely thinnest layer, where only singular Activity shall be used. Domain and Presentation layers take over the main responsibilities that developers usually entrust to the UI.
+
+Notice that with these changes - _layers being aggressively separated_ - we don't really care whether the Android substrate changes as it's touching only a single class.
+
+#### Composition
+
+Uses thin framework (from a separate module!) to combine, inject and fetch dependencies at composition time. Composition time is understood as a process of assembling the requested feature. Therefore we must assemble dependencies before the view is drawn on the screen and before data is fetched, stored or otherwise manipulated. This is a strict requirement of this design.
+
+It resembles popular framework [Koin](https://insert-koin.io/), but uses inline features rather than whatever Koin is trying to accomplish. Compared to Koin it's trimmed of features which this project does not directly require.
+
+#### Presentation
+
+Divisible components of presentation allow plug-ability of nearly all components and screens. Sudden benefit of this approach is that UI revamps' A/B tests are trivial with the help of [Remote Config](https://firebase.google.com/docs/remote-config/get-started?platform=android) or similar framework / library.
+
+The reuse of components, test-proven conditions and entire features is also trivial and generally plausible.
+
+#### Domain
+
+Encapsulates all the divisible micro-features and tasks app is required to perform. They are as unbiased as possible and abstracted by a guard interface. Abstraction used in this way allows for virtually unlimited extendability, which is in turn widely used in this sample.
+
+---
+
+> _Why would you make something everybody does? Make it better._
