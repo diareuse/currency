@@ -14,7 +14,7 @@ class ExchangeRatesAppendBaseline(
     }
 
     private fun getBaseline(date: Date): ExchangeRate {
-        return ExchangeRate(Currency.getInstance("EUR"), 1.0, date)
+        return ExchangeRate(ExchangeRatesConstants.Baseline, 1.0, date)
     }
 
 }

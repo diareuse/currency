@@ -20,7 +20,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.navigationBarsPadding
 import org.billthefarmer.currency.presentation.view.LocalSnackbarController
-import org.billthefarmer.currency.presentation.view.common.Chart
+import org.billthefarmer.currency.presentation.view.common.ChartDouble
 import org.billthefarmer.currency.presentation.view.common.vertical
 import org.billthefarmer.currency.presentation.view.show
 import org.billthefarmer.currency.screen.detail.DetailViewModel
@@ -71,7 +71,7 @@ class DetailViewCompositionContent : DetailViewComposition {
                     color = MaterialTheme.colors.onSurface
                 )
             }
-            Chart(
+            ChartDouble(
                 modifier = Modifier
                     .width(width)
                     .weight(1f)

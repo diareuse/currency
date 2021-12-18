@@ -8,21 +8,15 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.layout.onSizeChanged
 
 @Composable
-fun Chart(
+fun <Sample> Chart(
+    samples: List<Sample>,
+    pathCalculator: PathCalculator<Sample>,
     modifier: Modifier = Modifier,
-    pathCalculator: PathCalculator = ChartDefaults.pathCalculator,
-    background: Brush = Brush.verticalGradient(
-        listOf(
-            Color.White.copy(alpha = 1f),
-            Color.White.copy(alpha = .4f)
-        )
-    ),
-    samples: List<Double>
+    background: Brush = ChartDefaults.background
 ) {
     var path by remember { mutableStateOf(Path()) }
     var size by remember { mutableStateOf(Rect.Zero) }
@@ -44,5 +38,37 @@ fun Chart(
             }
             .drawWithContent {
                 drawPath(path = path, brush = background)
-            })
+            }
+    )
+}
+
+@Composable
+fun ChartDouble(
+    samples: List<Double>,
+    modifier: Modifier = Modifier,
+    background: Brush = ChartDefaults.background
+) {
+    val factory = remember {
+        val result: CoordinateCalculatorFactory<Double>
+        result = CoordinateCalculatorFactoryDouble()
+        result
+    }
+    val calculator = remember {
+        var result: PathCalculator<Double>
+        result = PathCalculatorDouble(factory)
+        result = PathCalculatorSampleCountSwitch(
+            sourceAbove = result,
+            sourceBelow = PathCalculatorRectangle(),
+            sourceEqual = PathCalculatorRectangle(),
+            sampleCount = 2
+        )
+        result
+    }
+
+    Chart(
+        modifier = modifier,
+        samples = samples,
+        pathCalculator = calculator,
+        background = background
+    )
 }
