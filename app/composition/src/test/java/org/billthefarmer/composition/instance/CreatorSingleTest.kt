@@ -5,6 +5,7 @@ import com.google.common.truth.Truth.assertThat
 import org.billthefarmer.composition.extra.Parameters
 import org.billthefarmer.composition.tooling.getNoopScope
 import org.junit.Test
+import kotlin.random.Random.Default.nextInt
 
 class CreatorSingleTest {
 
@@ -52,6 +53,30 @@ class CreatorSingleTest {
         value = creator.getValue(scope, Parameters(2))
 
         Truth.assertThat(value).isEqualTo(ParametersTest.Value(2))
+    }
+
+    @Test
+    fun `returns same value when used with empty params`() {
+        val creator = CreatorSingle { ParametersTest.Value(nextInt()) }
+        val scope = getNoopScope()
+        assertThat(creator.getValue(scope, Parameters())).isSameInstanceAs(
+            creator.getValue(
+                scope,
+                Parameters()
+            )
+        )
+    }
+
+    @Test
+    fun `returns same value when used with some params`() {
+        val creator = CreatorSingle { (_: Int) -> ParametersTest.Value(nextInt()) }
+        val scope = getNoopScope()
+        assertThat(
+            creator.getValue(
+                scope,
+                Parameters(100)
+            )
+        ).isSameInstanceAs(creator.getValue(scope, Parameters(100)))
     }
 
 }

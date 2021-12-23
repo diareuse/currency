@@ -5,12 +5,13 @@ import org.billthefarmer.composition.scope.CompositionScope
 
 class CreatorSingle<T : Any>(private val factory: Creator.Factory<T>) : Creator<T> {
 
-    private val instances: HashMap<Parameters, T> = HashMap()
+    private val instances: HashMap<Int, T> = HashMap()
 
     override fun getValue(scope: CompositionScope, parameters: Parameters): T {
-        return instances[parameters] ?: synchronized(this) {
-            instances[parameters] ?: createInstance(scope, parameters).also {
-                instances[parameters] = it
+        val identifier = parameters.hashCode()
+        return instances[identifier] ?: synchronized(this) {
+            instances[identifier] ?: createInstance(scope, parameters).also {
+                instances[identifier] = it
             }
         }
     }

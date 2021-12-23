@@ -39,11 +39,13 @@ inline fun <reified T : ViewModel> composedViewModel(
     alias: Alias? = null,
     vararg params: Any?
 ): T {
-    val factory = ViewModelFactory(
-        scope = Dependency(),
-        type = T::class.java,
-        alias = alias,
-        parameters = params
-    )
+    val factory = remember(screen, alias, params) {
+        ViewModelFactory(
+            scope = Dependency(),
+            type = T::class.java,
+            alias = alias,
+            parameters = params
+        )
+    }
     return viewModel(key = screen, factory = factory)
 }
