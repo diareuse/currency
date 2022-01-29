@@ -36,22 +36,22 @@ class SelectionViewCompositionPendingConsumer(
         }
     }
 
-    private suspend fun readPreference(): ExchangeRatePreference {
-        return withContext(Dispatchers.Default) {
-            reader.read()
-        }
+    private suspend fun readPreference() = withContext(Dispatchers.IO) {
+        reader.read()
     }
 
-    private suspend fun writePreference(preference: ExchangeRatePreference) {
-        withContext(Dispatchers.Default) {
-            writer.write(preference)
-        }
+    private suspend fun writePreference(
+        preference: ExchangeRatePreference
+    ) = withContext(Dispatchers.IO) {
+        writer.write(preference)
     }
 
-    private fun ExchangeRatePreference.addAll(pending: List<CurrencyModel>): ExchangeRatePreference {
+    private suspend fun ExchangeRatePreference.addAll(
+        pending: List<CurrencyModel>
+    ) = withContext(Dispatchers.IO) {
         val currencies = selectedCurrencies.toHashSet()
-        currencies += pending.map { it.rate.currency }
-        return copy(selectedCurrencies = currencies)
+        currencies += pending.map { it.rate.currency }.toSet()
+        copy(selectedCurrencies = currencies)
     }
 
 }

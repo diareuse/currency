@@ -37,20 +37,20 @@ class DashboardViewCompositionDeletionConsumer(
     }
 
     private suspend fun readPreference(): ExchangeRatePreference {
-        return withContext(Dispatchers.Default) {
+        return withContext(Dispatchers.IO) {
             reader.read()
         }
     }
 
     private suspend fun writePreference(preference: ExchangeRatePreference) {
-        withContext(Dispatchers.Default) {
+        withContext(Dispatchers.IO) {
             writer.write(preference)
         }
     }
 
     private fun ExchangeRatePreference.removeAll(pending: List<CurrencyModel>): ExchangeRatePreference {
         val currencies = selectedCurrencies.toHashSet()
-        currencies -= pending.map { it.rate.currency }
+        currencies -= pending.map { it.rate.currency }.toSet()
         return copy(selectedCurrencies = currencies)
     }
 

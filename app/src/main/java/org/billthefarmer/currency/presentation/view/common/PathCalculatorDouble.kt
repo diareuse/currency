@@ -12,7 +12,7 @@ class PathCalculatorDouble(
     override suspend fun getPath(
         samples: List<Double>,
         rect: Rect
-    ): Path = withContext(Dispatchers.Default) {
+    ): Path = withContext(Dispatchers.IO) {
         val metadata = ChartMetadata(
             container = rect,
             minY = samples.minOrNull() ?: 0.0,

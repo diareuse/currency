@@ -7,7 +7,6 @@ import kotlinx.coroutines.withContext
 import org.billthefarmer.currency.domain.model.ExchangeRate
 import org.billthefarmer.currency.domain.rate.ExchangeRates
 import org.billthefarmer.currency.presentation.adapter.DaySnapshotAdapter
-import org.billthefarmer.currency.presentation.model.DaySnapshot
 import org.billthefarmer.currency.screen.detail.DetailViewModel
 import java.util.*
 
@@ -25,8 +24,8 @@ class DetailViewCompositionContentLoader(
         }
     }
 
-    private suspend fun getRates(currency: Currency): List<DaySnapshot> {
-        return getExchangeRates()
+    private suspend fun getRates(currency: Currency) = withContext(Dispatchers.IO) {
+        getExchangeRates()
             .asSequence()
             .filter { it.currency == currency }
             .map(adapter::adapt)
@@ -35,7 +34,7 @@ class DetailViewCompositionContentLoader(
     }
 
     private suspend fun getExchangeRates(): List<ExchangeRate> {
-        return withContext(Dispatchers.Default) {
+        return withContext(Dispatchers.IO) {
             rates.getCurrentRates()
         }
     }

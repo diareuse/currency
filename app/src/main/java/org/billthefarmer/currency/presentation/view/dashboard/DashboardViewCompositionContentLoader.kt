@@ -29,7 +29,7 @@ class DashboardViewCompositionContentLoader(
     }
 
     private suspend fun getExchangeRates(): List<ExchangeRate> {
-        return withContext(Dispatchers.Default) {
+        return withContext(Dispatchers.IO) {
             rates.getCurrentRates()
         }
     }
