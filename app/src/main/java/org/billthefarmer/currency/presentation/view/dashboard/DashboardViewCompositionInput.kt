@@ -4,10 +4,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,6 +28,7 @@ import org.billthefarmer.currency.R
 import org.billthefarmer.currency.presentation.gesture.DismissDirectionVertical
 import org.billthefarmer.currency.presentation.gesture.dismissVertically
 import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
+import org.billthefarmer.currency.screen.style.shapes
 import java.util.*
 import kotlin.math.max
 
@@ -89,8 +90,8 @@ class DashboardViewCompositionInput : DashboardViewComposition {
             modifier = modifier
                 .testTag("input-flag"),
             shape = MaterialTheme.shapes.medium,
-            color = MaterialTheme.colors.surface,
-            elevation = 8.dp
+            color = MaterialTheme.colorScheme.surface,
+            shadowElevation = 8.dp
         ) {
             Image(
                 modifier = Modifier.fillMaxSize(),
@@ -112,7 +113,7 @@ class DashboardViewCompositionInput : DashboardViewComposition {
             modifier = modifier
                 .testTag("input-text"),
             shape = MaterialTheme.shapes.medium,
-            color = MaterialTheme.colors.surface
+            color = MaterialTheme.colorScheme.surface
         ) {
             val textColor = LocalContentColor.current
             val textStyle = LocalTextStyle.current

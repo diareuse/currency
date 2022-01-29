@@ -6,8 +6,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -31,6 +31,7 @@ import org.billthefarmer.currency.presentation.view.common.ExchangeRateItem
 import org.billthefarmer.currency.presentation.view.common.ExchangeRateItemDefaults
 import org.billthefarmer.currency.presentation.view.main.LocalNavHostController
 import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
+import org.billthefarmer.currency.screen.style.ShapeMedium
 import java.util.*
 import kotlin.math.roundToInt
 import kotlin.random.Random.Default.nextDouble
@@ -119,12 +120,12 @@ class DashboardViewCompositionContent : DashboardViewComposition {
                             offset = 0f
                             onDetailClick()
                         }
-                        .background(MaterialTheme.colors.secondary, MaterialTheme.shapes.medium)
+                        .background(MaterialTheme.colorScheme.secondary, ShapeMedium)
                         .size(48.dp)
                         .padding(12.dp),
                     painter = painterResource(id = R.drawable.ic_chart),
                     contentDescription = "Detail",
-                    tint = MaterialTheme.colors.onSecondary
+                    tint = MaterialTheme.colorScheme.onSecondary
                 )
                 Spacer(modifier = Modifier.size(4.dp))
                 Icon(
@@ -133,12 +134,12 @@ class DashboardViewCompositionContent : DashboardViewComposition {
                             offset = 0f
                             onDeleteClick()
                         }
-                        .background(MaterialTheme.colors.error, MaterialTheme.shapes.medium)
+                        .background(MaterialTheme.colorScheme.error, ShapeMedium)
                         .size(48.dp)
                         .padding(12.dp),
                     painter = painterResource(id = R.drawable.ic_delete),
                     contentDescription = "Delete",
-                    tint = MaterialTheme.colors.onError
+                    tint = MaterialTheme.colorScheme.onError
                 )
             }
 
@@ -155,7 +156,7 @@ class DashboardViewCompositionContent : DashboardViewComposition {
                         getOffset = { offset },
                         onOffsetChanged = { offset = it }
                     )
-                    .background(MaterialTheme.colors.surface),
+                    .background(MaterialTheme.colorScheme.surface),
                 model = item,
                 calculator = calculator,
                 onCurrencyClick = onCurrencyClick

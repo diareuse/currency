@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import org.billthefarmer.currency.R
 import org.billthefarmer.currency.presentation.view.main.LocalNavHostController
 import org.billthefarmer.currency.screen.detail.DetailViewModel
+import org.billthefarmer.currency.screen.style.shapes
 import java.util.*
 
 class DetailViewCompositionToolbar : DetailViewComposition {
@@ -44,8 +45,8 @@ class DetailViewCompositionToolbar : DetailViewComposition {
                 .testTag("toolbar-action-button")
                 .clickable(onClickLabel = "Go Back", role = Role.Button, onClick = onClick),
             shape = MaterialTheme.shapes.medium,
-            color = MaterialTheme.colors.primary,
-            elevation = 16.dp
+            color = MaterialTheme.colorScheme.primary,
+            shadowElevation = 16.dp
         ) {
             Image(
                 modifier = Modifier.size(24.dp),
@@ -63,7 +64,7 @@ class DetailViewCompositionToolbar : DetailViewComposition {
             Text(
                 modifier = Modifier
                     .testTag("toolbar-title"),
-                style = MaterialTheme.typography.h5,
+                style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Black,
                 text = currency.displayName
             )

@@ -5,8 +5,8 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +24,7 @@ import org.billthefarmer.currency.presentation.view.common.ChartDouble
 import org.billthefarmer.currency.presentation.view.common.vertical
 import org.billthefarmer.currency.presentation.view.show
 import org.billthefarmer.currency.screen.detail.DetailViewModel
+import org.billthefarmer.currency.screen.style.overline
 import java.text.DateFormat
 
 class DetailViewCompositionContent : DetailViewComposition {
@@ -58,17 +59,17 @@ class DetailViewCompositionContent : DetailViewComposition {
                 Text(
                     modifier = Modifier.vertical(-90f),
                     text = rates.firstOrNull()?.date?.let { formatter.format(it) }.orEmpty(),
-                    style = MaterialTheme.typography.overline,
+                    style = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.Black,
-                    color = MaterialTheme.colors.onSurface
+                    color = MaterialTheme.colorScheme.onSurface
                 )
                 Spacer(Modifier.weight(1f))
                 Text(
                     modifier = Modifier.vertical(-90f),
                     text = rates.lastOrNull()?.date?.let { formatter.format(it) }.orEmpty(),
-                    style = MaterialTheme.typography.overline,
+                    style = MaterialTheme.typography.labelMedium,
                     fontWeight = FontWeight.Black,
-                    color = MaterialTheme.colors.onSurface
+                    color = MaterialTheme.colorScheme.onSurface
                 )
             }
             ChartDouble(
@@ -97,14 +98,14 @@ class DetailViewCompositionContent : DetailViewComposition {
                 samples = samples,
                 background = Brush.verticalGradient(
                     listOf(
-                        MaterialTheme.colors.primary,
-                        MaterialTheme.colors.primary.copy(.8f)
+                        MaterialTheme.colorScheme.primary,
+                        MaterialTheme.colorScheme.primary.copy(.8f)
                     )
                 )
             )
             Row(
                 modifier = Modifier
-                    .background(MaterialTheme.colors.primary.copy(.8f))
+                    .background(MaterialTheme.colorScheme.primary.copy(.8f))
                     .navigationBarsPadding()
                     .padding(vertical = 16.dp)
                     .width(width)
@@ -117,9 +118,9 @@ class DetailViewCompositionContent : DetailViewComposition {
                                 .vertical(-90f)
                                 .align(Alignment.Bottom),
                             text = sample.toString(),
-                            style = MaterialTheme.typography.overline,
+                            style = MaterialTheme.typography.labelMedium,
                             fontWeight = FontWeight.Black,
-                            color = MaterialTheme.colors.onPrimary
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                     }
                 }

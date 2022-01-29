@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +24,7 @@ import org.billthefarmer.currency.R
 import org.billthefarmer.currency.presentation.view.dashboard.DashboardViewCompositionToolbar
 import org.billthefarmer.currency.presentation.view.main.LocalNavHostController
 import org.billthefarmer.currency.screen.selection.SelectionViewModel
+import org.billthefarmer.currency.screen.style.shapes
 import org.billthefarmer.currency.tooling.Duplicates
 
 @Duplicates(DashboardViewCompositionToolbar::class)
@@ -46,8 +47,8 @@ class SelectionViewCompositionToolbar : SelectionViewComposition {
                 .testTag("toolbar-action-button")
                 .clickable(onClickLabel = "Go Back", role = Role.Button, onClick = onClick),
             shape = MaterialTheme.shapes.medium,
-            color = MaterialTheme.colors.primary,
-            elevation = 16.dp
+            color = MaterialTheme.colorScheme.primary,
+            shadowElevation = 16.dp
         ) {
             Image(
                 modifier = Modifier.size(24.dp),
@@ -65,7 +66,7 @@ class SelectionViewCompositionToolbar : SelectionViewComposition {
             Text(
                 modifier = Modifier
                     .testTag("toolbar-title"),
-                style = MaterialTheme.typography.h5,
+                style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Black,
                 text = "Select a currency"
             )

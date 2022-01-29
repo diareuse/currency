@@ -2,9 +2,9 @@ package org.billthefarmer.currency.presentation.view.dashboard
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.LocalContentColor
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -69,7 +69,7 @@ class DashboardViewCompositionInputHint : DashboardViewComposition {
         Text(
             modifier = modifier,
             text = "Select a currency from the list above",
-            style = MaterialTheme.typography.h6
+            style = MaterialTheme.typography.titleMedium
         )
     }
 

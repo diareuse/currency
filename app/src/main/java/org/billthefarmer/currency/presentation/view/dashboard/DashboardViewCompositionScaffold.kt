@@ -9,8 +9,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -20,6 +20,7 @@ import com.google.accompanist.insets.navigationBarsWithImePadding
 import com.google.accompanist.insets.statusBarsPadding
 import org.billthefarmer.currency.screen.dashboard.DashboardViewModel
 import org.billthefarmer.currency.screen.style.AnticipateOvershootEasing
+import org.billthefarmer.currency.screen.style.shapes
 
 class DashboardViewCompositionScaffold(
     private val toolbar: DashboardViewComposition,
@@ -29,7 +30,7 @@ class DashboardViewCompositionScaffold(
 
     @Composable
     override fun Compose(model: DashboardViewModel) {
-        Surface(color = MaterialTheme.colors.background) {
+        Surface(color = MaterialTheme.colorScheme.surfaceVariant) {
             ComposeLayout(model = model)
         }
     }
@@ -47,7 +48,7 @@ class DashboardViewCompositionScaffold(
         val insets = LocalWindowInsets.current
         Surface(
             modifier = modifier,
-            color = MaterialTheme.colors.surface,
+            color = MaterialTheme.colorScheme.surface,
             shape = MaterialTheme.shapes.large.copy(
                 topStart = CornerSize(0.dp),
                 topEnd = CornerSize(0.dp)

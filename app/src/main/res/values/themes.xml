@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Currency.Foundation" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Currency.Foundation" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/color_status_bar</item>
         <item name="android:navigationBarColor">@color/color_navigation_bar</item>
     </style>
