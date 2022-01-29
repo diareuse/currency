@@ -16,4 +16,3 @@ dependencyResolutionManagement {
 
 include ':app'
 include ':app:composition'
-include ':app:benchmark'
