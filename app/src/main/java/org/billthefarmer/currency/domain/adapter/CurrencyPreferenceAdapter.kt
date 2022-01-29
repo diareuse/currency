@@ -1,9 +1,10 @@
 package org.billthefarmer.currency.domain.adapter
 
+import androidx.annotation.Keep
 import org.billthefarmer.currency.domain.preference.PreferenceAdapter
 import java.util.*
 
-class CurrencyPreferenceAdapter : PreferenceAdapter {
+class CurrencyPreferenceAdapter @Keep constructor() : PreferenceAdapter {
 
     override fun fromPreference(input: Any?): Currency? {
         if (input == null)

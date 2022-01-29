@@ -1,7 +1,9 @@
 package org.billthefarmer.currency.domain.preference
 
+import androidx.annotation.Keep
 import kotlin.reflect.KClass
 
+@Keep
 @Retention(AnnotationRetention.RUNTIME)
 annotation class PreferenceKey(
     val name: String,
