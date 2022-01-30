@@ -1,3 +1,0 @@
-package org.billthefarmer.currency.domain.preference
-
-class ExchangeRatePreferencesTest

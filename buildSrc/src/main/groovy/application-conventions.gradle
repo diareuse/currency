@@ -11,7 +11,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
 
     defaultConfig {
-        applicationId "org.billthefarmer.currency"
+        applicationId "wiki.depasquale.currency"
         versionCode 139
         versionName "1.39"
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="org.billthefarmer.currency"
+    package="wiki.depasquale.currency"
     android:installLocation="auto">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -36,7 +36,7 @@
             tools:node="merge">
 
             <meta-data
-                android:name="org.billthefarmer.currency.domain.startup.StartupComposition"
+                android:name="wiki.depasquale.currency.domain.startup.StartupComposition"
                 android:value="androidx.startup" />
 
         </provider>

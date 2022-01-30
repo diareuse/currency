@@ -1,6 +1,0 @@
-package org.billthefarmer.currency.domain.preference
-
-import org.billthefarmer.currency.domain.model.ExchangeRatePreference
-
-typealias ExchangeRatePreferenceReader = PreferenceReader<ExchangeRatePreference>
-typealias ExchangeRatePreferenceWriter = PreferenceWriter<ExchangeRatePreference>
