@@ -9,3 +9,4 @@ data
 *.orig
 keystore.properties
 keystore.jks
+google-services.json
