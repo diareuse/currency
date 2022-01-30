@@ -11,9 +11,9 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 android {
 
     defaultConfig {
-        applicationId "wiki.depasquale.currency"
-        versionCode 139
-        versionName "1.39"
+        applicationId "wiki.depasquale.cursola"
+        versionCode 1
+        versionName "1.0.0"
     }
 
     signingConfigs {
