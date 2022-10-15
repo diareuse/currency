@@ -1,0 +1,21 @@
+plugins {
+    id "library-conventions"
+    id "di-conventions"
+    id "org.jetbrains.kotlin.plugin.serialization"
+}
+
+android {
+
+    namespace "cursola.network"
+
+}
+
+dependencies {
+
+    def vKtor = "2.1.2"
+
+    implementation "io.ktor:ktor-client-core:$vKtor"
+    implementation "io.ktor:ktor-client-cio:$vKtor"
+    implementation "io.ktor:ktor-serialization-kotlinx-json:$vKtor"
+
+}
