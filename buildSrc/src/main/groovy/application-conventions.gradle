@@ -10,6 +10,8 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
 
+    namespace "wiki.depasquale.currency"
+
     defaultConfig {
         applicationId "wiki.depasquale.cursola"
         versionCode 1
