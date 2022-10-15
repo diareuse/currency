@@ -1,0 +1,14 @@
+plugins {
+    id "library-conventions"
+    id "di-conventions"
+}
+
+android {
+
+    namespace "cursola.persistence"
+
+}
+
+dependencies {
+
+}

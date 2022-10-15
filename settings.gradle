@@ -14,4 +14,7 @@ dependencyResolutionManagement {
 }
 
 
-include ':app'
+include ":app"
+include ":library-core",
+        ":library-network",
+        ":library-persistence"

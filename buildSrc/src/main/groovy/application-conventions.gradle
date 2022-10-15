@@ -1,12 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'common-conventions'
+    id 'signing-conventions'
 }
-
-def keystorePropertiesFile = rootProject.file("keystore.properties")
-def keystoreProperties = new Properties()
-
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
 
@@ -16,27 +12,6 @@ android {
         applicationId "wiki.depasquale.cursola"
         versionCode 1
         versionName "1.0.0"
-    }
-
-    signingConfigs {
-
-        root {
-            storeFile rootProject.file("keystore.jks")
-            storePassword keystoreProperties["store.password"]
-        }
-
-        debug {
-            initWith(root)
-            keyAlias keystoreProperties["key.debug.name"]
-            keyPassword keystoreProperties["key.debug.password"]
-        }
-
-        release {
-            initWith(root)
-            keyAlias keystoreProperties["key.release.name"]
-            keyPassword keystoreProperties["key.release.password"]
-        }
-
     }
 
     buildTypes {
