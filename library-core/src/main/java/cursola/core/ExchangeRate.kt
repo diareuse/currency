@@ -1,6 +1,6 @@
-package cursola.network
+package cursola.core
 
-import cursola.network.util.todayRange
+import cursola.core.util.todayRange
 import java.util.Date
 
 data class ExchangeRate(

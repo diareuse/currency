@@ -1,6 +1,6 @@
-package cursola.network
+package cursola.core
 
-import cursola.network.util.todayRange
+import cursola.core.util.todayRange
 import org.junit.Test
 import java.util.Calendar
 import kotlin.test.assertEquals

@@ -1,4 +1,4 @@
-package cursola.network.util
+package cursola.core.util
 
 import org.junit.Test
 import java.util.Calendar

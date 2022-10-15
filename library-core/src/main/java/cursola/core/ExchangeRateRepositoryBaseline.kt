@@ -1,4 +1,4 @@
-package cursola.network
+package cursola.core
 
 import java.util.Currency
 
