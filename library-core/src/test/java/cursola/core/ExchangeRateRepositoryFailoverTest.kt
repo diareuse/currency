@@ -1,8 +1,8 @@
 @file:OptIn(ExperimentalCoroutinesApi::class)
 
-package cursola.network
+package cursola.core
 
-import cursola.network.util.nextCurrency
+import cursola.core.util.nextCurrency
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
