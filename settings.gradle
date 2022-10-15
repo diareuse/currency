@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 
 
 include ':app'
-include ':app:composition'

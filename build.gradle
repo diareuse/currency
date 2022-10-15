@@ -1,12 +1,16 @@
 buildscript {
     repositories {
         google()
-        mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.2.0-beta01"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
-        classpath "com.google.gms:google-services:4.3.10"
-        classpath "com.google.firebase:firebase-crashlytics-gradle:2.8.1"
+        classpath "com.google.gms:google-services:4.3.14"
+        classpath "com.google.firebase:firebase-crashlytics-gradle:2.9.2"
     }
+}
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.7.20' apply false
+    id 'org.jetbrains.kotlin.android' version '1.7.20' apply false
+    id 'org.jetbrains.kotlin.plugin.parcelize' version '1.7.20' apply false
+    id "com.android.library" version "8.0.0-alpha04" apply false
+    id "com.android.application" version "8.0.0-alpha04" apply false
 }
