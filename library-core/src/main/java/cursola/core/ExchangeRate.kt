@@ -8,6 +8,14 @@ data class ExchangeRate(
     val timestamp: Date = Date()
 ) {
 
+    constructor(
+        from: ExchangeRate,
+        to: ExchangeRate
+    ) : this(
+        rate = 1.0 / from.rate * to.rate,
+        timestamp = maxOf(from.timestamp, to.timestamp)
+    )
+
     val isFromToday
         get() = timestamp in todayRange
 
