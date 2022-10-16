@@ -11,4 +11,6 @@ android {
 
 dependencies {
 
+    implementation project(":library-core")
+
 }

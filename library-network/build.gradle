@@ -16,6 +16,11 @@ dependencies {
 
     implementation "io.ktor:ktor-client-core:$vKtor"
     implementation "io.ktor:ktor-client-cio:$vKtor"
-    implementation "io.ktor:ktor-serialization-kotlinx-json:$vKtor"
+    implementation "io.ktor:ktor-client-content-negotiation:$vKtor"
+    implementation "io.ktor:ktor-serialization-kotlinx-xml:$vKtor"
+
+    implementation project(":library-core")
+
+    testImplementation "net.sf.kxml:kxml2:2.3.0"
 
 }
