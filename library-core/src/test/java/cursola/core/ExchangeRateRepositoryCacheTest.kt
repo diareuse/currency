@@ -50,6 +50,7 @@ class ExchangeRateRepositoryCacheTest {
     fun getRate_returns_cachedItem() = runTest {
         val first = nextCurrency()
         val second = nextCurrency()
+        whenever(origin.get(first, second)).thenReturn(ExchangeRate(1.0))
         repo.get(first, second)
         verify(origin).get(first, second)
         repo.get(first, second)
