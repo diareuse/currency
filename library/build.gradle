@@ -1,0 +1,18 @@
+plugins {
+    id "library-conventions"
+    id "di-conventions"
+}
+
+android {
+
+    namespace "cursola.bundle"
+
+}
+
+dependencies {
+
+    implementation project(":library-core")
+    implementation project(":library-persistence")
+    implementation project(":library-network")
+
+}
