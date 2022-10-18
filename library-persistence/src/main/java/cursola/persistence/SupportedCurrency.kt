@@ -8,7 +8,7 @@ import java.util.Currency
 @Entity(
     tableName = "currencies"
 )
-data class SupportedCurrency(
+internal data class SupportedCurrency(
     @PrimaryKey
     @ColumnInfo(name = "currency")
     val currency: Currency

@@ -26,7 +26,8 @@ import java.util.concurrent.TimeUnit
 )
 abstract class Storage : RoomDatabase() {
 
-    abstract fun rates(): ExchangeRateDao
+    internal abstract fun rates(): ExchangeRateDao
+    internal abstract fun currency(): CurrencyDao
 
     companion object {
 
