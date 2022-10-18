@@ -6,7 +6,7 @@ import cursola.persistence.database.DaoCreate
 import java.util.Currency
 
 @Dao
-interface CurrencyDao : DaoCreate<SupportedCurrency> {
+internal interface CurrencyDao : DaoCreate<SupportedCurrency> {
 
     @Query("select distinct(currency) from currencies")
     suspend fun select(): List<Currency>

@@ -2,7 +2,7 @@ package cursola.persistence.database
 
 import androidx.room.Delete
 
-interface DaoDelete<Type> {
+internal interface DaoDelete<Type> {
 
     @Delete
     suspend fun delete(value: Type)

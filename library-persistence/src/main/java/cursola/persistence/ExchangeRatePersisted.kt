@@ -28,7 +28,7 @@ import java.util.Date
         Index("timestamp", orders = [Index.Order.DESC])
     ]
 )
-data class ExchangeRatePersisted(
+internal data class ExchangeRatePersisted(
     @ColumnInfo(name = "from")
     val from: Currency,
 

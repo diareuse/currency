@@ -3,7 +3,7 @@ package cursola.persistence
 import androidx.room.TypeConverter
 import java.util.Date
 
-class ConverterDate {
+internal class ConverterDate {
 
     @TypeConverter
     fun from(timestamp: Long): Date =

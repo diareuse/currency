@@ -3,7 +3,7 @@ package cursola.persistence
 import androidx.room.TypeConverter
 import java.util.Currency
 
-class ConverterCurrency {
+internal class ConverterCurrency {
 
     @TypeConverter
     fun from(code: String): Currency =

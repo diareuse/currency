@@ -4,7 +4,7 @@ import cursola.core.ExchangeRate
 import cursola.core.ExchangeRateRepository
 import java.util.Currency
 
-class ExchangeRateRepositoryStorage(
+internal class ExchangeRateRepositoryStorage(
     private val currencies: CurrencyDao,
     private val rates: ExchangeRateDao
 ) : ExchangeRateRepository {

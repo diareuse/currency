@@ -5,7 +5,7 @@ import cursola.core.ExchangeRateRepository
 import cursola.persistence.util.deferTask
 import java.util.Currency
 
-class ExchangeRateRepositorySaving(
+internal class ExchangeRateRepositorySaving(
     private val origin: ExchangeRateRepository,
     private val currencies: CurrencyDao,
     private val rates: ExchangeRateDao
