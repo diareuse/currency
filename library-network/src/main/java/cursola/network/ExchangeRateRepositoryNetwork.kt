@@ -4,7 +4,7 @@ import cursola.core.ExchangeRate
 import cursola.core.ExchangeRateRepository
 import java.util.Currency
 
-class ExchangeRateRepositoryNetwork(
+internal class ExchangeRateRepositoryNetwork(
     private val service: RatesService
 ) : ExchangeRateRepository {
 

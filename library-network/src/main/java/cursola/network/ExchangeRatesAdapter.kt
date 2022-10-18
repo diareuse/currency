@@ -2,7 +2,7 @@ package cursola.network
 
 import java.io.InputStream
 
-interface ExchangeRatesAdapter {
+internal interface ExchangeRatesAdapter {
 
     fun adapt(stream: InputStream): List<ExchangeRateResponse>
 

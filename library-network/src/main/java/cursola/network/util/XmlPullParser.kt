@@ -2,7 +2,7 @@ package cursola.network.util
 
 import org.xmlpull.v1.XmlPullParser
 
-inline fun XmlPullParser.tag(
+internal inline fun XmlPullParser.tag(
     name: String,
     namespace: String? = null,
     body: XmlPullParser.() -> Unit
@@ -16,7 +16,7 @@ inline fun XmlPullParser.tag(
     }
 }
 
-fun XmlPullParser.skipEntry() {
+internal fun XmlPullParser.skipEntry() {
     if (eventType != XmlPullParser.START_TAG) {
         throw IllegalStateException()
     }
@@ -29,7 +29,7 @@ fun XmlPullParser.skipEntry() {
     }
 }
 
-fun XmlPullParser.skipUntilTag(
+internal fun XmlPullParser.skipUntilTag(
     name: String,
     namespace: String? = null,
     body: XmlPullParser.() -> Unit
@@ -38,7 +38,7 @@ fun XmlPullParser.skipUntilTag(
     else skipEntry()
 }
 
-fun XmlPullParser.optionalTag(
+internal fun XmlPullParser.optionalTag(
     name: String,
     namespace: String? = null,
     body: XmlPullParser.() -> Unit
