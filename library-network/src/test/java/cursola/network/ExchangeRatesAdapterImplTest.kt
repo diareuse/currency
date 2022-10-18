@@ -41,7 +41,7 @@ class ExchangeRatesAdapterImplTest {
         val date = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
             .parse("2021-11-12")
             .let { requireNotNull(it) }
-        val singleResponse = listOf(
+        internal val singleResponse = listOf(
             ExchangeRateResponse(Currency.getInstance("USD"), 1.1448, date),
             ExchangeRateResponse(Currency.getInstance("JPY"), 130.50, date),
             ExchangeRateResponse(Currency.getInstance("BGN"), 1.9558, date),

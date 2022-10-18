@@ -7,7 +7,7 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.http.ContentType
 import io.ktor.serialization.kotlinx.xml.xml
 
-class HttpClientFactory {
+internal class HttpClientFactory {
 
     fun create() = HttpClient(CIO) {
         install(HttpCache)
