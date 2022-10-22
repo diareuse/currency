@@ -1,6 +1,5 @@
 package cursola.rate
 
-import cursola.rate.database.CurrencyStored
 import cursola.rate.database.ExchangeRateStored
 import cursola.rate.di.ExchangeRateModule
 import cursola.rate.model.makeExchangeRate
@@ -56,9 +55,6 @@ internal class ExchangeRateDataSourceTest : AbstractDataSourceTest() {
         val data = prepareTest(1)
         whenever(network.get()).thenReturn(data)
         source.get()
-        database.currencies().inOrder {
-            verify().insert(data.map(::CurrencyStored).first())
-        }
         database.rates().inOrder {
             verify().insert(data.map(::ExchangeRateStored).first())
         }
