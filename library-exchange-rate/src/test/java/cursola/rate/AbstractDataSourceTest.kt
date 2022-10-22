@@ -16,7 +16,7 @@ internal abstract class AbstractDataSourceTest {
         network = mock()
         database = mock()
         whenever(database.rates()).thenReturn(mock())
-        whenever(database.currencies()).thenReturn(mock())
+        whenever(database.favorites()).thenReturn(mock())
         prepare()
     }
 
