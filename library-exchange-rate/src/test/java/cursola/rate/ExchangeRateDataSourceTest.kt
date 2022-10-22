@@ -9,6 +9,7 @@ import org.junit.Test
 import org.mockito.kotlin.inOrder
 import org.mockito.kotlin.whenever
 import java.io.IOException
+import kotlin.test.assertContains
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
@@ -27,7 +28,8 @@ internal class ExchangeRateDataSourceTest : AbstractDataSourceTest() {
         val data = prepareTest(10)
         whenever(network.get()).thenReturn(data)
         val result = source.get()
-        assertContentEquals(data, result)
+        for (item in data)
+            assertContains(result, item)
     }
 
     @Test

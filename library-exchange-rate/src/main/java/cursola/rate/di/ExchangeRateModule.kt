@@ -10,6 +10,7 @@ import cursola.rate.ExchangeRateDataSourceErrorReducer
 import cursola.rate.ExchangeRateDataSourceNetwork
 import cursola.rate.database.ExchangeRateDatabase
 import cursola.rate.network.ExchangeRateService
+import cursola.rate.network.ExchangeRateServicePeg
 import cursola.rate.network.ExchangeRateServiceSaving
 import dagger.Module
 import dagger.Provides
@@ -26,9 +27,11 @@ internal abstract class ExchangeRateModule {
         network: ExchangeRateService,
         database: ExchangeRateDatabase
     ): ConversionRateDataSource {
-        val network = ExchangeRateServiceSaving(network, database)
+        var service = network
+        service = ExchangeRateServicePeg(service)
+        service = ExchangeRateServiceSaving(service, database)
         return ConversionRateDataSourceErrorReducer(
-            ConversionRateDataSourceNetwork(network),
+            ConversionRateDataSourceNetwork(service),
             ConversionRateDataSourceDatabase(database)
         )
     }
@@ -38,9 +41,11 @@ internal abstract class ExchangeRateModule {
         network: ExchangeRateService,
         database: ExchangeRateDatabase
     ): ExchangeRateDataSource {
-        val network = ExchangeRateServiceSaving(network, database)
+        var service = network
+        service = ExchangeRateServicePeg(service)
+        service = ExchangeRateServiceSaving(service, database)
         return ExchangeRateDataSourceErrorReducer(
-            ExchangeRateDataSourceNetwork(network),
+            ExchangeRateDataSourceNetwork(service),
             ExchangeRateDataSourceDatabase(database)
         )
     }

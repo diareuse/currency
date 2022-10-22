@@ -5,11 +5,15 @@ internal class ExchangeRateDataSourceErrorReducer(
 ) : ExchangeRateDataSource {
 
     override suspend fun get(): List<ExchangeRate> {
-        val exception = ExchangeRateError.NoSourceAvailable()
-        val initial = Result.failure<List<ExchangeRate>>(exception)
-        return sources.fold(initial) { acc, source ->
-            acc.recoverCatching { source.get() }
-        }.getOrDefault(emptyList())
+        for (source in sources) {
+            try {
+                return source.get()
+            } catch (e: Throwable) {
+                e.printStackTrace()
+                continue
+            }
+        }
+        return emptyList()
     }
 
 }

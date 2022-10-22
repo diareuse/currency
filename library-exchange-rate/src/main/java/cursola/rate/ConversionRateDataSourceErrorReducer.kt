@@ -7,10 +7,16 @@ internal class ConversionRateDataSourceErrorReducer(
 ) : ConversionRateDataSource {
 
     override suspend fun get(from: Currency, to: Currency): Double {
-        val exception = ExchangeRateError.NoSourceAvailable()
-        return sources.fold(Result.failure<Double>(exception)) { acc, source ->
-            acc.recoverCatching { source.get(from, to) }
-        }.getOrThrow()
+        var latestError: Throwable? = null
+        for (source in sources)
+            try {
+                return source.get(from, to)
+            } catch (e: Throwable) {
+                e.printStackTrace()
+                latestError = e
+                continue
+            }
+        throw latestError ?: NoSuchElementException("No sources are available")
     }
 
 }
