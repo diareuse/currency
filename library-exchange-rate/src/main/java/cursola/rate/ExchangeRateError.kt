@@ -9,6 +9,4 @@ sealed class ExchangeRateError(
         override val cause: Throwable? = null
     ) : ExchangeRateError(message)
 
-    class NoSourceAvailable : ExchangeRateError("Cannot find any sources")
-
 }
