@@ -1,6 +1,5 @@
 package cursola.rate
 
-import cursola.rate.database.CurrencyStored
 import cursola.rate.database.ExchangeRateStored
 import cursola.rate.di.ExchangeRateModule
 import cursola.rate.model.makeExchangeRate
@@ -53,14 +52,9 @@ internal class ConversionRateDataSourceTest : AbstractDataSourceTest() {
     @Test
     fun get_saves_networkDataToDatabase() = runTest {
         val subject = prepareTest()
-        val currencies = database.currencies()
         val rates = database.rates()
         whenever(network.get()).thenReturn(listOf(subject.from, subject.to))
         source.get(subject.fromCurrency, subject.toCurrency)
-        currencies.inOrder {
-            verify().insert(CurrencyStored(subject.fromCurrency))
-            verify().insert(CurrencyStored(subject.toCurrency))
-        }
         rates.inOrder {
             verify().insert(ExchangeRateStored(subject.from))
             verify().insert(ExchangeRateStored(subject.to))
