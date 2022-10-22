@@ -1,0 +1,30 @@
+plugins {
+    id "library-conventions"
+    id "di-conventions"
+    id "org.jetbrains.kotlin.plugin.serialization"
+}
+
+android {
+
+    namespace "cursola.rate"
+
+}
+
+dependencies {
+
+    def vKtor = "2.1.2"
+    def vRoom = "2.4.3"
+
+    implementation "io.ktor:ktor-client-core:$vKtor"
+    implementation "io.ktor:ktor-client-cio:$vKtor"
+    implementation "io.ktor:ktor-client-content-negotiation:$vKtor"
+    implementation "io.ktor:ktor-serialization-kotlinx-xml:$vKtor"
+
+    implementation "androidx.room:room-runtime:$vRoom"
+    implementation "androidx.room:room-ktx:$vRoom"
+    kapt "androidx.room:room-compiler:$vRoom"
+
+    testImplementation "net.sf.kxml:kxml2:2.3.0"
+    testImplementation "androidx.room:room-testing:$vRoom"
+
+}
