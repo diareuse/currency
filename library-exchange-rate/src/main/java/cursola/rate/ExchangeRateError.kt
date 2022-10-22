@@ -1,10 +1,14 @@
 package cursola.rate
 
-sealed class ExchangeRateError : IllegalStateException() {
+sealed class ExchangeRateError(
+    override val message: String?
+) : IllegalStateException() {
 
     class NotFoundException(
-        override val cause: Throwable,
-        override val message: String
-    ) : ExchangeRateError()
+        message: String,
+        override val cause: Throwable? = null
+    ) : ExchangeRateError(message)
+
+    class NoSourceAvailable : ExchangeRateError("Cannot find any sources")
 
 }

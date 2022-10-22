@@ -33,6 +33,7 @@ internal class ConversionRateDataSourceTest : AbstractDataSourceTest() {
     fun get_returns_fromDatabase() = runTest {
         val subject = prepareTest()
         val rates = database.rates()
+        whenever(network.get()).thenReturn(emptyList())
         whenever(rates.get(subject.fromCode)).thenReturn(subject.fromRate)
         whenever(rates.get(subject.toCode)).thenReturn(subject.toRate)
         val result = source.get(subject.fromCurrency, subject.toCurrency)
