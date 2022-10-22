@@ -1,0 +1,3 @@
+package cursola.rate
+
+class ExchangeRateDataSourceTest
