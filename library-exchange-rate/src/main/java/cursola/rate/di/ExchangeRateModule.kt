@@ -15,6 +15,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
+import org.jetbrains.annotations.TestOnly
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
@@ -46,6 +47,7 @@ internal abstract class ExchangeRateModule {
 
     companion object {
 
+        @TestOnly
         internal fun getInstance() = object : ExchangeRateModule() {}
 
     }
