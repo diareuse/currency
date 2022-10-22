@@ -11,11 +11,13 @@ import androidx.room.TypeConverters
 @Database(
     version = 1,
     entities = [
-        ExchangeRateStored::class
+        ExchangeRateStored::class,
+        FavoriteCurrency::class
     ]
 )
 internal abstract class ExchangeRateDatabase : RoomDatabase() {
 
     abstract fun rates(): DaoExchangeRate
+    abstract fun favorites(): DaoFavorite
 
 }
