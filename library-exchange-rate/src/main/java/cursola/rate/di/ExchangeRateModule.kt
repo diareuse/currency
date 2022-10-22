@@ -1,8 +1,11 @@
 package cursola.rate.di
 
 import cursola.rate.ConversionRateDataSource
-import cursola.rate.ConversionRateDataSourceImpl
+import cursola.rate.ConversionRateDataSourceDatabase
+import cursola.rate.ConversionRateDataSourceErrorReducer
+import cursola.rate.ConversionRateDataSourceNetwork
 import cursola.rate.ExchangeRateDataSource
+import cursola.rate.ExchangeRateServiceSaving
 import cursola.rate.database.ExchangeRateDatabase
 import cursola.rate.network.ExchangeRateService
 import dagger.Module
@@ -19,7 +22,11 @@ internal abstract class ExchangeRateModule {
         network: ExchangeRateService,
         database: ExchangeRateDatabase
     ): ConversionRateDataSource {
-        return ConversionRateDataSourceImpl(network, database)
+        val network = ExchangeRateServiceSaving(network, database)
+        return ConversionRateDataSourceErrorReducer(
+            ConversionRateDataSourceNetwork(network),
+            ConversionRateDataSourceDatabase(database)
+        )
     }
 
     @Provides
