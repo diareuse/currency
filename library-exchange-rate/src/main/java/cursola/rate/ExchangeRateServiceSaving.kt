@@ -14,7 +14,7 @@ internal class ExchangeRateServiceSaving(
     override suspend fun get() = origin.get().runEffect {
         for (rate in it) {
             with(database.currencies()) {
-                insert(CurrencyStored(rate.currency))
+                insert(CurrencyStored(rate))
             }
             with(database.rates()) {
                 insert(ExchangeRateStored(rate))
