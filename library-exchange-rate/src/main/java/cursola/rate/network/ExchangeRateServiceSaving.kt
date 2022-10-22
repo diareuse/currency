@@ -1,9 +1,8 @@
-package cursola.rate
+package cursola.rate.network
 
 import cursola.rate.database.CurrencyStored
 import cursola.rate.database.ExchangeRateDatabase
 import cursola.rate.database.ExchangeRateStored
-import cursola.rate.network.ExchangeRateService
 import cursola.rate.util.runEffect
 
 internal class ExchangeRateServiceSaving(

@@ -8,9 +8,9 @@ import cursola.rate.ExchangeRateDataSource
 import cursola.rate.ExchangeRateDataSourceDatabase
 import cursola.rate.ExchangeRateDataSourceErrorReducer
 import cursola.rate.ExchangeRateDataSourceNetwork
-import cursola.rate.ExchangeRateServiceSaving
 import cursola.rate.database.ExchangeRateDatabase
 import cursola.rate.network.ExchangeRateService
+import cursola.rate.network.ExchangeRateServiceSaving
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
