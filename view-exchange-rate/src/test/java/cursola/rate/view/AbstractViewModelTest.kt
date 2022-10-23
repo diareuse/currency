@@ -39,14 +39,16 @@ internal abstract class AbstractViewModelTest<Model : ViewModel> {
     protected abstract fun prepare(): Model
 
     protected suspend fun mockFavorites() {
-        val favorites = mutableListOf<Currency>()
+        val favorites = mutableListOf<Pair<Currency, Int>>()
         whenever(favorite.add(any(), any())).then {
-            favorites.add(it.getArgument(0))
+            favorites.add(it.getArgument<Currency>(0) to it.getArgument(1))
         }
-        whenever(favorite.remove(any())).then {
-            favorites.remove(it.getArgument(0))
+        whenever(favorite.remove(any())).then { invocation ->
+            favorites.removeAll { it.first == invocation.getArgument(0) }
         }
-        whenever(favorite.list()).thenAnswer { favorites }
+        whenever(favorite.list()).thenAnswer {
+            favorites.sortedByDescending { it.second }.map { it.first }
+        }
     }
 
     protected fun TestScope.setMainDispatcher() {
