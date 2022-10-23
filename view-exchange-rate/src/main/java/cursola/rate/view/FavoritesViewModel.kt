@@ -21,7 +21,7 @@ class FavoritesViewModel @Inject internal constructor(
     val value = MutableStateFlow(1.0)
     val selected = MutableStateFlow(Currency.getInstance("EUR"))
 
-    private val favorites = repeatingFlow(every = 1.seconds) { favorite.list() }
+    private val favorites = repeatingFlow(every = 10.seconds) { favorite.list() }
         .distinctUntilChanged()
 
     val items = combine(value, selected, favorites, ::transform)

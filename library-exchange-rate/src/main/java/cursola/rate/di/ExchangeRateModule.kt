@@ -13,6 +13,7 @@ import cursola.rate.FavoriteDataSourceDatabase
 import cursola.rate.database.ExchangeRateDatabase
 import cursola.rate.network.ExchangeRateService
 import cursola.rate.network.ExchangeRateServiceBaseline
+import cursola.rate.network.ExchangeRateServiceCaching
 import cursola.rate.network.ExchangeRateServicePeg
 import cursola.rate.network.ExchangeRateServiceSaving
 import dagger.Module
@@ -30,12 +31,8 @@ internal class ExchangeRateModule {
         network: ExchangeRateService,
         database: ExchangeRateDatabase
     ): ConversionRateDataSource {
-        var service = network
-        service = ExchangeRateServicePeg(service)
-        service = ExchangeRateServiceSaving(service, database)
-        service = ExchangeRateServiceBaseline(service)
         return ConversionRateDataSourceErrorReducer(
-            ConversionRateDataSourceNetwork(service),
+            ConversionRateDataSourceNetwork(wrap(network, database)),
             ConversionRateDataSourceDatabase(database)
         )
     }
@@ -45,12 +42,8 @@ internal class ExchangeRateModule {
         network: ExchangeRateService,
         database: ExchangeRateDatabase
     ): ExchangeRateDataSource {
-        var service = network
-        service = ExchangeRateServicePeg(service)
-        service = ExchangeRateServiceSaving(service, database)
-        service = ExchangeRateServiceBaseline(service)
         return ExchangeRateDataSourceErrorReducer(
-            ExchangeRateDataSourceNetwork(service),
+            ExchangeRateDataSourceNetwork(wrap(network, database)),
             ExchangeRateDataSourceDatabase(database)
         )
     }
@@ -60,6 +53,20 @@ internal class ExchangeRateModule {
         database: ExchangeRateDatabase
     ): FavoriteDataSource {
         return FavoriteDataSourceDatabase(database)
+    }
+
+    // ---
+
+    private fun wrap(
+        network: ExchangeRateService,
+        database: ExchangeRateDatabase
+    ): ExchangeRateService {
+        var service = network
+        service = ExchangeRateServicePeg(service)
+        service = ExchangeRateServiceSaving(service, database)
+        service = ExchangeRateServiceBaseline(service)
+        service = ExchangeRateServiceCaching(service)
+        return service
     }
 
     companion object {
