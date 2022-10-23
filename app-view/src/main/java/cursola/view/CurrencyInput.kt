@@ -49,7 +49,8 @@ fun CurrencyInput(
             fontWeight = FontWeight.ExtraBold
         ),
         onValueChange = {
-            onValueChanged(formatter.parse(it)?.toDouble() ?: 0.0)
+            val number = it.takeUnless { it.isBlank() }?.run(formatter::parse)?.toDouble() ?: 0.0
+            onValueChanged(number)
         },
         decorationBox = {
             Row(
