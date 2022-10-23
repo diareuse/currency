@@ -1,41 +1,33 @@
-package wiki.depasquale.currency.domain.adapter
+package cursola.rate.adapter
 
+import cursola.rate.ExchangeRate
+import cursola.rate.util.optionalTag
+import cursola.rate.util.skipEntry
+import cursola.rate.util.skipUntilTag
+import cursola.rate.util.tag
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.xmlpull.v1.XmlPullParser
-import wiki.depasquale.currency.domain.model.ExchangeRate
-import wiki.depasquale.currency.domain.model.PersistedCurrency
-import wiki.depasquale.currency.domain.model.PersistedRate
-import wiki.depasquale.currency.domain.tooling.optionalTag
-import wiki.depasquale.currency.domain.tooling.skipEntry
-import wiki.depasquale.currency.domain.tooling.skipUntilTag
-import wiki.depasquale.currency.domain.tooling.tag
 import java.io.InputStream
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Currency
+import java.util.Date
+import java.util.Locale
 
 class ExchangeRatesAdapterImpl(
-    private val parser: XmlPullParser,
-    formatter: SimpleDateFormat
+    private val parser: XmlPullParser
 ) : ExchangeRatesAdapter {
 
+    private val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
     private val xml = XmlAdapter(formatter)
 
-    override fun adapt(rate: PersistedRate): ExchangeRate {
-        return ExchangeRate(rate.currency, rate.rate, rate.time)
-    }
-
-    override fun adapt(stream: InputStream): List<ExchangeRate> {
+    override suspend fun adapt(stream: InputStream): List<ExchangeRate> {
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, true)
         parser.setInput(stream, null)
         parser.nextTag()
-        return xml.adapt(parser)
-    }
-
-    override fun adapt(rate: ExchangeRate): PersistedRate {
-        return PersistedRate(rate.currency, rate.rate, rate.time)
-    }
-
-    override fun adaptCurrency(rate: ExchangeRate): PersistedCurrency {
-        return PersistedCurrency(rate.currency)
+        return withContext(Dispatchers.IO) {
+            xml.adapt(parser)
+        }
     }
 
     private class XmlAdapter(

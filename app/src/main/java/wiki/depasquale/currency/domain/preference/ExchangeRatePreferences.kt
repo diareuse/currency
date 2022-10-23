@@ -1,6 +1,0 @@
-package wiki.depasquale.currency.domain.preference
-
-import wiki.depasquale.currency.domain.model.ExchangeRatePreference
-
-typealias ExchangeRatePreferenceReader = PreferenceReader<ExchangeRatePreference>
-typealias ExchangeRatePreferenceWriter = PreferenceWriter<ExchangeRatePreference>
