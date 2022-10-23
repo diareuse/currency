@@ -10,6 +10,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.inOrder
 import org.mockito.kotlin.whenever
 import java.io.IOException
+import java.util.Currency
 import kotlin.test.assertContains
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
@@ -80,7 +81,11 @@ internal class ExchangeRateDataSourceTest : AbstractDataSourceTest() {
         val data = List(10) { item }
         whenever(network.get()).thenReturn(data)
         val actual = source.get()
-        assertEquals(listOf(item), actual)
+        assertEquals(
+            1,
+            actual.count { it == item },
+            "Expected to contain only one $item, instead was $actual"
+        )
     }
 
     @Test
@@ -91,6 +96,14 @@ internal class ExchangeRateDataSourceTest : AbstractDataSourceTest() {
         whenever(database.rates().getLatest()).thenReturn(data.map(::ExchangeRateStored))
         val actual = source.get()
         assertEquals(listOf(item), actual)
+    }
+
+    @Test
+    fun get_returns_baselineItem() = runTest {
+        val expected = Currency.getInstance("EUR")
+        whenever(network.get()).thenReturn(emptyList())
+        val result = source.get()
+        assertContains(result.map { it.currency }, expected)
     }
 
     // ---

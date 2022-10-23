@@ -12,6 +12,7 @@ import cursola.rate.FavoriteDataSource
 import cursola.rate.FavoriteDataSourceDatabase
 import cursola.rate.database.ExchangeRateDatabase
 import cursola.rate.network.ExchangeRateService
+import cursola.rate.network.ExchangeRateServiceBaseline
 import cursola.rate.network.ExchangeRateServicePeg
 import cursola.rate.network.ExchangeRateServiceSaving
 import dagger.Module
@@ -32,6 +33,7 @@ internal class ExchangeRateModule {
         var service = network
         service = ExchangeRateServicePeg(service)
         service = ExchangeRateServiceSaving(service, database)
+        service = ExchangeRateServiceBaseline(service)
         return ConversionRateDataSourceErrorReducer(
             ConversionRateDataSourceNetwork(service),
             ConversionRateDataSourceDatabase(database)
@@ -46,6 +48,7 @@ internal class ExchangeRateModule {
         var service = network
         service = ExchangeRateServicePeg(service)
         service = ExchangeRateServiceSaving(service, database)
+        service = ExchangeRateServiceBaseline(service)
         return ExchangeRateDataSourceErrorReducer(
             ExchangeRateDataSourceNetwork(service),
             ExchangeRateDataSourceDatabase(database)
