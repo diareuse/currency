@@ -22,7 +22,7 @@ import org.jetbrains.annotations.TestOnly
 
 @Module
 @InstallIn(ActivityRetainedComponent::class)
-internal abstract class ExchangeRateModule {
+internal class ExchangeRateModule {
 
     @Provides
     fun conversionRate(
@@ -62,7 +62,7 @@ internal abstract class ExchangeRateModule {
     companion object {
 
         @TestOnly
-        internal fun getInstance() = object : ExchangeRateModule() {}
+        internal fun getInstance() = ExchangeRateModule()
 
     }
 

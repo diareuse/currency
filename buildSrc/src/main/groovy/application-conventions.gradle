@@ -23,7 +23,6 @@ android {
         }
 
         debug {
-            applicationIdSuffix ".dev"
             signingConfig = signingConfigs.debug
         }
 
