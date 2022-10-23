@@ -1,10 +1,12 @@
 package cursola.rate
 
+import android.database.sqlite.SQLiteConstraintException
 import cursola.rate.database.ExchangeRateStored
 import cursola.rate.di.ExchangeRateModule
 import cursola.rate.model.makeExchangeRate
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
+import org.mockito.kotlin.any
 import org.mockito.kotlin.inOrder
 import org.mockito.kotlin.whenever
 import java.io.IOException
@@ -58,6 +60,37 @@ internal class ExchangeRateDataSourceTest : AbstractDataSourceTest() {
         database.rates().inOrder {
             verify().insert(data.map(::ExchangeRateStored).first())
         }
+    }
+
+    @Test
+    fun get_updates_toDatabase() = runTest {
+        val data = prepareTest(1)
+        val rates = database.rates()
+        whenever(network.get()).thenReturn(data)
+        whenever(rates.insert(model = any())).thenThrow(SQLiteConstraintException())
+        source.get()
+        database.rates().inOrder {
+            verify().update(data.map(::ExchangeRateStored).first())
+        }
+    }
+
+    @Test
+    fun get_returns_distinctItems_fromNetwork() = runTest {
+        val item = makeExchangeRate()
+        val data = List(10) { item }
+        whenever(network.get()).thenReturn(data)
+        val actual = source.get()
+        assertEquals(listOf(item), actual)
+    }
+
+    @Test
+    fun get_returns_distinctItems_fromDatabase() = runTest {
+        val item = makeExchangeRate()
+        val data = List(10) { item }
+        whenever(network.get()).thenThrow(IOException())
+        whenever(database.rates().getLatest()).thenReturn(data.map(::ExchangeRateStored))
+        val actual = source.get()
+        assertEquals(listOf(item), actual)
     }
 
     // ---
