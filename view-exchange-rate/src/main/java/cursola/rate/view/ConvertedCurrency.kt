@@ -1,5 +1,6 @@
 package cursola.rate.view
 
+import cursola.rate.ExchangeRate
 import java.math.RoundingMode
 import java.text.NumberFormat
 import java.util.Currency
@@ -9,6 +10,13 @@ data class ConvertedCurrency(
     val currency: Currency,
     val value: Double
 ) {
+
+    constructor(
+        rate: ExchangeRate
+    ) : this(
+        rate.currency,
+        rate.rate
+    )
 
     fun symbol(locale: Locale) =
         currency.getSymbol(locale).orEmpty()

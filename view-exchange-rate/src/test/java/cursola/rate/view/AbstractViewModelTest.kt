@@ -1,11 +1,21 @@
+@file:OptIn(ExperimentalCoroutinesApi::class)
+
 package cursola.rate.view
 
 import androidx.lifecycle.ViewModel
 import cursola.rate.ConversionRateDataSource
 import cursola.rate.ExchangeRateDataSource
 import cursola.rate.FavoriteDataSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.UnconfinedTestDispatcher
+import kotlinx.coroutines.test.setMain
 import org.junit.Before
+import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
+import java.util.Currency
 
 internal abstract class AbstractViewModelTest<Model : ViewModel> {
 
@@ -27,5 +37,21 @@ internal abstract class AbstractViewModelTest<Model : ViewModel> {
     }
 
     protected abstract fun prepare(): Model
+
+    protected suspend fun mockFavorites() {
+        val favorites = mutableListOf<Currency>()
+        whenever(favorite.add(any(), any())).then {
+            favorites.add(it.getArgument(0))
+        }
+        whenever(favorite.remove(any())).then {
+            favorites.remove(it.getArgument(0))
+        }
+        whenever(favorite.list()).thenAnswer { favorites }
+    }
+
+    protected fun TestScope.setMainDispatcher() {
+        val testDispatcher = UnconfinedTestDispatcher(testScheduler)
+        Dispatchers.setMain(testDispatcher)
+    }
 
 }

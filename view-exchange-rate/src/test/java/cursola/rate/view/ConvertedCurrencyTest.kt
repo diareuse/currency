@@ -39,4 +39,12 @@ internal class ConvertedCurrencyTest {
         assertEquals("CZK123.44", actual)
     }
 
+    @Test
+    fun constructor_transformsRate() {
+        val rate = makeExchangeRate()
+        val actual = ConvertedCurrency(rate)
+        val expected = ConvertedCurrency(currency = rate.currency, value = rate.rate)
+        assertEquals(expected, actual)
+    }
+
 }
