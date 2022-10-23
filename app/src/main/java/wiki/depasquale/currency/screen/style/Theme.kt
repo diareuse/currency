@@ -7,9 +7,6 @@ import androidx.compose.runtime.Composable
 fun CurrencyTheme(content: @Composable () -> Unit) = MaterialTheme(
     colorScheme = currencyColors(),
     typography = CurrencyTypography,
+    shapes = CurrencyShapes,
     content = content
 )
-
-@Deprecated("", replaceWith = ReplaceWith("MaterialTheme.colorScheme"))
-val MaterialTheme.colors
-    @Composable get() = colorScheme
