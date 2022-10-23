@@ -25,8 +25,8 @@ class ListingViewModel @Inject internal constructor(
             val favorites = favorite.list()
             exchange.get()
                 .asSequence()
-                .sortedByDescending { it.currency in favorites }
-                .map(::ConvertedCurrency)
+                .map { ConvertedCurrency(it, it.currency in favorites) }
+                .sortedByDescending { it.isFavorite }
                 .toList()
         }
 

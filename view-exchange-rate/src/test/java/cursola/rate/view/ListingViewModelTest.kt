@@ -23,7 +23,7 @@ internal class ListingViewModelTest : AbstractViewModelTest<ListingViewModel>() 
         val expected = List(5) { makeExchangeRate() }
         whenever(exchange.get()).thenReturn(expected)
         val actual = viewModel.items.first()
-        assertEquals(expected.map(::ConvertedCurrency), actual)
+        assertEquals(expected.map { ConvertedCurrency(it, false) }, actual)
     }
 
     @Test
@@ -36,7 +36,9 @@ internal class ListingViewModelTest : AbstractViewModelTest<ListingViewModel>() 
         whenever(favorite.list()).thenReturn(favorites)
         val actual = viewModel.items.first()
         assertEquals(
-            rates.map(::ConvertedCurrency).sortedByDescending { it.currency in favorites },
+            rates
+                .map { ConvertedCurrency(it, it.currency in favorites) }
+                .sortedByDescending { it.currency in favorites },
             actual
         )
     }
@@ -50,12 +52,13 @@ internal class ListingViewModelTest : AbstractViewModelTest<ListingViewModel>() 
             makeExchangeRate(currency = Currency.getInstance("CZK"))
         )
         whenever(exchange.get()).thenReturn(rates)
-        viewModel.add(Currency.getInstance("CZK"))
+        val favorite = Currency.getInstance("CZK")
+        viewModel.add(favorite)
         val actual = viewModel.items.first()
         val expected = listOf(
             makeExchangeRate(currency = Currency.getInstance("CZK")),
             makeExchangeRate(currency = Currency.getInstance("USD"))
-        ).map(::ConvertedCurrency)
+        ).map { ConvertedCurrency(it, it.currency == favorite) }
         assertEquals(expected, actual)
     }
 
@@ -74,7 +77,7 @@ internal class ListingViewModelTest : AbstractViewModelTest<ListingViewModel>() 
         val expected = listOf(
             makeExchangeRate(currency = Currency.getInstance("USD")),
             makeExchangeRate(currency = Currency.getInstance("CZK"))
-        ).map(::ConvertedCurrency)
+        ).map { ConvertedCurrency(it, false) }
         assertEquals(expected, actual)
     }
 
