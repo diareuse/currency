@@ -1,3 +1,0 @@
-package wiki.depasquale.currency.domain.preference
-
-class ExchangeRatePreferencesTest

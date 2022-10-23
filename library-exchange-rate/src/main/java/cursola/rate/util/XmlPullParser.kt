@@ -1,4 +1,4 @@
-package wiki.depasquale.currency.domain.tooling
+package cursola.rate.util
 
 import org.xmlpull.v1.XmlPullParser
 
