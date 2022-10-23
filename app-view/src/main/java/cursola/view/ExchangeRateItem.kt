@@ -17,10 +17,10 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun ExchangeRateItem(
-    icon: @Composable () -> Unit,
     flag: @Composable () -> Unit,
     text: @Composable () -> Unit,
     modifier: Modifier = Modifier,
+    icon: @Composable (() -> Unit)? = null,
 ) {
     Row(
         modifier = modifier
@@ -29,7 +29,7 @@ fun ExchangeRateItem(
         horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.Start),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        icon()
+        if (icon != null) icon()
         flag()
         text()
     }
