@@ -5,6 +5,8 @@ import cursola.rate.di.ExchangeRateModule
 import cursola.rate.model.makeExchangeRate
 import kotlinx.coroutines.test.runTest
 import org.mockito.kotlin.inOrder
+import org.mockito.kotlin.times
+import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import java.io.IOException
 import kotlin.test.Test
@@ -59,6 +61,15 @@ internal class ConversionRateDataSourceTest : AbstractDataSourceTest() {
             verify().insert(ExchangeRateStored(subject.from))
             verify().insert(ExchangeRateStored(subject.to))
         }
+    }
+
+    @Test
+    fun get_cachesConversion() = runTest {
+        val subject = prepareTest()
+        whenever(network.get()).thenReturn(listOf(subject.from, subject.to))
+        source.get(subject.fromCurrency, subject.toCurrency)
+        source.get(subject.fromCurrency, subject.toCurrency)
+        verify(network, times(1)).get()
     }
 
     // ---
