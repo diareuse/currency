@@ -34,7 +34,7 @@ class FavoritesViewModel @Inject internal constructor(
         for (favorite in favorites) {
             if (favorite == selected) continue
             val conversionRate = conversion.get(selected, favorite)
-            val converted = ConvertedCurrency(favorite, conversionRate * value)
+            val converted = ConvertedCurrency(favorite, conversionRate * value, true)
             add(converted)
         }
     }

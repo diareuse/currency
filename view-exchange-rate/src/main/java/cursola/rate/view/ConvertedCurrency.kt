@@ -8,14 +8,17 @@ import java.util.Locale
 
 data class ConvertedCurrency(
     val currency: Currency,
-    val value: Double
+    val value: Double,
+    val isFavorite: Boolean
 ) {
 
     constructor(
-        rate: ExchangeRate
+        rate: ExchangeRate,
+        isFavorite: Boolean
     ) : this(
         rate.currency,
-        rate.rate
+        rate.rate,
+        isFavorite
     )
 
     fun symbol(locale: Locale) =

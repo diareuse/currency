@@ -27,7 +27,7 @@ internal class FavoritesViewModelTest : AbstractViewModelTest<FavoritesViewModel
         whenever(conversion.get(eq(viewModel.selected.filterNotNull().first()), any())).thenReturn(
             12.0
         )
-        val expected = currencies.map { ConvertedCurrency(it, 12.0) }
+        val expected = currencies.map { ConvertedCurrency(it, 12.0, true) }
         val actual = viewModel.items.first()
         assertContentEquals(expected, actual)
     }
@@ -68,8 +68,8 @@ internal class FavoritesViewModelTest : AbstractViewModelTest<FavoritesViewModel
         ).thenReturn(5.0)
         viewModel.value.value = 32.3
         val expected = listOf(
-            ConvertedCurrency(Currency.getInstance("USD"), 387.59999999999997),
-            ConvertedCurrency(Currency.getInstance("CZK"), 161.5),
+            ConvertedCurrency(Currency.getInstance("USD"), 387.59999999999997, true),
+            ConvertedCurrency(Currency.getInstance("CZK"), 161.5, true),
         )
         val actual = viewModel.items.first()
         assertEquals(expected, actual)
@@ -80,7 +80,7 @@ internal class FavoritesViewModelTest : AbstractViewModelTest<FavoritesViewModel
         suspend fun validateWith(currencies: List<Currency>) {
             whenever(conversion.get(any(), any())).thenReturn(1.0)
             val actual = viewModel.items.first()
-            assertEquals(currencies.map { ConvertedCurrency(it, 1.0) }, actual)
+            assertEquals(currencies.map { ConvertedCurrency(it, 1.0, true) }, actual)
         }
 
         var currencies = listOf(Currency.getInstance("USD"), Currency.getInstance("CZK"))
