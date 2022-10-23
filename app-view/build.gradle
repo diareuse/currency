@@ -1,0 +1,30 @@
+plugins {
+    id "library-conventions"
+    id "di-conventions"
+}
+
+android {
+
+    namespace "cursola.view"
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion "1.3.2"
+    }
+
+}
+
+dependencies {
+
+    def vCompose = "1.3.0-rc01"
+    def vMaterial = "1.0.0-rc01"
+
+    api "androidx.compose.ui:ui:$vCompose"
+    api "androidx.compose.ui:ui-tooling:$vCompose"
+    api "androidx.compose.foundation:foundation:$vCompose"
+    api "androidx.compose.material3:material3:$vMaterial"
+
+}
