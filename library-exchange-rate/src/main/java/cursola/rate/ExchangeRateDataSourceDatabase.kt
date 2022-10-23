@@ -8,7 +8,9 @@ internal class ExchangeRateDataSourceDatabase(
 ) : ExchangeRateDataSource {
 
     override suspend fun get(): List<ExchangeRate> {
-        return database.rates().getLatest().map(::ExchangeRate)
+        return database.rates().getLatest()
+            .map(::ExchangeRate)
+            .distinctBy { it.currency }
     }
 
     internal fun ExchangeRate(
