@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -22,7 +21,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
@@ -34,7 +32,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import cursola.rate.view.ConvertedCurrency
 import cursola.rate.view.ListingViewModel
-import cursola.view.CurrencyValue
 import cursola.view.ExchangeRateItem
 import wiki.depasquale.currency.R
 import wiki.depasquale.currency.screen.favorite.asFlagRes
@@ -112,7 +109,7 @@ fun ListingItem(
             ListingItemFlag(resource = currency.asFlagRes())
         },
         text = {
-            ListingItemText(name = name, value = value, currency = currency)
+            ListingItemText(name = name, currency = currency)
         }
     )
 }
@@ -125,7 +122,7 @@ fun ItemActiveIcon(
         Image(
             painter = painterResource(id = R.drawable.ic_favorite),
             contentDescription = null,
-            modifier = Modifier.size(48.dp),
+            modifier = Modifier.size(32.dp),
             colorFilter = ColorFilter.tint(Color.Yellow)
         )
     }
@@ -139,7 +136,7 @@ fun ItemInactiveIcon(
         Image(
             painter = painterResource(id = R.drawable.ic_favorite_not),
             contentDescription = null,
-            modifier = Modifier.size(48.dp),
+            modifier = Modifier.size(32.dp),
             colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
         )
     }
@@ -164,24 +161,18 @@ private fun ListingItemFlag(
 @Composable
 private fun ListingItemText(
     name: String,
-    value: String,
     currency: Currency,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+    Column(
+        modifier = modifier.fillMaxWidth()
     ) {
-        Column {
-            Text(name)
-            Text(
-                currency.currencyCode,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier
-                    .alpha(.5f)
-            )
-        }
-        CurrencyValue(value, currency.getSymbol(Locale.getDefault()))
+        Text(name)
+        Text(
+            currency.currencyCode,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier
+                .alpha(.5f)
+        )
     }
 }

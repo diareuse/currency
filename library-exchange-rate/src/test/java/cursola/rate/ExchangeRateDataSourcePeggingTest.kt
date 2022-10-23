@@ -50,12 +50,6 @@ internal class ExchangeRateDataSourcePeggingTest : AbstractDataSourceTest() {
     }
 
     @Test
-    fun get_returnsPeg_HKD() = runTest {
-        preparePeg("USD", 1.0)
-        expectValue("HKD", 7.80)
-    }
-
-    @Test
     fun get_returnsPeg_JOD() = runTest {
         preparePeg("USD", 1.0)
         expectValue("JOD", 0.709)

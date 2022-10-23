@@ -36,7 +36,6 @@ internal class ExchangeRateServicePeg(
             "CUC" to 1.0,
             "DJF" to 177.721,
             "ERN" to 15.0,
-            "HKD" to 7.80,
             "JOD" to 0.709,
             "LBP" to 1507.5,
             "OMR" to 0.38449,
