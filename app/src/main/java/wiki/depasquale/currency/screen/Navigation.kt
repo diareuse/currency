@@ -1,12 +1,12 @@
 package wiki.depasquale.currency.screen
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import wiki.depasquale.currency.screen.favorite.FavoriteScreen
+import wiki.depasquale.currency.screen.listing.ListingScreen
 
 @Composable
 fun Navigation() {
@@ -21,7 +21,10 @@ fun Navigation() {
             )
         }
         composable("/listing") {
-            Text("👋")
+            ListingScreen(
+                viewModel = hiltViewModel(),
+                onNavigateBack = controller::navigateUp
+            )
         }
     }
 }

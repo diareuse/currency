@@ -133,7 +133,7 @@ private fun FavoriteScreen(
 }
 
 @Composable
-private operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
+operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
     val direction = LocalLayoutDirection.current
     return PaddingValues(
         start = calculateStartPadding(direction) + other.calculateStartPadding(direction),
