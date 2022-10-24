@@ -74,7 +74,6 @@ private fun ListingScreen(
                     onAddItem = { onAddItem(it.currency) },
                     onRemoveItem = { onRemoveItem(it.currency) },
                     name = it.name(locale),
-                    value = it.toString(locale),
                     currency = it.currency,
                     isFavorite = it.isFavorite
                 )
@@ -89,7 +88,6 @@ fun ListingItem(
     onAddItem: () -> Unit,
     onRemoveItem: () -> Unit,
     name: String,
-    value: String,
     currency: Currency,
     isFavorite: Boolean
 ) {
