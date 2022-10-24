@@ -1,40 +1,40 @@
-package wiki.depasquale.currency.screen.favorite
+package wiki.depasquale.currency.screen.listing
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import cursola.view.CurrencyValue
 import cursola.view.ExchangeRateItem
 import wiki.depasquale.currency.R
+import wiki.depasquale.currency.screen.favorite.asFlagRes
 import wiki.depasquale.currency.screen.style.CurrencyTheme
 import java.util.Currency
-import java.util.Locale
 
 @Composable
-fun FavoriteItem(
+fun ListingItem(
     modifier: Modifier = Modifier,
+    onAddItem: () -> Unit,
+    onRemoveItem: () -> Unit,
     name: String,
-    value: String,
     currency: Currency,
+    isFavorite: Boolean
 ) {
     ExchangeRateItem(
         modifier = Modifier
@@ -44,17 +44,21 @@ fun FavoriteItem(
             )
             .clip(MaterialTheme.shapes.medium)
             .then(modifier),
+        icon = {
+            if (isFavorite) ItemActiveIcon(onRemoveItem)
+            else ItemInactiveIcon(onAddItem)
+        },
         flag = {
-            FavoriteItemFlag(resource = currency.asFlagRes())
+            ListingItemFlag(resource = currency.asFlagRes())
         },
         text = {
-            FavoriteItemText(name = name, value = value, currency = currency)
+            ListingItemText(name = name, currency = currency)
         }
     )
 }
 
 @Composable
-private fun FavoriteItemFlag(
+private fun ListingItemFlag(
     resource: Int
 ) {
     Image(
@@ -70,50 +74,62 @@ private fun FavoriteItemFlag(
 }
 
 @Composable
-private fun FavoriteItemText(
+private fun ListingItemText(
     name: String,
-    value: String,
     currency: Currency,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
+    Column(
+        modifier = modifier.fillMaxWidth()
     ) {
-        Column {
-            Text(name)
-            Text(
-                currency.currencyCode,
-                style = MaterialTheme.typography.bodySmall,
-                modifier = Modifier
-                    .alpha(.5f)
-            )
-        }
-        CurrencyValue(value, currency.getSymbol(Locale.getDefault()))
+        Text(name)
+        Text(
+            currency.currencyCode,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier
+                .alpha(.5f)
+        )
     }
 }
 
-@SuppressLint("DiscouragedApi")
 @Composable
-fun Currency.asFlagRes(): Int {
-    val context = LocalContext.current
-    val resources = context.resources ?: return R.drawable.flag__unknown
-    val name = "flag_${currencyCode.lowercase()}"
-    val id = resources.getIdentifier(name, "drawable", context.packageName)
-    if (id == 0)
-        return R.drawable.flag__unknown
-    return id
+private fun ItemActiveIcon(
+    onClick: () -> Unit
+) {
+    IconButton(onClick = onClick) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_favorite),
+            contentDescription = null,
+            modifier = Modifier.size(32.dp),
+            colorFilter = ColorFilter.tint(Color.Yellow)
+        )
+    }
+}
+
+@Composable
+private fun ItemInactiveIcon(
+    onClick: () -> Unit
+) {
+    IconButton(onClick = onClick) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_favorite_not),
+            contentDescription = null,
+            modifier = Modifier.size(32.dp),
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSurfaceVariant)
+        )
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 private fun Preview() {
     CurrencyTheme {
-        FavoriteItem(
+        ListingItem(
+            onAddItem = { /*TODO*/ },
+            onRemoveItem = { /*TODO*/ },
             name = "US Dollar",
-            value = "$12.30",
-            currency = Currency.getInstance("USD")
+            currency = Currency.getInstance("USD"),
+            isFavorite = true
         )
     }
 }
