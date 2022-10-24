@@ -23,7 +23,9 @@ fun CurrencyValue(value: String, symbol: String, modifier: Modifier = Modifier) 
     }
     Text(
         text = text,
-        modifier = modifier
+        modifier = modifier,
+        softWrap = false,
+        maxLines = 1
     )
 }
 
