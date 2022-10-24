@@ -29,7 +29,7 @@ fun FavoriteInputField(
         )
     ) {
         CurrencyInput(
-            modifier = modifier.padding(24.dp),
+            modifier = modifier.padding(horizontal = 12.dp),
             value = value,
             onValueChanged = onValueChanged,
             currency = selected,
