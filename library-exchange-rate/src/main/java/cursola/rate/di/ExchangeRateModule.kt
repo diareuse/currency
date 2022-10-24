@@ -10,12 +10,16 @@ import cursola.rate.ExchangeRateDataSourceErrorReducer
 import cursola.rate.ExchangeRateDataSourceNetwork
 import cursola.rate.FavoriteDataSource
 import cursola.rate.FavoriteDataSourceDatabase
+import cursola.rate.LatestValueDataSource
+import cursola.rate.LatestValueDataSourceDefault
+import cursola.rate.LatestValueDataSourceImpl
 import cursola.rate.database.ExchangeRateDatabase
 import cursola.rate.network.ExchangeRateService
 import cursola.rate.network.ExchangeRateServiceBaseline
 import cursola.rate.network.ExchangeRateServiceCaching
 import cursola.rate.network.ExchangeRateServicePeg
 import cursola.rate.network.ExchangeRateServiceSaving
+import cursola.rate.storage.Storage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -53,6 +57,16 @@ internal class ExchangeRateModule {
         database: ExchangeRateDatabase
     ): FavoriteDataSource {
         return FavoriteDataSourceDatabase(database)
+    }
+
+    @Provides
+    fun latestValue(
+        storage: Storage
+    ): LatestValueDataSource {
+        var source: LatestValueDataSource
+        source = LatestValueDataSourceImpl(storage)
+        source = LatestValueDataSourceDefault(source)
+        return source
     }
 
     // ---

@@ -15,7 +15,8 @@ import kotlin.test.assertEquals
 internal class FavoritesViewModelTest : AbstractViewModelTest<FavoritesViewModel>() {
 
     override fun prepare(): FavoritesViewModel {
-        return FavoritesViewModel(conversion, favorite)
+        setMainDispatcher()
+        return FavoritesViewModel(conversion, favorite, latest)
     }
 
     // ---
@@ -90,6 +91,21 @@ internal class FavoritesViewModelTest : AbstractViewModelTest<FavoritesViewModel
         whenever(favorite.list()).thenReturn(currencies)
         advanceTimeBy(1200)
         validateWith(currencies)
+    }
+
+    @Test
+    fun newInstance_remembers_value() = runTest {
+        viewModel.value.value = "95285.31"
+        val instance = prepare()
+        assertEquals("95285.31", instance.value.value)
+    }
+
+    @Test
+    fun newInstance_remembers_currency() = runTest {
+        val expected = Currency.getAvailableCurrencies().random()
+        viewModel.selected.value = expected
+        val instance = prepare()
+        assertEquals(expected, instance.selected.value)
     }
 
 }

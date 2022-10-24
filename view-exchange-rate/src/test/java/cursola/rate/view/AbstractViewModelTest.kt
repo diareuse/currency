@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import cursola.rate.ConversionRateDataSource
 import cursola.rate.ExchangeRateDataSource
 import cursola.rate.FavoriteDataSource
+import cursola.rate.LatestValueDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestScope
@@ -13,12 +14,15 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.mockito.kotlin.any
+import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 import java.util.Currency
 
 internal abstract class AbstractViewModelTest<Model : ViewModel> {
 
+    protected lateinit var latest: LatestValueDataSource
+        private set
     protected lateinit var conversion: ConversionRateDataSource
         private set
     protected lateinit var exchange: ExchangeRateDataSource
@@ -33,6 +37,8 @@ internal abstract class AbstractViewModelTest<Model : ViewModel> {
         conversion = mock()
         exchange = mock()
         favorite = mock()
+        latest = mock()
+        mockLatest()
         viewModel = prepare()
     }
 
@@ -51,8 +57,21 @@ internal abstract class AbstractViewModelTest<Model : ViewModel> {
         }
     }
 
+    protected fun mockLatest() {
+        val values = mutableMapOf<String, String>()
+        whenever(latest.currency).then { values.getOrDefault("currency", "EUR") }
+        doAnswer { values["currency"] = it.getArgument(0) }.whenever(latest).currency = any()
+        whenever(latest.value).then { values.getOrDefault("value", "1") }
+        doAnswer { values["value"] = it.getArgument(0) }.whenever(latest).value = any()
+    }
+
     protected fun TestScope.setMainDispatcher() {
         val testDispatcher = UnconfinedTestDispatcher(testScheduler)
+        Dispatchers.setMain(testDispatcher)
+    }
+
+    protected fun setMainDispatcher() {
+        val testDispatcher = UnconfinedTestDispatcher()
         Dispatchers.setMain(testDispatcher)
     }
 
