@@ -1,7 +1,6 @@
 package wiki.depasquale.currency.screen.listing
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -37,13 +36,9 @@ fun ListingItem(
     isFavorite: Boolean
 ) {
     ExchangeRateItem(
-        modifier = Modifier
-            .background(
-                MaterialTheme.colorScheme.surfaceVariant,
-                shape = MaterialTheme.shapes.medium
-            )
-            .clip(MaterialTheme.shapes.medium)
-            .then(modifier),
+        background = MaterialTheme.colorScheme.surfaceVariant,
+        shape = MaterialTheme.shapes.medium,
+        modifier = modifier,
         icon = {
             if (isFavorite) ItemActiveIcon(onRemoveItem)
             else ItemInactiveIcon(onAddItem)
