@@ -96,7 +96,7 @@ private fun ItemActiveIcon(
             painter = painterResource(id = R.drawable.ic_favorite),
             contentDescription = null,
             modifier = Modifier.size(32.dp),
-            colorFilter = ColorFilter.tint(Color.Yellow)
+            colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.primary)
         )
     }
 }
