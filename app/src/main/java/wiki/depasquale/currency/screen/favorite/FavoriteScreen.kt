@@ -107,7 +107,7 @@ private fun FavoriteScreen(
             )
         }
         LazyColumn(
-            contentPadding = padding + PaddingValues(24.dp),
+            contentPadding = padding + PaddingValues(horizontal = 24.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             item {
