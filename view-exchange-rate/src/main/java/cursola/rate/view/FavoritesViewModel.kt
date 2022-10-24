@@ -18,7 +18,7 @@ class FavoritesViewModel @Inject internal constructor(
     private val favorite: FavoriteDataSource
 ) : ViewModel() {
 
-    val value = MutableStateFlow(1.0)
+    val value = MutableStateFlow("1")
     val selected = MutableStateFlow(Currency.getInstance("EUR"))
 
     private val favorites = repeatingFlow(every = 10.seconds) { favorite.list() }
@@ -27,14 +27,15 @@ class FavoritesViewModel @Inject internal constructor(
     val items = combine(value, selected, favorites, ::transform)
 
     private suspend fun transform(
-        value: Double,
+        value: String,
         selected: Currency,
         favorites: List<Currency>
     ) = buildList {
         for (favorite in favorites) {
             if (favorite == selected) continue
+            val valueNumber = value.toDoubleOrNull() ?: 0.0
             val conversionRate = conversion.get(selected, favorite)
-            val converted = ConvertedCurrency(favorite, conversionRate * value, true)
+            val converted = ConvertedCurrency(favorite, conversionRate * valueNumber, true)
             add(converted)
         }
     }

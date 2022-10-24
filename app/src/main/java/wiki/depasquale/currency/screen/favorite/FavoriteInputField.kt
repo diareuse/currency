@@ -14,10 +14,10 @@ import java.util.Locale
 
 @Composable
 fun FavoriteInputField(
-    value: Double,
+    value: String,
     selected: Currency,
     locale: Locale,
-    onValueChanged: (Double) -> Unit,
+    onValueChanged: (String) -> Unit,
     onCloseKeyboard: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -38,7 +38,7 @@ fun FavoriteInputField(
 private fun Preview() {
     CurrencyTheme {
         FavoriteInputField(
-            value = 0.0,
+            value = "0.0",
             selected = Currency.getAvailableCurrencies().random(),
             locale = Locale.getDefault(),
             onValueChanged = {},

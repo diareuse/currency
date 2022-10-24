@@ -67,9 +67,9 @@ fun FavoriteScreen(
 @Composable
 private fun FavoriteScreen(
     items: List<ConvertedCurrency>,
-    value: Double,
+    value: String,
     selected: Currency,
-    onValueChanged: (Double) -> Unit,
+    onValueChanged: (String) -> Unit,
     onItemSelected: (ConvertedCurrency) -> Unit,
     onCloseKeyboard: () -> Unit,
     onNavigateToListing: () -> Unit,
@@ -155,7 +155,7 @@ private fun Preview(
         FavoriteScreen(
             items = items,
             onItemSelected = {},
-            value = 1.0,
+            value = "1.0",
             selected = Currency.getInstance("EUR"),
             onValueChanged = {},
             onCloseKeyboard = {},
