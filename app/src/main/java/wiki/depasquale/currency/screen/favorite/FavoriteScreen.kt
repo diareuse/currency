@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
@@ -97,11 +98,12 @@ private fun FavoriteScreen(
             contentAlignment = Alignment.TopEnd
         ) {
             Image(
-                painter = painterResource(id = selected.asFlagRes()),
-                contentDescription = null,
                 modifier = Modifier
                     .padding(48.dp)
-                    .size(200.dp, 133.dp)
+                    .size(200.dp, 133.dp),
+                painter = painterResource(id = selected.asFlagRes()),
+                contentDescription = null,
+                contentScale = ContentScale.Crop
             )
         }
         LazyColumn(
