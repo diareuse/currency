@@ -6,7 +6,6 @@ import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,21 +23,19 @@ fun FavoriteInputField(
     onCloseKeyboard: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurface) {
-        ProvideTextStyle(
-            value = MaterialTheme.typography.displaySmall.copy(
-                color = LocalContentColor.current
-            )
-        ) {
-            CurrencyInput(
-                modifier = modifier.padding(24.dp),
-                value = value,
-                onValueChanged = onValueChanged,
-                currency = selected,
-                locale = locale,
-                onDone = onCloseKeyboard
-            )
-        }
+    ProvideTextStyle(
+        value = MaterialTheme.typography.displaySmall.copy(
+            color = LocalContentColor.current
+        )
+    ) {
+        CurrencyInput(
+            modifier = modifier.padding(24.dp),
+            value = value,
+            onValueChanged = onValueChanged,
+            currency = selected,
+            locale = locale,
+            onDone = onCloseKeyboard
+        )
     }
 }
 
