@@ -5,6 +5,7 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import dagger.hilt.android.AndroidEntryPoint
+import wiki.depasquale.currency.screen.style.CurrencyTheme
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -14,7 +15,9 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            Navigation()
+            CurrencyTheme {
+                Navigation()
+            }
         }
     }
 
