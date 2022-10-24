@@ -25,32 +25,27 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import java.text.NumberFormat
 import java.util.Currency
 import java.util.Locale
 
 @Composable
 fun CurrencyInput(
-    value: Double,
-    onValueChanged: (Double) -> Unit,
+    value: String,
+    onValueChanged: (String) -> Unit,
     currency: Currency,
     locale: Locale,
     onDone: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val formatter = remember(locale) {
-        NumberFormat.getNumberInstance(locale)
-    }
     BasicTextField(
         modifier = modifier,
-        value = formatter.format(value),
+        value = value,
         textStyle = LocalTextStyle.current.copy(
             textAlign = TextAlign.End,
             fontWeight = FontWeight.ExtraBold
         ),
         onValueChange = {
-            val number = it.takeUnless { it.isBlank() }?.run(formatter::parse)?.toDouble() ?: 0.0
-            onValueChanged(number)
+            onValueChanged(it)
         },
         decorationBox = {
             Row(
@@ -73,7 +68,7 @@ fun CurrencyInput(
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Done,
             keyboardType = KeyboardType.Number
-        ),
+        )
     )
 }
 
@@ -82,7 +77,7 @@ fun CurrencyInput(
 private fun Preview() {
     MaterialTheme {
         var state by remember {
-            mutableStateOf(1.0)
+            mutableStateOf("1123005023.42")
         }
         ProvideTextStyle(value = MaterialTheme.typography.displaySmall) {
             CurrencyInput(

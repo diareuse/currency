@@ -66,7 +66,7 @@ internal class FavoritesViewModelTest : AbstractViewModelTest<FavoritesViewModel
                 Currency.getInstance("CZK")
             )
         ).thenReturn(5.0)
-        viewModel.value.value = 32.3
+        viewModel.value.value = "32.3"
         val expected = listOf(
             ConvertedCurrency(Currency.getInstance("USD"), 387.59999999999997, true),
             ConvertedCurrency(Currency.getInstance("CZK"), 161.5, true),
