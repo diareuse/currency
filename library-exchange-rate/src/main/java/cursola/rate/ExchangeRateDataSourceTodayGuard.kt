@@ -9,7 +9,7 @@ internal class ExchangeRateDataSourceTodayGuard(
     override suspend fun get(): List<ExchangeRate> {
         val items = origin.get()
         val date = items.firstOrNull()?.timestamp
-        if (date != null && date.isToday)
+        if (date?.isToday == true)
             return items
         throw IllegalStateException("Old data")
     }
