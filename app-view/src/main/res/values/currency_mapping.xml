@@ -24,10 +24,12 @@
     <string name="BRL">BR</string>
     <string name="BND">BN</string>
     <string name="BGN">BG</string>
+    <string name="BTN">BT</string>
     <string name="BIF">BI</string>
     <string name="KHR">KH</string>
     <string name="CAD">CA</string>
     <string name="CVE">CV</string>
+    <string name="CUC">CU</string>
     <string name="KYD">KY</string>
     <string name="CLP">CL</string>
     <string name="CNY">CN</string>
@@ -135,6 +137,7 @@
     <string name="TOP">TO</string>
     <string name="TTD">TT</string>
     <string name="SHP">TA</string>
+    <string name="SGD">SG</string>
     <string name="TND">TN</string>
     <string name="TRY">TR</string>
     <string name="TMT">TM</string>
