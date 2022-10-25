@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "wiki.depasquale.cursola"
-        versionCode 1
+        versionCode 3
         versionName "1.0.0"
     }
 
