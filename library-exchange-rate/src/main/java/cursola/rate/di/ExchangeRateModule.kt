@@ -9,6 +9,7 @@ import cursola.rate.ExchangeRateDataSourceDatabase
 import cursola.rate.ExchangeRateDataSourceErrorReducer
 import cursola.rate.ExchangeRateDataSourceNetwork
 import cursola.rate.ExchangeRateDataSourceSort
+import cursola.rate.ExchangeRateDataSourceTodayGuard
 import cursola.rate.FavoriteDataSource
 import cursola.rate.FavoriteDataSourceDatabase
 import cursola.rate.LatestValueDataSource
@@ -48,7 +49,10 @@ internal class ExchangeRateModule {
         database: ExchangeRateDatabase
     ): ExchangeRateDataSource {
         var source: ExchangeRateDataSource
+        source = ExchangeRateDataSourceDatabase(database)
+        source = ExchangeRateDataSourceTodayGuard(source)
         source = ExchangeRateDataSourceErrorReducer(
+            source,
             ExchangeRateDataSourceNetwork(wrap(network, database)),
             ExchangeRateDataSourceDatabase(database)
         )
