@@ -29,11 +29,13 @@ internal abstract class AbstractDataSourceTest {
 
     // ---
 
+    @Suppress("RedundantUnitExpression")
     private fun mockStorage() {
         val data = mutableMapOf<String, Any>()
         whenever(storage[any()]).then { data.getOrElse(it.getArgument(0)) { "" } }
         whenever(storage.set(any(), any())).then {
             data[it.getArgument(0)] = it.getArgument(1)
+            Unit
         }
     }
 
