@@ -115,6 +115,7 @@ internal class ExchangeRateDataSourceTest : AbstractDataSourceTest() {
                 continue
             this += rate
         }
+        sortBy { it.currency.displayName }
     }
 
 }
