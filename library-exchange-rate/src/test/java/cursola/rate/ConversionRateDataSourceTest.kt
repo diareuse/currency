@@ -3,8 +3,8 @@ package cursola.rate
 import cursola.rate.database.ExchangeRateStored
 import cursola.rate.di.ExchangeRateModule
 import cursola.rate.model.makeExchangeRate
+import cursola.rate.util.todayRange
 import kotlinx.coroutines.test.runTest
-import org.mockito.kotlin.inOrder
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
@@ -57,10 +57,8 @@ internal class ConversionRateDataSourceTest : AbstractDataSourceTest() {
         val rates = database.rates()
         whenever(network.get()).thenReturn(listOf(subject.from, subject.to))
         source.get(subject.fromCurrency, subject.toCurrency)
-        rates.inOrder {
-            verify().insert(ExchangeRateStored(subject.from))
-            verify().insert(ExchangeRateStored(subject.to))
-        }
+        verify(rates).insert(ExchangeRateStored(subject.from, todayRange.start))
+        verify(rates).insert(ExchangeRateStored(subject.to, todayRange.start))
     }
 
     @Test
