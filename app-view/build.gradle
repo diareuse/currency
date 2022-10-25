@@ -21,10 +21,14 @@ dependencies {
 
     def vCompose = "1.3.0-rc01"
     def vMaterial = "1.0.0-rc01"
+    def vCoil = "2.2.2"
 
     api "androidx.compose.ui:ui:$vCompose"
     api "androidx.compose.ui:ui-tooling:$vCompose"
     api "androidx.compose.foundation:foundation:$vCompose"
     api "androidx.compose.material3:material3:$vMaterial"
+
+    implementation "io.coil-kt:coil-compose:$vCoil"
+    implementation "io.coil-kt:coil-svg:$vCoil"
 
 }

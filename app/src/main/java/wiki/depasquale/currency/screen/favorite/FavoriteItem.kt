@@ -1,7 +1,5 @@
 package wiki.depasquale.currency.screen.favorite
 
-import android.annotation.SuppressLint
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,14 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import cursola.view.CurrencyFlag
 import cursola.view.CurrencyValue
 import cursola.view.ExchangeRateItem
-import wiki.depasquale.currency.R
 import wiki.depasquale.currency.screen.style.CurrencyTheme
 import java.util.Currency
 import java.util.Locale
@@ -45,7 +40,7 @@ fun FavoriteItem(
             .clip(MaterialTheme.shapes.medium)
             .then(modifier),
         flag = {
-            FavoriteItemFlag(resource = currency.asFlagRes())
+            FavoriteItemFlag(currency = currency)
         },
         text = {
             FavoriteItemText(name = name, value = value, currency = currency)
@@ -55,17 +50,15 @@ fun FavoriteItem(
 
 @Composable
 private fun FavoriteItemFlag(
-    resource: Int
+    currency: Currency
 ) {
-    Image(
+    CurrencyFlag(
         modifier = Modifier
-            .width(48.dp)
+            .width(40.dp)
             .height(30.dp)
             .shadow(8.dp)
             .clip(MaterialTheme.shapes.small),
-        painter = painterResource(id = resource),
-        contentDescription = null,
-        contentScale = ContentScale.Crop
+        currency = currency
     )
 }
 
@@ -92,18 +85,6 @@ private fun FavoriteItemText(
         }
         CurrencyValue(value, currency.getSymbol(Locale.getDefault()))
     }
-}
-
-@SuppressLint("DiscouragedApi")
-@Composable
-fun Currency.asFlagRes(): Int {
-    val context = LocalContext.current
-    val resources = context.resources ?: return R.drawable.flag__unknown
-    val name = "flag_${currencyCode.lowercase()}"
-    val id = resources.getIdentifier(name, "drawable", context.packageName)
-    if (id == 0)
-        return R.drawable.flag__unknown
-    return id
 }
 
 @Preview(showBackground = true)

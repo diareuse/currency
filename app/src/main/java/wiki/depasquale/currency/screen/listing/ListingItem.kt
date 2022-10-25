@@ -14,15 +14,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import cursola.view.CurrencyFlag
 import cursola.view.ExchangeRateItem
 import wiki.depasquale.currency.R
-import wiki.depasquale.currency.screen.favorite.asFlagRes
 import wiki.depasquale.currency.screen.style.CurrencyTheme
 import java.util.Currency
 
@@ -44,7 +42,7 @@ fun ListingItem(
             else ItemInactiveIcon(onAddItem)
         },
         flag = {
-            ListingItemFlag(resource = currency.asFlagRes())
+            ListingItemFlag(currency = currency)
         },
         text = {
             ListingItemText(name = name, currency = currency)
@@ -54,17 +52,15 @@ fun ListingItem(
 
 @Composable
 private fun ListingItemFlag(
-    resource: Int
+    currency: Currency
 ) {
-    Image(
+    CurrencyFlag(
         modifier = Modifier
-            .width(48.dp)
+            .width(40.dp)
             .height(30.dp)
             .shadow(8.dp)
             .clip(MaterialTheme.shapes.small),
-        painter = painterResource(id = resource),
-        contentDescription = null,
-        contentScale = ContentScale.Crop
+        currency = currency
     )
 }
 
