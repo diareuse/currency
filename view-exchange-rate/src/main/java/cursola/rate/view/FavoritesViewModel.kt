@@ -7,6 +7,9 @@ import cursola.rate.FavoriteDataSource
 import cursola.rate.LatestValueDataSource
 import cursola.rate.view.util.repeatingFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -40,13 +43,17 @@ class FavoritesViewModel @Inject internal constructor(
         selected: Currency,
         favorites: List<Currency>
     ) = buildList {
-        for (favorite in favorites) {
-            if (favorite == selected) continue
-            val valueNumber = value.toDoubleOrNull() ?: 0.0
-            val conversionRate = conversion.get(selected, favorite)
-            val converted = ConvertedCurrency(favorite, conversionRate * valueNumber, true)
-            add(converted)
+        coroutineScope {
+            for (favorite in favorites) {
+                if (favorite == selected) continue
+                val valueNumber = value.toDoubleOrNull() ?: 0.0
+                val converted = async {
+                    val conversionRate = conversion.get(selected, favorite)
+                    ConvertedCurrency(favorite, conversionRate * valueNumber, true)
+                }
+                add(converted)
+            }
         }
-    }
+    }.awaitAll()
 
 }
