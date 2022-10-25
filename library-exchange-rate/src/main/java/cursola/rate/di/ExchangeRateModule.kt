@@ -2,6 +2,7 @@ package cursola.rate.di
 
 import cursola.rate.ConversionRateDataSource
 import cursola.rate.ConversionRateDataSourceDatabase
+import cursola.rate.ConversionRateDataSourceDatabaseToday
 import cursola.rate.ConversionRateDataSourceErrorReducer
 import cursola.rate.ConversionRateDataSourceNetwork
 import cursola.rate.ExchangeRateDataSource
@@ -38,6 +39,7 @@ internal class ExchangeRateModule {
         database: ExchangeRateDatabase
     ): ConversionRateDataSource {
         return ConversionRateDataSourceErrorReducer(
+            ConversionRateDataSourceDatabaseToday(database),
             ConversionRateDataSourceNetwork(wrap(network, database)),
             ConversionRateDataSourceDatabase(database)
         )
@@ -85,8 +87,8 @@ internal class ExchangeRateModule {
     ): ExchangeRateService {
         var service = network
         service = ExchangeRateServicePeg(service)
-        service = ExchangeRateServiceSaving(service, database)
         service = ExchangeRateServiceBaseline(service)
+        service = ExchangeRateServiceSaving(service, database)
         service = ExchangeRateServiceCaching(service)
         return service
     }
