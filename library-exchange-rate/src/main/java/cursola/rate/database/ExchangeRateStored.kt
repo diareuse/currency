@@ -20,11 +20,12 @@ internal data class ExchangeRateStored(
 ) {
 
     constructor(
-        rate: ExchangeRate
+        rate: ExchangeRate,
+        timestamp: Date = rate.timestamp
     ) : this(
         rate = rate.rate,
         currency = rate.currency,
-        timestamp = rate.timestamp
+        timestamp = timestamp
     )
 
 }
