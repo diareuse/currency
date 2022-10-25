@@ -46,7 +46,7 @@
     <string name="ETB">ET</string>
     <string name="FKP">FK</string>
     <string name="FJD">FJ</string>
-    <string name="XAF">GA</string>
+    <string name="XAF">CF</string>
     <string name="GMD">GM</string>
     <string name="GEL">GE</string>
     <string name="GHS">GH</string>
@@ -96,7 +96,7 @@
     <string name="KPW">KP</string>
     <string name="OMR">OM</string>
     <string name="PKR">PK</string>
-    <string name="JOD">PS</string>
+    <string name="JOD">JO</string>
     <string name="PAB">PA</string>
     <string name="PGK">PG</string>
     <string name="PYG">PY</string>
@@ -131,14 +131,14 @@
     <string name="TZS">TZ</string>
     <string name="THB">TH</string>
     <string name="XOF">TG</string>
-    <string name="NZD">TK</string>
+    <string name="NZD">NZ</string>
     <string name="TOP">TO</string>
     <string name="TTD">TT</string>
     <string name="SHP">TA</string>
     <string name="TND">TN</string>
     <string name="TRY">TR</string>
     <string name="TMT">TM</string>
-    <string name="AUD">TV</string>
+    <string name="AUD">AU</string>
     <string name="UGX">UG</string>
     <string name="UAH">UA</string>
     <string name="AED">AE</string>
