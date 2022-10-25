@@ -1,7 +1,6 @@
 package wiki.depasquale.currency.screen.favorite
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,15 +29,14 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import cursola.rate.view.ConvertedCurrency
 import cursola.rate.view.FavoritesViewModel
+import cursola.view.CurrencyFlag
 import wiki.depasquale.currency.screen.style.CurrencyTheme
 import java.util.Currency
 import java.util.Locale
@@ -97,13 +95,11 @@ private fun FavoriteScreen(
                 .alpha(.4f),
             contentAlignment = Alignment.TopEnd
         ) {
-            Image(
+            CurrencyFlag(
                 modifier = Modifier
                     .padding(48.dp)
-                    .size(200.dp, 133.dp),
-                painter = painterResource(id = selected.asFlagRes()),
-                contentDescription = null,
-                contentScale = ContentScale.Crop
+                    .size(200.dp, 150.dp),
+                currency = selected
             )
         }
         LazyColumn(
