@@ -1,8 +1,10 @@
 package wiki.depasquale.currency.screen.listing
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -47,7 +49,7 @@ fun ListingScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 private fun ListingScreen(
     items: List<ConvertedCurrency>,
@@ -87,6 +89,7 @@ private fun ListingScreen(
         }
     ) { padding ->
         LazyColumn(
+            modifier = Modifier.fillMaxSize(),
             contentPadding = padding + PaddingValues(24.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
@@ -95,6 +98,7 @@ private fun ListingScreen(
                 key = ConvertedCurrency::currency
             ) {
                 ListingItem(
+                    modifier = Modifier.animateItemPlacement(),
                     onAddItem = { onAddItem(it.currency) },
                     onRemoveItem = { onRemoveItem(it.currency) },
                     name = it.name(locale),

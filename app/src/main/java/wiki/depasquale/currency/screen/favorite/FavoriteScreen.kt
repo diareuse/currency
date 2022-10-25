@@ -103,6 +103,7 @@ private fun FavoriteScreen(
             )
         }
         LazyColumn(
+            modifier = Modifier.fillMaxSize(),
             contentPadding = padding + PaddingValues(horizontal = 24.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
