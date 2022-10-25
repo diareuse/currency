@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import cursola.view.CurrencyFlag
@@ -73,7 +74,7 @@ private fun ListingItemText(
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
-        Text(name)
+        Text(name, maxLines = 1, overflow = TextOverflow.Ellipsis)
         Text(
             currency.currencyCode,
             style = MaterialTheme.typography.bodySmall,
