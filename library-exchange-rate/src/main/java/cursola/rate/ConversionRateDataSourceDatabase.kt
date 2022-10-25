@@ -13,7 +13,7 @@ internal class ConversionRateDataSourceDatabase(
         val toRate = rates.get(to.currencyCode)
 
         if (fromRate == null || toRate == null)
-            throw ExchangeRateError.NotFoundException("Database doesn't provide conversion $from -> $to")
+            throw ExchangeRateError.NotFoundException("Database doesn't provide conversion $from($fromRate) -> $to($toRate)")
 
         return ExchangeRate.getExchangeRate(fromRate, toRate)
     }
