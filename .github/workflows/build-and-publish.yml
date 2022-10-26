@@ -12,15 +12,21 @@ jobs:
       - uses: actions/checkout@v3
 
       - run: |
-          echo "${{ DEPLOY_SIGNING_KEY }}" | base64 --decode > keystore.jks
-          echo "${{ DEPLOY_SIGNING_PROPERTIES }}" | base64 --decode > keystore.properties
-          echo "${{ GOOGLE_SERVICES_JSON }}" | base64 --decode > app/google-services.json
+          echo "${{ secrets.DEPLOY_SIGNING_KEY }}" | base64 --decode > keystore.jks
+          echo "${{ secrets.DEPLOY_SIGNING_PROPERTIES }}" | base64 --decode > keystore.properties
+          echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 --decode > app/google-services.json
+          echo "${{ secrets.SERVICE_ACCOUNT_JSON }}" | base64 --decode > service-account.json
 
       - name: Set up JDK 11
         uses: actions/setup-java@v3
         with:
           java-version: '11'
           distribution: 'temurin'
+
+      - uses: nathanmkaya/android-version-code-update@v0.1
+        with:
+          serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          packageName: wiki.depasquale.cursola
 
       - name: Build with Gradle
         uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
