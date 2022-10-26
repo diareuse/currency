@@ -1,8 +1,7 @@
 plugins {
     id 'application-conventions'
     id 'di-conventions'
-    id 'com.google.gms.google-services'
-    id 'com.google.firebase.crashlytics'
+    id 'google-conventions'
 }
 
 android {
