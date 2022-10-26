@@ -1,0 +1,17 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "**.kt"
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          wget -O taggy https://github.com/diareuse/taggy/releases/download/1.1.1/taggy-linux
+          chmod +x taggy
+          taggy --pattern "$(date +%Y)(\.[0-9]+)+(-[a-z]+[0-9]+)?" -p
