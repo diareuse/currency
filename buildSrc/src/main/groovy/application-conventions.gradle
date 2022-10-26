@@ -4,14 +4,19 @@ plugins {
     id 'signing-conventions'
 }
 
+def calendar = Calendar.getInstance()
+def year = calendar.get(Calendar.YEAR)
+def month = calendar.get(Calendar.MONTH) + 1
+def dateVersion = "$year.$month"
+
 android {
 
     namespace "wiki.depasquale.currency"
 
     defaultConfig {
         applicationId "wiki.depasquale.cursola"
-        versionCode 3
-        versionName "1.0.0"
+        versionCode 1
+        versionName dateVersion
     }
 
     buildTypes {
