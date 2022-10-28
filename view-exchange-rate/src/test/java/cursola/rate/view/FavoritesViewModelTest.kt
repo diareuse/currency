@@ -96,6 +96,7 @@ internal class FavoritesViewModelTest : AbstractViewModelTest<FavoritesViewModel
     @Test
     fun newInstance_remembers_value() = runTest {
         viewModel.value.value = "95285.31"
+        advanceTimeBy(5001)
         val instance = prepare()
         assertEquals("95285.31", instance.value.value)
     }
