@@ -9,6 +9,7 @@ import cursola.rate.view.util.repeatingFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import java.util.Currency
@@ -31,7 +32,7 @@ class FavoritesViewModel @Inject internal constructor(
     val items = combine(value, selected, favorites, ::transform)
 
     init {
-        viewModelScope.launch { value.collect { latest.value = it } }
+        viewModelScope.launch { value.debounce(5.seconds).collect { latest.value = it } }
         viewModelScope.launch { selected.collect { latest.currency = it.currencyCode } }
     }
 
