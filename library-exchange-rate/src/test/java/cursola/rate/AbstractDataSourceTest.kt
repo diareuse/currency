@@ -1,5 +1,6 @@
 package cursola.rate
 
+import cursola.rate.analytics.AnalyticService
 import cursola.rate.database.ExchangeRateDatabase
 import cursola.rate.network.ExchangeRateService
 import cursola.rate.storage.Storage
@@ -13,14 +14,18 @@ internal abstract class AbstractDataSourceTest {
     internal lateinit var storage: Storage
     protected lateinit var database: ExchangeRateDatabase
     protected lateinit var network: ExchangeRateService
+    protected lateinit var analytics: AnalyticService
 
+    @Suppress("RedundantUnitExpression")
     @Before
     fun prepareInternal() {
         network = mock()
         database = mock()
         storage = mock()
+        analytics = mock()
         whenever(database.rates()).thenReturn(mock())
         whenever(database.favorites()).thenReturn(mock())
+        whenever(analytics.log(any(), any())).then { Unit }
         mockStorage()
         prepare()
     }

@@ -12,10 +12,13 @@ import cursola.rate.ExchangeRateDataSourceNetwork
 import cursola.rate.ExchangeRateDataSourceSort
 import cursola.rate.ExchangeRateDataSourceTodayGuard
 import cursola.rate.FavoriteDataSource
+import cursola.rate.FavoriteDataSourceAnalytics
 import cursola.rate.FavoriteDataSourceDatabase
 import cursola.rate.LatestValueDataSource
+import cursola.rate.LatestValueDataSourceAnalytics
 import cursola.rate.LatestValueDataSourceDefault
 import cursola.rate.LatestValueDataSourceImpl
+import cursola.rate.analytics.AnalyticService
 import cursola.rate.database.ExchangeRateDatabase
 import cursola.rate.network.ExchangeRateService
 import cursola.rate.network.ExchangeRateServiceBaseline
@@ -64,18 +67,24 @@ internal class ExchangeRateModule {
 
     @Provides
     fun favorites(
-        database: ExchangeRateDatabase
+        database: ExchangeRateDatabase,
+        analytics: AnalyticService
     ): FavoriteDataSource {
-        return FavoriteDataSourceDatabase(database)
+        var source: FavoriteDataSource
+        source = FavoriteDataSourceDatabase(database)
+        source = FavoriteDataSourceAnalytics(source, analytics)
+        return source
     }
 
     @Provides
     fun latestValue(
-        storage: Storage
+        storage: Storage,
+        analytics: AnalyticService
     ): LatestValueDataSource {
         var source: LatestValueDataSource
         source = LatestValueDataSourceImpl(storage)
         source = LatestValueDataSourceDefault(source)
+        source = LatestValueDataSourceAnalytics(source, analytics)
         return source
     }
 
