@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import wiki.depasquale.currency.R
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,7 +32,7 @@ fun ListingSearchField(
             unfocusedIndicatorColor = Color.Transparent
         ),
         placeholder = {
-            Text("Search here…", style = style)
+            Text(stringResource(R.string.search_cta), style = style)
         },
         trailingIcon = {
             if (filter.isBlank())

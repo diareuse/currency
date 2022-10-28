@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cursola</string>
+    <string name="favorites_headline">Your favorites</string>
+    <string name="edit">Edit</string>
+    <string name="search_cta">Search here…</string>
 </resources>

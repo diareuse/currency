@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cursola</string>
+    <string name="favorites_headline">आपके पसंदीदा</string>
+    <string name="edit">संपादन करना</string>
+    <string name="search_cta">यहां तलाश करो…</string>
+</resources>

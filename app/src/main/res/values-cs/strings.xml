@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cursola</string>
+    <string name="favorites_headline">Tvé oblíbené</string>
+    <string name="edit">Upravit</string>
+    <string name="search_cta">Helej tady…</string>
+</resources>
