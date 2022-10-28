@@ -14,7 +14,7 @@ internal class FavoriteDataSourceTest : AbstractDataSourceTest() {
     private lateinit var source: FavoriteDataSource
 
     override fun prepare() {
-        source = ExchangeRateModule.getInstance().favorites(database)
+        source = ExchangeRateModule.getInstance().favorites(database, analytics)
     }
 
     // ---
@@ -46,11 +46,25 @@ internal class FavoriteDataSourceTest : AbstractDataSourceTest() {
     }
 
     @Test
+    fun add_notifiesAnalytics() = runTest {
+        val currency = nextCurrency()
+        source.add(currency, 0)
+        verify(analytics).log("favorite_added", mapOf("value" to currency.currencyCode))
+    }
+
+    @Test
     fun remove_updatesDatabase() = runTest {
         val favorites = database.favorites()
         val currency = nextCurrency()
         source.remove(currency)
         verify(favorites).delete(makeFavorite(currency, 0))
+    }
+
+    @Test
+    fun remove_notifiesAnalytics() = runTest {
+        val currency = nextCurrency()
+        source.remove(currency)
+        verify(analytics).log("favorite_removed", mapOf("value" to currency.currencyCode))
     }
 
 }
