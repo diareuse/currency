@@ -1,8 +1,11 @@
 package cursola.view
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -11,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import coil.decode.SvgDecoder
+import coil.request.CachePolicy
 import coil.request.ImageRequest
 import java.util.Currency
 
@@ -21,14 +25,21 @@ fun CurrencyFlag(
 ) {
     val language = stringResource(id = currency.asId()).lowercase()
     SubcomposeAsyncImage(
-        modifier = modifier,
+        modifier = modifier.background(MaterialTheme.colorScheme.surface),
         model = ImageRequest.Builder(LocalContext.current)
             .data("https://flagicons.lipis.dev/flags/4x3/$language.svg")
             .decoderFactory(SvgDecoder.Factory())
             .crossfade(true)
+            .diskCacheKey("flag-$language")
+            .diskCachePolicy(CachePolicy.ENABLED)
             .build(),
         loading = {
-            CircularProgressIndicator(modifier = Modifier.size(24.dp), strokeWidth = 4.dp)
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .padding(4.dp)
+                    .size(16.dp),
+                strokeWidth = 2.dp
+            )
         },
         contentScale = ContentScale.Crop,
         contentDescription = currency.currencyCode
