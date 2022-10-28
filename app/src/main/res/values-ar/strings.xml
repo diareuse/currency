@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cursola</string>
+    <string name="favorites_headline">المفضلة لديك</string>
+    <string name="edit">يحرر</string>
+    <string name="search_cta">ابحث هنا…</string>
+</resources>

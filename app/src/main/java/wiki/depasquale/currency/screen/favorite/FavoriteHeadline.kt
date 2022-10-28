@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import wiki.depasquale.currency.R
@@ -33,16 +34,19 @@ fun FavoriteHeadline(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = "My favorites", style = MaterialTheme.typography.titleLarge)
+        Text(
+            text = stringResource(R.string.favorites_headline),
+            style = MaterialTheme.typography.titleLarge
+        )
 
         Button(
             onClick = onAddClick,
             contentPadding = PaddingValues(8.dp),
             colors = ButtonDefaults.textButtonColors()
         ) {
-            Icon(painter = painterResource(R.drawable.ic_edit), contentDescription = "edit")
+            Icon(painter = painterResource(R.drawable.ic_edit), null)
             Spacer(Modifier.width(8.dp))
-            Text("Edit")
+            Text(stringResource(R.string.edit))
         }
     }
 }
