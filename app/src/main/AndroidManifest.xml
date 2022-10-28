@@ -41,6 +41,10 @@
             android:exported="false"
             tools:node="merge">
 
+            <meta-data
+                android:name="wiki.depasquale.currency.platform.InitializerWork"
+                android:value="androidx.startup" />
+
         </provider>
 
     </application>
