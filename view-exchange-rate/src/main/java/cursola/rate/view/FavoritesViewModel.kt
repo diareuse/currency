@@ -8,9 +8,11 @@ import cursola.rate.LatestValueDataSource
 import cursola.rate.view.util.repeatingFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.util.Currency
 import javax.inject.Inject
@@ -30,6 +32,7 @@ class FavoritesViewModel @Inject internal constructor(
         .distinctUntilChanged()
 
     val items = combine(value, selected, favorites, ::transform)
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
     init {
         viewModelScope.launch { value.debounce(5.seconds).collect { latest.value = it } }
