@@ -4,4 +4,5 @@
     <string name="favorites_headline">المفضلة لديك</string>
     <string name="edit">يحرر</string>
     <string name="search_cta">ابحث هنا…</string>
+    <string name="history_footnote">تعرض الرسوم البيانية هنا تاريخًا لمدة 3 أشهر لأي عملة مفضلة فيما يتعلق باليورو.</string>
 </resources>

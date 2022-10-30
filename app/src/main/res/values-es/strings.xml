@@ -4,4 +4,5 @@
     <string name="favorites_headline">Tus favoritas</string>
     <string name="edit">Editar</string>
     <string name="search_cta">Busca aquí…</string>
+    <string name="history_footnote">Los gráficos aquí muestran un historial de 3 meses de cualquier moneda favorita en relación con el euro.</string>
 </resources>
