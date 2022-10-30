@@ -8,7 +8,9 @@ internal class HistoryDataSourceFailOnEmpty(
 
     override suspend fun get(currency: Currency): List<ExchangeRate> {
         return origin.get(currency).also {
-            check(it.isNotEmpty())
+            check(it.isNotEmpty()) {
+                "Expected to contain $currency, but was $it"
+            }
         }
     }
 

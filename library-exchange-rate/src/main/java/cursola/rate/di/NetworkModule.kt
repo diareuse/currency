@@ -34,16 +34,6 @@ internal class NetworkModule {
         return serviceWithUrl(client, performance, url)
     }
 
-    @ScopeSinceInception
-    @Provides
-    fun serviceInception(
-        client: HttpClient,
-        performance: PerformanceService
-    ): ExchangeRateService {
-        val url = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml"
-        return serviceWithUrl(client, performance, url)
-    }
-
     @Provides
     fun client() = HttpClient(CIO) {}
 
