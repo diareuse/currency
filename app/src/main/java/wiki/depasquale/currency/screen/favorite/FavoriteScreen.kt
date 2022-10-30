@@ -18,6 +18,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -44,7 +46,8 @@ import java.util.Locale
 @Composable
 fun FavoriteScreen(
     viewModel: FavoritesViewModel,
-    onNavigateToListing: () -> Unit
+    onNavigateToListing: () -> Unit,
+    onNavigateToHistory: () -> Unit
 ) {
     val items by viewModel.items.collectAsState(initial = emptyList())
     val selected by viewModel.selected.collectAsState()
@@ -57,7 +60,8 @@ fun FavoriteScreen(
         onValueChanged = { viewModel.value.value = it },
         onItemSelected = { viewModel.selected.value = it.currency },
         onCloseKeyboard = manager::clearFocus,
-        onNavigateToListing = onNavigateToListing
+        onNavigateToListing = onNavigateToListing,
+        onNavigateToHistory = onNavigateToHistory
     )
 }
 
@@ -71,6 +75,7 @@ private fun FavoriteScreen(
     onItemSelected: (ConvertedCurrency) -> Unit,
     onCloseKeyboard: () -> Unit,
     onNavigateToListing: () -> Unit,
+    onNavigateToHistory: () -> Unit,
     locale: Locale = Locale.getDefault()
 ) {
     val focusRequester = remember { FocusRequester() }
@@ -122,6 +127,11 @@ private fun FavoriteScreen(
                 )
             }
             item {
+                TextButton(onClick = onNavigateToHistory) {
+                    Text("Show history")
+                }
+            }
+            item {
                 Spacer(modifier = Modifier.imePadding())
             }
         }
@@ -156,7 +166,8 @@ private fun Preview(
             selected = Currency.getInstance("EUR"),
             onValueChanged = {},
             onCloseKeyboard = {},
-            onNavigateToListing = {}
+            onNavigateToListing = {},
+            onNavigateToHistory = {}
         )
     }
 }
