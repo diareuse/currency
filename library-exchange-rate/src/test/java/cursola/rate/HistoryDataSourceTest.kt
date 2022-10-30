@@ -106,7 +106,7 @@ internal class HistoryDataSourceTest : AbstractDataSourceTest() {
         val usdRates = List(10) {
             makeExchangeRate(
                 Currency.getInstance("USD"),
-                timestamp = Date(it.toLong())
+                timestamp = Date(10 - it.toLong())
             )
         }
         whenever(network.get()).thenReturn(usdRates)
