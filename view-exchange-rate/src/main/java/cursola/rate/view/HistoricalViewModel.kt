@@ -49,8 +49,8 @@ class HistoricalViewModel @Inject internal constructor(
         val values: List<ChartValue>
     ) {
 
-        val min get() = values.minBy { it.y }.y
-        val max get() = values.maxBy { it.y }.y
+        val min get() = values.minByOrNull { it.y }?.y ?: 0.0
+        val max get() = values.minByOrNull { it.y }?.y ?: 0.0
 
     }
 

@@ -15,6 +15,7 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import wiki.depasquale.currency.screen.favorite.FavoriteScreen
+import wiki.depasquale.currency.screen.history.HistoryScreen
 import wiki.depasquale.currency.screen.listing.ListingScreen
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -27,11 +28,20 @@ fun Navigation() {
                 viewModel = hiltViewModel(),
                 onNavigateToListing = {
                     controller.navigate("/listing")
+                },
+                onNavigateToHistory = {
+                    controller.navigate("/favorites/history")
                 }
             )
         }
         composableCard("/listing") {
             ListingScreen(
+                viewModel = hiltViewModel(),
+                onNavigateBack = controller::navigateUp
+            )
+        }
+        composableCard("/favorites/history") {
+            HistoryScreen(
                 viewModel = hiltViewModel(),
                 onNavigateBack = controller::navigateUp
             )
