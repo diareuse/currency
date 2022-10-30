@@ -4,7 +4,6 @@ import android.database.sqlite.SQLiteConstraintException
 import cursola.rate.database.ExchangeRateStored
 import cursola.rate.di.ExchangeRateModule
 import cursola.rate.model.makeExchangeRate
-import cursola.rate.util.todayRange
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -60,7 +59,7 @@ internal class ExchangeRateDataSourceTest : AbstractDataSourceTest() {
         whenever(network.get()).thenReturn(data)
         source.get()
         database.rates().apply {
-            verify(this).insert(data.map { ExchangeRateStored(it, todayRange.start) }.first())
+            verify(this).insert(data.map { ExchangeRateStored(it) }.first())
         }
     }
 
@@ -72,7 +71,7 @@ internal class ExchangeRateDataSourceTest : AbstractDataSourceTest() {
         whenever(rates.insert(model = any())).thenThrow(SQLiteConstraintException())
         source.get()
         database.rates().apply {
-            verify(this).update(data.map { ExchangeRateStored(it, todayRange.start) }.first())
+            verify(this).update(data.map { ExchangeRateStored(it) }.first())
         }
     }
 
