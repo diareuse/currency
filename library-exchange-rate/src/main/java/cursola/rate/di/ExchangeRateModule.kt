@@ -14,6 +14,12 @@ import cursola.rate.ExchangeRateDataSourceTodayGuard
 import cursola.rate.FavoriteDataSource
 import cursola.rate.FavoriteDataSourceAnalytics
 import cursola.rate.FavoriteDataSourceDatabase
+import cursola.rate.HistoryDataSource
+import cursola.rate.HistoryDataSourceBaseline
+import cursola.rate.HistoryDataSourceDatabase
+import cursola.rate.HistoryDataSourceErrorReducer
+import cursola.rate.HistoryDataSourceFailOnEmpty
+import cursola.rate.HistoryDataSourceNetwork
 import cursola.rate.LatestValueDataSource
 import cursola.rate.LatestValueDataSourceAnalytics
 import cursola.rate.LatestValueDataSourceDefault
@@ -88,6 +94,25 @@ internal class ExchangeRateModule {
         return source
     }
 
+    @ScopeSinceInception
+    @Provides
+    fun historyValue(
+        @ScopeSinceInception
+        network: ExchangeRateService,
+        database: ExchangeRateDatabase
+    ): HistoryDataSource {
+        var service = network
+        service = ExchangeRateServiceSaving(service, database)
+        service = ExchangeRateServiceCaching(service)
+        service = ExchangeRateServicePeg(service)
+        var source: HistoryDataSource
+        source = HistoryDataSourceNetwork(service)
+        source = HistoryDataSourceFailOnEmpty(source)
+        source = HistoryDataSourceErrorReducer(source, HistoryDataSourceDatabase(database))
+        source = HistoryDataSourceBaseline(source)
+        return source
+    }
+
     // ---
 
     private fun wrap(
@@ -95,10 +120,10 @@ internal class ExchangeRateModule {
         database: ExchangeRateDatabase
     ): ExchangeRateService {
         var service = network
-        service = ExchangeRateServicePeg(service)
         service = ExchangeRateServiceBaseline(service)
         service = ExchangeRateServiceSaving(service, database)
         service = ExchangeRateServiceCaching(service)
+        service = ExchangeRateServicePeg(service)
         return service
     }
 

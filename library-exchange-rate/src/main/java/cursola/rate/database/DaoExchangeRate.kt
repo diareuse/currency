@@ -15,4 +15,7 @@ internal interface DaoExchangeRate : DaoCreate<ExchangeRateStored>, DaoUpdate<Ex
     @Query("select * from exchange_rates where timestamp=(select timestamp from exchange_rates order by timestamp desc limit 1)")
     suspend fun getLatest(): List<ExchangeRateStored>
 
+    @Query("select * from exchange_rates where currency=:currency order by timestamp desc")
+    suspend fun getAll(currency: String): List<ExchangeRateStored>
+
 }

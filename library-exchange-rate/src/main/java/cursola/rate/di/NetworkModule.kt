@@ -21,14 +21,44 @@ internal class NetworkModule {
         performance: PerformanceService
     ): ExchangeRateService {
         val url = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"
+        return serviceWithUrl(client, performance, url)
+    }
+
+    @ScopeOf90Days
+    @Provides
+    fun service90Days(
+        client: HttpClient,
+        performance: PerformanceService
+    ): ExchangeRateService {
+        val url = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist-90d.xml"
+        return serviceWithUrl(client, performance, url)
+    }
+
+    @ScopeSinceInception
+    @Provides
+    fun serviceInception(
+        client: HttpClient,
+        performance: PerformanceService
+    ): ExchangeRateService {
+        val url = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-hist.xml"
+        return serviceWithUrl(client, performance, url)
+    }
+
+    @Provides
+    fun client() = HttpClient(CIO) {}
+
+    // ---
+
+    private fun serviceWithUrl(
+        client: HttpClient,
+        performance: PerformanceService,
+        url: String
+    ): ExchangeRateService {
         val method = "GET"
         var service: ExchangeRateService
         service = ExchangeRateServiceImpl(client, url)
         service = ExchangeRateServicePerformance(service, performance, url, method)
         return service
     }
-
-    @Provides
-    fun client() = HttpClient(CIO) {}
 
 }
