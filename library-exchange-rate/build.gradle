@@ -4,13 +4,19 @@ plugins {
     id "org.jetbrains.kotlin.plugin.serialization"
 }
 
+def schemasDir = "$projectDir/schemas".toString()
+
 android {
 
     namespace "cursola.rate"
 
+    sourceSets {
+        androidTest.assets.srcDirs += files(schemasDir)
+    }
+
     kapt {
         arguments {
-            arg("room.schemaLocation", "$projectDir/schemas")
+            arg("room.schemaLocation", schemasDir)
         }
     }
 
@@ -31,6 +37,5 @@ dependencies {
     kapt "androidx.room:room-compiler:$vRoom"
 
     testImplementation "net.sf.kxml:kxml2:2.3.0"
-    testImplementation "androidx.room:room-testing:$vRoom"
 
 }
