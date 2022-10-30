@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import cursola.rate.ConversionRateDataSource
 import cursola.rate.ExchangeRateDataSource
 import cursola.rate.FavoriteDataSource
+import cursola.rate.HistoryDataSource
 import cursola.rate.LatestValueDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -21,6 +22,8 @@ import java.util.Currency
 
 internal abstract class AbstractViewModelTest<Model : ViewModel> {
 
+    protected lateinit var history: HistoryDataSource
+        private set
     protected lateinit var latest: LatestValueDataSource
         private set
     protected lateinit var conversion: ConversionRateDataSource
@@ -37,6 +40,7 @@ internal abstract class AbstractViewModelTest<Model : ViewModel> {
         conversion = mock()
         exchange = mock()
         favorite = mock()
+        history = mock()
         latest = mock()
         mockLatest()
         viewModel = prepare()
