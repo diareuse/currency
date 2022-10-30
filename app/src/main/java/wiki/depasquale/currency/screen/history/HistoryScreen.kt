@@ -29,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -99,7 +100,7 @@ private fun HistoryScreen(
             }
             item {
                 Text(
-                    "Charts here are showing a 3-month history of any favorite currency in relation to Euro.",
+                    stringResource(id = R.string.history_footnote),
                     style = MaterialTheme.typography.labelSmall,
                     textAlign = TextAlign.Center
                 )

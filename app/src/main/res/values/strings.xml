@@ -4,4 +4,5 @@
     <string name="favorites_headline">Your favorites</string>
     <string name="edit">Edit</string>
     <string name="search_cta">Search here…</string>
+    <string name="history_footnote">Charts here are showing a 3-month history of any favorite currency in relation to Euro.</string>
 </resources>
