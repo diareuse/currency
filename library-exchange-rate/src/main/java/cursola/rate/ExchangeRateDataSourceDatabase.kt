@@ -1,7 +1,6 @@
 package cursola.rate
 
 import cursola.rate.database.ExchangeRateDatabase
-import cursola.rate.database.ExchangeRateStored
 
 internal class ExchangeRateDataSourceDatabase(
     private val database: ExchangeRateDatabase
@@ -12,13 +11,5 @@ internal class ExchangeRateDataSourceDatabase(
             .map(::ExchangeRate)
             .distinctBy { it.currency }
     }
-
-    internal fun ExchangeRate(
-        stored: ExchangeRateStored
-    ) = ExchangeRate(
-        currency = stored.currency,
-        rate = stored.rate,
-        timestamp = stored.timestamp
-    )
 
 }
