@@ -20,6 +20,7 @@ import cursola.rate.HistoryDataSourceDatabase
 import cursola.rate.HistoryDataSourceErrorReducer
 import cursola.rate.HistoryDataSourceFailOnEmpty
 import cursola.rate.HistoryDataSourceNetwork
+import cursola.rate.HistoryDataSourceSizeGuard
 import cursola.rate.LatestValueDataSource
 import cursola.rate.LatestValueDataSourceAnalytics
 import cursola.rate.LatestValueDataSourceDefault
@@ -94,21 +95,24 @@ internal class ExchangeRateModule {
         return source
     }
 
-    @ScopeSinceInception
     @Provides
     fun historyValue(
-        @ScopeSinceInception
+        @ScopeOf90Days
         network: ExchangeRateService,
         database: ExchangeRateDatabase
     ): HistoryDataSource {
         var service = network
+        service = ExchangeRateServicePeg(service)
         service = ExchangeRateServiceSaving(service, database)
         service = ExchangeRateServiceCaching(service)
-        service = ExchangeRateServicePeg(service)
+        var sourceOnline: HistoryDataSource
+        sourceOnline = HistoryDataSourceNetwork(service)
+        sourceOnline = HistoryDataSourceFailOnEmpty(sourceOnline)
+        val sourceDatabase = HistoryDataSourceDatabase(database)
         var source: HistoryDataSource
-        source = HistoryDataSourceNetwork(service)
-        source = HistoryDataSourceFailOnEmpty(source)
-        source = HistoryDataSourceErrorReducer(source, HistoryDataSourceDatabase(database))
+        source = sourceDatabase
+        source = HistoryDataSourceSizeGuard(source, 60)
+        source = HistoryDataSourceErrorReducer(source, sourceOnline, sourceDatabase)
         source = HistoryDataSourceBaseline(source)
         return source
     }
@@ -120,10 +124,10 @@ internal class ExchangeRateModule {
         database: ExchangeRateDatabase
     ): ExchangeRateService {
         var service = network
+        service = ExchangeRateServicePeg(service)
         service = ExchangeRateServiceBaseline(service)
         service = ExchangeRateServiceSaving(service, database)
         service = ExchangeRateServiceCaching(service)
-        service = ExchangeRateServicePeg(service)
         return service
     }
 

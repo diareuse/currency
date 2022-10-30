@@ -8,7 +8,7 @@ internal class HistoryDataSourceNetwork(
 ) : HistoryDataSource {
 
     override suspend fun get(currency: Currency): List<ExchangeRate> {
-        return network.get().filter { it.currency == currency }
+        return network.get().filter { it.currency == currency }.sortedByDescending { it.timestamp }
     }
 
 }
