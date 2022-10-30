@@ -10,6 +10,7 @@ import androidx.room.TypeConverters
 )
 @Database(
     version = 1,
+    exportSchema = true,
     entities = [
         ExchangeRateStored::class,
         FavoriteCurrency::class

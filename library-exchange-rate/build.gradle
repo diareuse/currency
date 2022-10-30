@@ -8,6 +8,12 @@ android {
 
     namespace "cursola.rate"
 
+    kapt {
+        arguments {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
+    }
+
 }
 
 dependencies {
