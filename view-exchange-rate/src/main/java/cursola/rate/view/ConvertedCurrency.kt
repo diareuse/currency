@@ -21,11 +21,13 @@ data class ConvertedCurrency(
         isFavorite
     )
 
-    fun symbol(locale: Locale) =
-        currency.getSymbol(locale).orEmpty()
+    fun symbol(locale: Locale) = currency.getSymbol(locale)
+        .orEmpty()
+        .uppercase()
 
-    fun name(locale: Locale) =
-        currency.getDisplayName(locale).orEmpty()
+    fun name(locale: Locale) = currency.getDisplayName(locale)
+        .orEmpty()
+        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(locale) else it.toString() }
 
     fun toString(locale: Locale): String {
         val format = NumberFormat.getCurrencyInstance(locale)
