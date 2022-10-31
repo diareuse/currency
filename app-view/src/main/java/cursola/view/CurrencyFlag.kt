@@ -2,15 +2,17 @@ package cursola.view
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import coil.decode.SvgDecoder
@@ -34,17 +36,11 @@ fun CurrencyFlag(
             .diskCachePolicy(CachePolicy.ENABLED)
             .build(),
         loading = {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .padding(4.dp)
-                    .size(16.dp),
-                strokeWidth = 2.dp
-            )
+            ProgressIndicator(tint = MaterialTheme.colorScheme.primary)
         },
         contentScale = ContentScale.Crop,
         contentDescription = currency.currencyCode
     )
-
 }
 
 @SuppressLint("DiscouragedApi")
@@ -57,4 +53,17 @@ private fun Currency.asId(): Int {
         return R.string.EUR
     }
     return id
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun Preview() {
+    CurrencyFlag(
+        currency = Currency.getInstance("USD"),
+        modifier = Modifier
+            .width(40.dp)
+            .height(30.dp)
+            .shadow(8.dp)
+            .clip(MaterialTheme.shapes.small)
+    )
 }
