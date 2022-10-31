@@ -6,7 +6,7 @@ import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.horizontalScroll
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -26,6 +26,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import cursola.view.ChartDouble
 import cursola.view.CurrencyFlag
 import cursola.view.ExchangeRateItemInline
@@ -73,10 +74,12 @@ fun CurrencyChartItem(
                         .height(56.dp)
                         .alpha(.3f)
                 )
-                Box(modifier = Modifier.horizontalScroll(state)) {
+                BoxWithConstraints(modifier = Modifier
+                    .fillMaxWidth()
+                    .horizontalScroll(state)) {
                     ChartDouble(
                         modifier = Modifier
-                            .width((values.size * 16).dp)
+                            .width(max((values.size * 16).dp, maxWidth))
                             .height(if (isExpanded) 112.dp else 56.dp),
                         samples = values,
                         background = Brush.verticalGradient(
