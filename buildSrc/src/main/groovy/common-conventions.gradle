@@ -20,6 +20,9 @@ android {
         freeCompilerArgs = ['-Xjvm-default=enable', '-opt-in=kotlin.RequiresOptIn']
     }
     buildTypes {
+        debug {
+            enableUnitTestCoverage true
+        }
         release {
             minifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")

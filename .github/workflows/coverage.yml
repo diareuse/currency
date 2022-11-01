@@ -1,0 +1,30 @@
+name: Coverage
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "**.kt"
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    name: codacy-coverage-reporter
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+
+      - name: Run detekt
+        run: ./gradlew rootCoverage
+
+      - name: Run Codacy reporter
+        uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          project-token: ${{ secrets.CODACY_TOKEN }}
+          coverage-reports: build/reports/jacoco.xml
