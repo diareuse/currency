@@ -18,7 +18,7 @@ inline fun XmlPullParser.tag(
 
 fun XmlPullParser.skipEntry() {
     if (eventType != XmlPullParser.START_TAG) {
-        throw IllegalStateException()
+        throw IllegalStateException("Starting tag not found")
     }
     var depth = 1
     while (depth != 0) {
