@@ -23,6 +23,14 @@ plugins {
     id "io.gitlab.arturbosch.detekt" version "1.21.0"
 }
 
+rootCoverage {
+    excludes = ["wiki/depasquale/**"]
+
+    generateCsv false
+    generateHtml false
+    generateXml true
+}
+
 task reportMerge(type: ReportMergeTask) {
     output = project.layout.buildDirectory.file("reports/detekt/merge.sarif")
 }
