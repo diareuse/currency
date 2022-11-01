@@ -36,13 +36,6 @@ task reportMerge(type: ReportMergeTask) {
 }
 
 subprojects {
-    if (plugins.findPlugin("io.gitlab.arturbosch.detekt") == null)
-        return
-
-    detekt {
-        reports.sarif.required.set(true)
-    }
-
     plugins.withType(DetektPlugin) {
         tasks.withType(Detekt) { detektTask ->
             finalizedBy(reportMerge)
