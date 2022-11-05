@@ -44,7 +44,7 @@ fun CurrencyInput(
         onValueChange = { onValueChanged(it.text) },
         textStyle = LocalTextStyle.current.copy(
             textAlign = TextAlign.End,
-            fontWeight = FontWeight.ExtraBold
+            fontWeight = FontWeight.Bold
         ),
         colors = TextFieldDefaults.textFieldColors(
             containerColor = Color.Transparent,
