@@ -105,7 +105,8 @@ fun CurrencyChartItem(
                     .padding(horizontal = 16.dp)
                     .alpha(.4f),
                 max = values.minByOrNull { it },
-                min = values.maxByOrNull { it }
+                min = values.maxByOrNull { it },
+                currency = currency
             )
         }
     }
