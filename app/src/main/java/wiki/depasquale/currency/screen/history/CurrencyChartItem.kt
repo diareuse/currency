@@ -25,7 +25,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
 import cursola.view.ChartDouble
@@ -83,9 +87,11 @@ fun CurrencyChartItem(
                             .fillMaxWidth()
                             .horizontalScroll(state)
                     ) {
+                        val width = max((values.size * 16).dp, maxWidth)
+                        val widthPx = with(LocalDensity.current) { width.toPx() }
                         ChartDouble(
                             modifier = Modifier
-                                .width(max((values.size * 16).dp, maxWidth))
+                                .width(width)
                                 .height(if (isExpanded) 112.dp else 56.dp),
                             samples = values,
                             background = Brush.verticalGradient(
@@ -93,7 +99,8 @@ fun CurrencyChartItem(
                                     MaterialTheme.colorScheme.primary,
                                     MaterialTheme.colorScheme.secondary
                                 )
-                            )
+                            ),
+                            initialSize = Rect(Offset.Zero, Size(widthPx, 0f))
                         )
                     }
                 }

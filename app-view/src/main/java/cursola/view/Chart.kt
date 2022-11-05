@@ -25,10 +25,11 @@ fun <Sample> Chart(
     samples: List<Sample>,
     pathCalculator: PathCalculator<Sample>,
     background: Brush,
+    initialSize: Rect,
     modifier: Modifier = Modifier
 ) {
     var path by remember { mutableStateOf(Path()) }
-    var size by remember { mutableStateOf(Rect.Zero) }
+    var size by remember { mutableStateOf(initialSize) }
     val rect by animateRectAsState(size, animationSpec = remember { tween() })
 
     LaunchedEffect(samples, rect) {
@@ -56,6 +57,7 @@ fun <Sample> Chart(
 fun ChartDouble(
     samples: List<Double>,
     background: Brush,
+    initialSize: Rect,
     modifier: Modifier = Modifier
 ) {
     val factory = remember {
@@ -79,7 +81,8 @@ fun ChartDouble(
         modifier = modifier,
         samples = samples,
         pathCalculator = calculator,
-        background = background
+        background = background,
+        initialSize = initialSize
     )
 }
 
