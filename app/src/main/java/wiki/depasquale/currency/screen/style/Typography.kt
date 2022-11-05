@@ -53,9 +53,9 @@ val CurrencyTypography = Typography(
     ),
     titleLarge = TextStyle(
         fontFamily = Roboto,
-        fontWeight = FontWeight.W400,
-        fontSize = 22.sp,
-        lineHeight = 28.sp,
+        fontWeight = FontWeight.Medium,
+        fontSize = 20.sp,
+        lineHeight = 24.sp,
         letterSpacing = 0.sp,
     ),
     titleMedium = TextStyle(
