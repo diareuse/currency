@@ -1,6 +1,8 @@
 package wiki.depasquale.currency.screen.history
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.LinearProgressIndicator
@@ -18,12 +21,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Rect
@@ -51,7 +55,7 @@ fun CurrencyChartItem(
         modifier = modifier,
         horizontalAlignment = Alignment.End
     ) {
-        var isExpanded by remember { mutableStateOf(false) }
+        var isExpanded by rememberSaveable(currency.currencyCode) { mutableStateOf(false) }
         ExchangeRateItemInline(
             modifier = Modifier
                 .background(
@@ -82,17 +86,22 @@ fun CurrencyChartItem(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     val maxWidth = maxWidth
+                    val height by animateDpAsState(targetValue = if (isExpanded) 112.dp else 56.dp)
+                    val scale by animateFloatAsState(targetValue = if (isExpanded) 2f else 1f)
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
                             .horizontalScroll(state)
+                            .height(height),
+                        contentAlignment = Alignment.Center
                     ) {
                         val width = max((values.size * 16).dp, maxWidth)
                         val widthPx = with(LocalDensity.current) { width.toPx() }
                         ChartDouble(
                             modifier = Modifier
                                 .width(width)
-                                .height(if (isExpanded) 112.dp else 56.dp),
+                                .heightIn(min = 56.dp, max = 112.dp)
+                                .scale(scaleX = 1f, scaleY = scale),
                             samples = values,
                             background = Brush.verticalGradient(
                                 listOf(

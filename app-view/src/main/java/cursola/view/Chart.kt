@@ -1,7 +1,5 @@
 package cursola.view
 
-import androidx.compose.animation.core.animateRectAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,10 +30,9 @@ fun <Sample> Chart(
 ) {
     var path by remember { mutableStateOf(Path()) }
     var size by remember { mutableStateOf(initialSize) }
-    val rect by animateRectAsState(size, animationSpec = remember { tween() })
 
-    LaunchedEffect(samples, rect) {
-        path = pathCalculator.getPath(samples, rect)
+    LaunchedEffect(samples, size) {
+        path = pathCalculator.getPath(samples, size)
     }
 
     Box(
