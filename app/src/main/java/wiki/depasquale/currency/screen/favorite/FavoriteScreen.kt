@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -38,10 +39,12 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import cursola.rate.view.ConvertedCurrency
 import cursola.rate.view.FavoritesViewModel
 import cursola.view.CurrencyFlag
+import cursola.view.topFadingEdge
 import wiki.depasquale.currency.R
 import wiki.depasquale.currency.screen.style.CurrencyTheme
 import java.util.Currency
@@ -111,10 +114,15 @@ private fun FavoriteScreen(
                 currency = selected
             )
         }
+        val state = rememberLazyListState()
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = padding + PaddingValues(horizontal = 24.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = padding.calculateTopPadding())
+                .topFadingEdge(48.dp, state),
+            contentPadding = padding.copy(top = 0.dp) + PaddingValues(horizontal = 24.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+            state = state
         ) {
             item {
                 FavoriteHeadline(onAddClick = onNavigateToListing)
@@ -164,6 +172,22 @@ operator fun PaddingValues.plus(other: PaddingValues): PaddingValues {
         top = calculateTopPadding() + other.calculateTopPadding(),
         end = calculateEndPadding(direction) + other.calculateEndPadding(direction),
         bottom = calculateBottomPadding() + other.calculateBottomPadding()
+    )
+}
+
+@Composable
+fun PaddingValues.copy(
+    start: Dp? = null,
+    top: Dp? = null,
+    end: Dp? = null,
+    bottom: Dp? = null
+): PaddingValues {
+    val direction = LocalLayoutDirection.current
+    return PaddingValues(
+        start = start ?: calculateStartPadding(direction),
+        top = top ?: calculateTopPadding(),
+        end = end ?: calculateEndPadding(direction),
+        bottom = bottom ?: calculateBottomPadding()
     )
 }
 
