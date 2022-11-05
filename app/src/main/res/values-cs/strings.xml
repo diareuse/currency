@@ -5,4 +5,5 @@
     <string name="edit">Upravit</string>
     <string name="search_cta">Helej tady…</string>
     <string name="history_footnote">"Grafy tu zobrazují 3 měsíční historii oblíbených měn ve vztahu k euru. "</string>
+    <string name="history_title">Historie</string>
 </resources>
