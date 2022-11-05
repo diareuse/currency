@@ -6,6 +6,7 @@ import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -73,22 +74,28 @@ fun CurrencyChartItem(
                         .fillMaxWidth()
                         .height(56.dp)
                         .alpha(.3f)
-                )
-                BoxWithConstraints(modifier = Modifier
-                    .fillMaxWidth()
-                    .horizontalScroll(state)) {
-                    ChartDouble(
+                ) else BoxWithConstraints(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    val maxWidth = maxWidth
+                    Box(
                         modifier = Modifier
-                            .width(max((values.size * 16).dp, maxWidth))
-                            .height(if (isExpanded) 112.dp else 56.dp),
-                        samples = values,
-                        background = Brush.verticalGradient(
-                            listOf(
-                                MaterialTheme.colorScheme.primary,
-                                MaterialTheme.colorScheme.secondary
+                            .fillMaxWidth()
+                            .horizontalScroll(state)
+                    ) {
+                        ChartDouble(
+                            modifier = Modifier
+                                .width(max((values.size * 16).dp, maxWidth))
+                                .height(if (isExpanded) 112.dp else 56.dp),
+                            samples = values,
+                            background = Brush.verticalGradient(
+                                listOf(
+                                    MaterialTheme.colorScheme.primary,
+                                    MaterialTheme.colorScheme.secondary
+                                )
                             )
                         )
-                    )
+                    }
                 }
             }
         )
