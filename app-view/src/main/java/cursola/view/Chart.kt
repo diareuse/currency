@@ -17,6 +17,8 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.layout.onSizeChanged
+import cursola.view.chart.HorizontalPointResolver
+import cursola.view.chart.VerticalPointResolver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -60,14 +62,9 @@ fun ChartDouble(
     initialSize: Rect,
     modifier: Modifier = Modifier
 ) {
-    val factory = remember {
-        val result: CoordinateCalculatorFactory<Double>
-        result = CoordinateCalculatorFactoryDouble()
-        result
-    }
     val calculator = remember {
         var result: PathCalculator<Double>
-        result = PathCalculatorDouble(factory)
+        result = PathCalculatorDouble()
         result = PathCalculatorSampleCountSwitch(
             sourceAbove = result,
             sourceBelow = PathCalculatorRectangle(),
@@ -92,41 +89,36 @@ interface PathCalculator<Sample> {
 
 }
 
-class PathCalculatorDouble(
-    private val factory: CoordinateCalculatorFactory<Double>
-) : PathCalculator<Double> {
+class PathCalculatorDouble : PathCalculator<Double> {
 
     override suspend fun getPath(
         samples: List<Double>,
         rect: Rect
     ): Path = withContext(Dispatchers.IO) {
-        val metadata = ChartMetadata(
-            container = rect,
-            minY = samples.minOrNull() ?: 0.0,
-            maxY = samples.maxOrNull() ?: 0.0,
-            count = samples.size
-        )
-        val coordinates = factory.build(metadata)
+        val stride = rect.width / (samples.size - 1)
+        val xPoints = HorizontalPointResolver(stride, offset = rect.left)
+        val (min, max) = samples.minMax() ?: (0.0 to 0.0)
+        val yPoints = VerticalPointResolver(min, max, rect.height)
         val path = Path()
 
         for ((index, sample) in samples.withIndex()) {
-            val x = coordinates.getX(sample, index)
-            val y = coordinates.getY(sample, index)
+            val x = xPoints.get(index)
+            val y = yPoints.get(sample)
             if (index == 0) {
                 path.moveTo(x, y)
                 continue
             }
 
-            val controlX = x - coordinates.strideX / 2f
+            val controlX = x - stride / 2f
             val lastIndex = index - 1
-            val lastY = coordinates.getY(samples[lastIndex], lastIndex)
+            val lastY = yPoints.get(samples[lastIndex])
             path.cubicTo(
                 controlX, lastY,
                 controlX, y,
                 x, y
             )
         }
-        path.lineTo(rect.right, coordinates.getY(samples.last(), samples.size - 1))
+        path.lineTo(rect.right, yPoints.get(samples.last()))
 
         // finish the line off to make a "chart" shape
         path.lineTo(rect.right, rect.bottom)
@@ -136,58 +128,17 @@ class PathCalculatorDouble(
         return@withContext path
     }
 
-}
-
-
-class CoordinateCalculatorFactoryDouble : CoordinateCalculatorFactory<Double> {
-
-    override fun build(metadata: ChartMetadata<Double>): CoordinateCalculator<Double> {
-        return CoordinateCalculatorDouble(metadata)
-    }
-}
-
-
-interface CoordinateCalculatorFactory<Sample> {
-
-    fun build(metadata: ChartMetadata<Sample>): CoordinateCalculator<Sample>
-
-}
-
-
-interface CoordinateCalculator<Sample> {
-
-    val strideX: Float
-
-    fun getX(sample: Sample, index: Int): Float
-    fun getY(sample: Sample, index: Int): Float
-
-}
-
-class CoordinateCalculatorDouble(
-    private val metadata: ChartMetadata<Double>
-) : CoordinateCalculator<Double> {
-
-    override val strideX: Float = metadata.container.width / (metadata.count - 1)
-
-    override fun getX(sample: Double, index: Int): Float {
-        return index * strideX + metadata.container.left
-    }
-
-    override fun getY(sample: Double, index: Int): Float {
-        val min = metadata.minY
-        val max = metadata.maxY
-        val heightPercentage = (1 - ((sample - min) / (max - min))).toFloat()
-        return metadata.container.height * heightPercentage
+    private fun <C : Comparable<C>> List<C>.minMax(): Pair<C, C>? {
+        var min = firstOrNull() ?: return null
+        var max = min
+        for (item in this) {
+            if (min > item) min = item
+            if (max < item) max = item
+        }
+        return min to max
     }
 
 }
-
-data class ChartMetadata<Sample>(
-    val container: Rect,
-    val minY: Sample,
-    val maxY: Sample,
-    val count: Int
-)
 
 class PathCalculatorSampleCountSwitch<Sample>(
     private val sourceBelow: PathCalculator<Sample>,
@@ -197,6 +148,8 @@ class PathCalculatorSampleCountSwitch<Sample>(
 ) : PathCalculator<Sample> {
 
     override suspend fun getPath(samples: List<Sample>, rect: Rect): Path {
+        if (rect.height == 0f)
+            return sourceEqual.getPath(samples, rect)
         return when (samples.size) {
             in Int.MIN_VALUE until sampleCount -> sourceBelow.getPath(samples, rect)
             sampleCount -> sourceEqual.getPath(samples, rect)
