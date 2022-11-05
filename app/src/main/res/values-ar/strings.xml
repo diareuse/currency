@@ -5,4 +5,5 @@
     <string name="edit">يحرر</string>
     <string name="search_cta">ابحث هنا…</string>
     <string name="history_footnote">تعرض الرسوم البيانية هنا تاريخًا لمدة 3 أشهر لأي عملة مفضلة فيما يتعلق باليورو.</string>
+    <string name="history_title">تاريخ</string>
 </resources>
