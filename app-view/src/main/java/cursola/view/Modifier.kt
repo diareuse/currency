@@ -1,6 +1,5 @@
 package cursola.view
 
-import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -29,14 +28,6 @@ fun Modifier.topFadingEdge(
                 blendMode = BlendMode.DstIn
             )
         }
-}
-
-fun Modifier.topFadingEdge(
-    length: Dp,
-    scrollState: ScrollState
-): Modifier = composed {
-    val scrollOffsetDp = with(LocalDensity.current) { scrollState.value.toDp() }
-    topFadingEdge(length = min(scrollOffsetDp, length))
 }
 
 fun Modifier.topFadingEdge(
