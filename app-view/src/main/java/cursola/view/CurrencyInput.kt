@@ -41,7 +41,7 @@ fun CurrencyInput(
     TextField(
         modifier = modifier.fillMaxWidth(),
         value = TextFieldValue(value, selection = TextRange(value.length)),
-        onValueChange = { onValueChanged(it.text) },
+        onValueChange = { onValueChanged(it.text.replace(",", ".")) },
         textStyle = LocalTextStyle.current.copy(
             textAlign = TextAlign.End,
             fontWeight = FontWeight.Bold
