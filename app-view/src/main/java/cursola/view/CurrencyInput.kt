@@ -61,8 +61,8 @@ fun CurrencyInput(
             Text(
                 currency.getSymbol(locale),
                 style = LocalTextStyle.current.copy(
-                    fontSize = 16.sp,
-                    fontWeight = FontWeight.ExtraBold
+                    fontSize = 22.sp,
+                    fontWeight = FontWeight.Bold
                 )
             )
         }
