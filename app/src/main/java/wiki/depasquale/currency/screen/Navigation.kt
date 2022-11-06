@@ -3,6 +3,7 @@ package wiki.depasquale.currency.screen
 import androidx.compose.animation.AnimatedContentScope.SlideDirection
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
@@ -60,16 +61,30 @@ private fun NavGraphBuilder.composableCard(
     arguments = arguments,
     deepLinks = deepLinks,
     enterTransition = {
-        slideIntoContainer(SlideDirection.Left)
+        slideIntoContainer(
+            SlideDirection.Left,
+            animationSpec = tween(durationMillis = 500)
+        )
     },
     exitTransition = {
-        slideOutOfContainer(SlideDirection.Left, targetOffset = { it / 2 }) + fadeOut()
+        slideOutOfContainer(
+            SlideDirection.Left,
+            animationSpec = tween(durationMillis = 500),
+            targetOffset = { it / 2 }
+        ) + fadeOut()
     },
     popEnterTransition = {
-        slideIntoContainer(SlideDirection.Right, initialOffset = { it / 2 }) + fadeIn()
+        slideIntoContainer(
+            SlideDirection.Right,
+            animationSpec = tween(durationMillis = 500),
+            initialOffset = { it / 2 }
+        ) + fadeIn()
     },
     popExitTransition = {
-        slideOutOfContainer(SlideDirection.Right)
+        slideOutOfContainer(
+            SlideDirection.Right,
+            animationSpec = tween(durationMillis = 500)
+        )
     },
     content = content
 )
