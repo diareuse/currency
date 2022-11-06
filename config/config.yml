@@ -28,8 +28,7 @@ complexity:
     active: true
     excludes: *testDirsAndCompose
   MethodOverloading:
-    active: true
-    threshold: 3
+    active: false
   NamedArguments:
     active: true
     threshold: 2
