@@ -53,14 +53,16 @@ import java.util.Locale
 @Composable
 fun FavoriteScreen(
     viewModel: FavoritesViewModel,
-    onNavigateToListing: () -> Unit,
-    onNavigateToHistory: () -> Unit
+    onNavigateToListing: (() -> Unit)?,
+    onNavigateToHistory: (() -> Unit)?,
+    modifier: Modifier = Modifier,
 ) {
     val items by viewModel.items.collectAsState(initial = emptyList())
     val selected by viewModel.selected.collectAsState()
     val value by viewModel.value.collectAsState()
     val manager = LocalFocusManager.current
     FavoriteScreen(
+        modifier = modifier,
         items = items,
         value = value,
         selected = selected,
@@ -81,12 +83,14 @@ private fun FavoriteScreen(
     onValueChanged: (String) -> Unit,
     onItemSelected: (ConvertedCurrency) -> Unit,
     onCloseKeyboard: () -> Unit,
-    onNavigateToListing: () -> Unit,
-    onNavigateToHistory: () -> Unit,
+    onNavigateToListing: (() -> Unit)?,
+    onNavigateToHistory: (() -> Unit)?,
+    modifier: Modifier = Modifier,
     locale: Locale = Locale.getDefault()
 ) {
     val focusRequester = remember { FocusRequester() }
     Scaffold(
+        modifier = modifier,
         topBar = {
             FavoriteInputField(
                 modifier = Modifier
@@ -138,7 +142,7 @@ private fun FavoriteScreen(
                     currency = currency.currency
                 )
             }
-            item {
+            if (onNavigateToHistory != null) item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.End

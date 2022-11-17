@@ -27,6 +27,7 @@ dependencies {
     api "androidx.compose.ui:ui-tooling:$vCompose"
     api "androidx.compose.foundation:foundation:$vCompose"
     api "androidx.compose.material3:material3:$vMaterial"
+    api "androidx.compose.material3:material3-window-size-class:$vMaterial"
 
     implementation "io.coil-kt:coil-compose:$vCoil"
     implementation "io.coil-kt:coil-svg:$vCoil"
