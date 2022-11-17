@@ -23,6 +23,7 @@ fun ChartMetadataItem(
     currency: Currency,
     modifier: Modifier = Modifier,
 ) {
+    if (max?.isNaN() == true || min?.isNaN() == true) return
     val formatter = remember(currency) {
         val format = NumberFormat.getCurrencyInstance()
         format.currency = currency
