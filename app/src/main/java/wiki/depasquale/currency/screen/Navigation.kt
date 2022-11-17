@@ -10,12 +10,16 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NamedNavArgument
@@ -27,6 +31,7 @@ import androidx.navigation.createGraph
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import cursola.view.VerticalDivider
 import wiki.depasquale.currency.screen.favorite.FavoriteScreen
 import wiki.depasquale.currency.screen.history.HistoryScreen
 import wiki.depasquale.currency.screen.listing.ListingScreen
@@ -71,6 +76,12 @@ fun NavigationMedium(controller: NavHostController) {
     }
     Row {
         FavoriteScreen(modifier = Modifier.weight(1f), controller = controller)
+        VerticalDivider(
+            modifier = Modifier
+                .padding(vertical = 16.dp)
+                .imePadding()
+                .navigationBarsPadding()
+        )
         AnimatedNavHost(
             modifier = Modifier.weight(1f),
             graph = graph,
@@ -90,7 +101,19 @@ fun NavigationExpanded(controller: NavHostController) {
     }
     Row(modifier = Modifier.fillMaxSize()) {
         FavoriteScreen(modifier = Modifier.weight(1f), controller = controller)
+        VerticalDivider(
+            modifier = Modifier
+                .padding(vertical = 16.dp)
+                .imePadding()
+                .navigationBarsPadding()
+        )
         HistoryScreen(modifier = Modifier.weight(1f), controller = controller)
+        VerticalDivider(
+            modifier = Modifier
+                .padding(vertical = 16.dp)
+                .imePadding()
+                .navigationBarsPadding()
+        )
         ListingScreen(modifier = Modifier.weight(1f), controller = controller)
     }
 }
