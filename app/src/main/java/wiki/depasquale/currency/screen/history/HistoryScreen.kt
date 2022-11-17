@@ -19,7 +19,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -45,10 +45,12 @@ import java.util.Currency
 @Composable
 fun HistoryScreen(
     viewModel: HistoricalViewModel,
-    onNavigateBack: () -> Unit
+    onNavigateBack: (() -> Unit)?,
+    modifier: Modifier = Modifier,
 ) {
     val items by viewModel.items.collectAsState()
     HistoryScreen(
+        modifier = modifier,
         items = items,
         onNavigateBack = onNavigateBack
     )
@@ -58,7 +60,8 @@ fun HistoryScreen(
 @Composable
 private fun HistoryScreen(
     items: List<HistoricalViewModel.HistoryValues>,
-    onNavigateBack: () -> Unit,
+    onNavigateBack: (() -> Unit)?,
+    modifier: Modifier = Modifier,
     scrollState: ScrollState = rememberScrollState(),
 ) {
     LaunchedEffect(items) {
@@ -67,15 +70,16 @@ private fun HistoryScreen(
         }
     }
     Scaffold(
+        modifier = modifier,
         topBar = {
             CenterAlignedTopAppBar(
-                colors = TopAppBarDefaults.smallTopAppBarColors(
+                colors = topAppBarColors(
                     containerColor = Color.Transparent,
                     scrolledContainerColor = Color.Transparent
                 ),
                 title = { Text(stringResource(id = R.string.history_title)) },
                 navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
+                    if (onNavigateBack != null) IconButton(onClick = onNavigateBack) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
                             contentDescription = null

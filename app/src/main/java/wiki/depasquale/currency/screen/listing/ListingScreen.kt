@@ -37,10 +37,12 @@ import java.util.Locale
 @Composable
 fun ListingScreen(
     viewModel: ListingViewModel,
-    onNavigateBack: () -> Unit
+    onNavigateBack: (() -> Unit)?,
+    modifier: Modifier = Modifier,
 ) {
     val items by viewModel.items.collectAsState(initial = emptyList())
     ListingScreen(
+        modifier = modifier,
         items = items,
         onAddItem = viewModel::add,
         onRemoveItem = viewModel::remove,
@@ -54,11 +56,13 @@ private fun ListingScreen(
     items: List<ConvertedCurrency>,
     onAddItem: (Currency) -> Unit,
     onRemoveItem: (Currency) -> Unit,
-    onNavigateBack: () -> Unit,
+    onNavigateBack: (() -> Unit)?,
+    modifier: Modifier = Modifier,
     locale: Locale = Locale.getDefault()
 ) {
     var filter by remember { mutableStateOf("") }
     Scaffold(
+        modifier = modifier,
         topBar = {
             TopAppBar(
                 title = {
@@ -68,7 +72,7 @@ private fun ListingScreen(
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
+                    if (onNavigateBack != null) IconButton(onClick = onNavigateBack) {
                         Icon(
                             painter = painterResource(id = R.drawable.ic_back),
                             contentDescription = null

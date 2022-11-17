@@ -24,7 +24,7 @@ import wiki.depasquale.currency.screen.style.CurrencyTheme
 
 @Composable
 fun FavoriteHeadline(
-    onAddClick: () -> Unit,
+    onAddClick: (() -> Unit)?,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -39,7 +39,7 @@ fun FavoriteHeadline(
             style = MaterialTheme.typography.titleLarge
         )
 
-        Button(
+        if (onAddClick != null) Button(
             onClick = onAddClick,
             contentPadding = PaddingValues(8.dp),
             colors = ButtonDefaults.textButtonColors()
