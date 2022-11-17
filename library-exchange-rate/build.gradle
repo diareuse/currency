@@ -24,8 +24,8 @@ android {
 
 dependencies {
 
-    def vKtor = "2.1.2"
-    def vRoom = "2.4.3"
+    def vKtor = "[2,3["
+    def vRoom = "[2,3["
 
     implementation "io.ktor:ktor-client-core:$vKtor"
     implementation "io.ktor:ktor-client-cio:$vKtor"
@@ -36,6 +36,6 @@ dependencies {
     implementation "androidx.room:room-ktx:$vRoom"
     kapt "androidx.room:room-compiler:$vRoom"
 
-    testImplementation "net.sf.kxml:kxml2:2.3.0"
+    testImplementation "net.sf.kxml:kxml2:[2,3["
 
 }
