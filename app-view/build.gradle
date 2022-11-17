@@ -12,16 +12,16 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion "1.3.2"
+        kotlinCompilerExtensionVersion "1.4.0-alpha02"
     }
 
 }
 
 dependencies {
 
-    def vCompose = "1.4.0-alpha01"
-    def vMaterial = "1.1.0-alpha01"
-    def vCoil = "2.2.2"
+    def vCompose = "[1,2["
+    def vMaterial = "[1,2["
+    def vCoil = "[2,3["
 
     api "androidx.compose.ui:ui:$vCompose"
     api "androidx.compose.ui:ui-tooling:$vCompose"
