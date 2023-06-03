@@ -41,7 +41,8 @@ ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 kxml2 = { module = "net.sf.kxml:kxml2", version.ref = "kxml2" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
-material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+material3-core = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+material3-window = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "material3" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-core = { module = "androidx.room:room-ktx", version.ref = "room" }
