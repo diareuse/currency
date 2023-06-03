@@ -1,10 +1,10 @@
 package wiki.depasquale.currency.di
 
 import androidx.core.os.bundleOf
-import com.google.firebase.analytics.ktx.analytics
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.perf.ktx.performance
-import com.google.firebase.perf.ktx.trace
+import com.google.firebase.analytics.analytics
+import com.google.firebase.Firebase
+import com.google.firebase.perf.performance
+import com.google.firebase.perf.trace
 import cursola.rate.analytics.AnalyticService
 import cursola.rate.analytics.PerformanceService
 import dagger.Module

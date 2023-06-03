@@ -1,0 +1,68 @@
+[versions]
+accompanist = "0.31.2-alpha"
+activity = "1.7.2"
+appcompat = "1.6.1"
+coil = "2.3.0"
+firebase-analytics = "21.3.0"
+firebase-crashlytics-plugin = "2.9.5"
+firebase-crashlytics = "18.3.7"
+firebase-perf = "20.3.2"
+compose = "1.5.0-beta01"
+google-services = "4.3.15"
+ktor = "2.3.0"
+kxml2 = "2.3.0"
+lifecycle = "[2,3["
+material = "1.9.0"
+material3 = "1.2.0-alpha02"
+navigation = "2.5.3"
+room = "2.5.1"
+startup = "1.1.1"
+work = "2.8.1"
+ksp = "1.8.21-1.0.11"
+detekt = "1.23.0"
+hilt = "2.46"
+agp = "8.2.0-alpha06"
+kotlin = "1.8.21"
+
+[libraries]
+accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
+activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebase-analytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version.ref = "firebase-crashlytics" }
+firebase-perf = { module = "com.google.firebase:firebase-perf-ktx", version.ref = "firebase-perf" }
+compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
+ktor-serialization-kotlinx-xml = { module = "io.ktor:ktor-serialization-kotlinx-xml", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+kxml2 = { module = "net.sf.kxml:kxml2", version.ref = "kxml2" }
+lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+material3 = { module = "androidx.compose.material3:material3", version.ref = "material3" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
+room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+room-core = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startup" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
+compose-ui-core = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+android-lib = { id = "com.android.library", version.ref = "agp" }
+android-app = { id = "com.android.application", version.ref = "agp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+google-services = { id = "com.google.gms.services.plugin", version.ref = "google-services" }
+google-firebase = { id = "com.google.firebase.plugin", version.ref = "firebase-crashlytics-plugin" }
+
+[bundles]
+
