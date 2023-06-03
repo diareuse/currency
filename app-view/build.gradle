@@ -1,35 +1,21 @@
 plugins {
     id "library-conventions"
     id "di-conventions"
+    id 'compose-conventions'
 }
 
 android {
 
     namespace "cursola.view"
 
-    buildFeatures {
-        compose true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion "1.4.0-alpha02"
-    }
-
 }
 
 dependencies {
 
-    def vCompose = "[1,2["
-    def vMaterial = "[1,2["
-    def vCoil = "[2,3["
-
-    api "androidx.compose.ui:ui:$vCompose"
-    api "androidx.compose.ui:ui-tooling:$vCompose"
-    api "androidx.compose.foundation:foundation:$vCompose"
-    api "androidx.compose.material3:material3:$vMaterial"
-    api "androidx.compose.material3:material3-window-size-class:$vMaterial"
-
-    implementation "io.coil-kt:coil-compose:$vCoil"
-    implementation "io.coil-kt:coil-svg:$vCoil"
+    api libs.compose.ui.core
+    api libs.compose.ui.tooling
+    api libs.compose.foundation
+    api libs.material3.core
+    api libs.material3.window
 
 }

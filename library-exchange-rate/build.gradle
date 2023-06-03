@@ -2,6 +2,7 @@ plugins {
     id "library-conventions"
     id "di-conventions"
     id "org.jetbrains.kotlin.plugin.serialization"
+    id "com.google.devtools.ksp"
 }
 
 def schemasDir = "$projectDir/schemas".toString()
@@ -14,28 +15,24 @@ android {
         androidTest.assets.srcDirs += files(schemasDir)
     }
 
-    kapt {
-        arguments {
-            arg("room.schemaLocation", schemasDir)
-        }
-    }
-
 }
+
+ksp {
+    arg("room.schemaLocation", schemasDir)
+}
+
 
 dependencies {
 
-    def vKtor = "[2,3["
-    def vRoom = "[2,3["
+    implementation libs.ktor.client.core
+    implementation libs.ktor.client.cio
+    implementation libs.ktor.client.content.negotiation
+    implementation libs.ktor.serialization.kotlinx.xml
 
-    implementation "io.ktor:ktor-client-core:$vKtor"
-    implementation "io.ktor:ktor-client-cio:$vKtor"
-    implementation "io.ktor:ktor-client-content-negotiation:$vKtor"
-    implementation "io.ktor:ktor-serialization-kotlinx-xml:$vKtor"
+    implementation libs.room.runtime
+    implementation libs.room.core
+    ksp libs.room.compiler
 
-    implementation "androidx.room:room-runtime:$vRoom"
-    implementation "androidx.room:room-ktx:$vRoom"
-    kapt "androidx.room:room-compiler:$vRoom"
-
-    testImplementation "net.sf.kxml:kxml2:[2,3["
+    testImplementation libs.kxml2
 
 }

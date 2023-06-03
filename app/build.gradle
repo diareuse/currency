@@ -2,20 +2,13 @@ plugins {
     id 'application-conventions'
     id 'di-conventions'
     id 'google-conventions'
+    id 'compose-conventions'
 }
 
 android {
 
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildFeatures {
-        compose true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion '1.4.0-alpha02'
     }
 
     packagingOptions {
@@ -33,18 +26,17 @@ dependencies {
     implementation project(":app-view")
     implementation project(":view-exchange-rate")
 
-    implementation "androidx.activity:activity-compose:[1,2["
-    implementation "androidx.appcompat:appcompat:[1,2["
-    implementation "androidx.navigation:navigation-compose:[2,3["
-    implementation "androidx.startup:startup-runtime:[1,2["
-    implementation "androidx.work:work-runtime-ktx:[2,3["
-    implementation "com.google.android.material:material:[1,2["
+    implementation libs.activity.compose
+    implementation libs.appcompat
+    implementation libs.navigation.compose
+    implementation libs.startup.runtime
+    implementation libs.work.runtime
+    implementation libs.material
 
-    implementation platform("com.google.firebase:firebase-bom:31.0.3")
-    implementation "com.google.firebase:firebase-analytics-ktx"
-    implementation "com.google.firebase:firebase-crashlytics-ktx"
-    implementation 'com.google.firebase:firebase-perf-ktx'
+    implementation libs.firebase.analytics
+    implementation libs.firebase.crashlytics
+    implementation libs.firebase.perf
 
-    implementation "com.google.accompanist:accompanist-navigation-animation:0.27.0"
+    implementation libs.accompanist.navigation.animation
 
 }
