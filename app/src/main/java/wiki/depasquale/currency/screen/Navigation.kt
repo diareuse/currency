@@ -1,11 +1,15 @@
+@file:Suppress("StringLiteralDuplication")
 package wiki.depasquale.currency.screen
 
 import androidx.compose.animation.*
 import androidx.compose.animation.AnimatedContentTransitionScope.*
 import androidx.compose.animation.core.*
-import androidx.compose.runtime.*
-import androidx.compose.material3.windowsizeclass.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.windowsizeclass.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.platform.*
+import androidx.compose.ui.unit.*
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NamedNavArgument
@@ -153,7 +157,7 @@ private fun navigateTask(
 private fun navigateUpTask(controller: NavHostController, fromRoute: String): (() -> Unit)? {
     if (controller.graph.none { it.route == fromRoute }) return null
     if (
-        controller.backQueue.asSequence()
+        controller.currentBackStack.value.asSequence()
             .map { it.destination.route }
             .filterNot { it.isNullOrBlank() || it == fromRoute }
             .count() == 0
