@@ -33,9 +33,10 @@ dependencies {
     implementation libs.work.runtime
     implementation libs.material
 
-    implementation libs.firebase.analytics
-    implementation libs.firebase.crashlytics
-    implementation libs.firebase.perf
+    releaseImplementation platform('com.google.firebase:firebase-bom:32.1.0')
+    releaseImplementation libs.firebase.analytics
+    releaseImplementation libs.firebase.crashlytics
+    releaseImplementation libs.firebase.perf
 
     implementation libs.accompanist.navigation.animation
 

@@ -9,11 +9,16 @@ firebase-crashlytics = "18.3.7"
 firebase-perf = "20.3.2"
 compose = "1.5.0-beta01"
 google-services = "4.3.15"
+hilt-android = "2.46"
+hilt-work = "[1,2["
+hilt-navigation-compose = "[1,2["
 ktor = "2.3.0"
 kxml2 = "2.3.0"
 lifecycle = "[2,3["
 material = "1.9.0"
 material3 = "1.2.0-alpha02"
+mockito-core = "[4,5["
+mockito-kotlin = "[4,5["
 navigation = "2.5.3"
 room = "2.5.1"
 startup = "1.1.1"
@@ -21,18 +26,27 @@ work = "2.8.1"
 ksp = "1.8.21-1.0.11"
 detekt = "1.23.0"
 hilt = "2.46"
-agp = "8.2.0-alpha06"
+agp = "8.2.0-alpha07"
 kotlin = "1.8.21"
+coroutines = "1.7.1"
 
 [libraries]
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android" }
+hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt-android" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt-android" }
+hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hilt-work" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
+coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebase-analytics" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx", version.ref = "firebase-crashlytics" }
-firebase-perf = { module = "com.google.firebase:firebase-perf-ktx", version.ref = "firebase-perf" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
+firebase-perf = { module = "com.google.firebase:firebase-perf-ktx" }
 compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
 ktor-serialization-kotlinx-xml = { module = "io.ktor:ktor-serialization-kotlinx-xml", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
@@ -43,6 +57,8 @@ lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", v
 material = { module = "com.google.android.material:material", version.ref = "material" }
 material3-core = { module = "androidx.compose.material3:material3", version.ref = "material3" }
 material3-window = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "material3" }
+mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito-core" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-core = { module = "androidx.room:room-ktx", version.ref = "room" }

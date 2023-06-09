@@ -11,16 +11,14 @@ hilt {
 }
 
 dependencies {
-    def vHilt = "2.44"
+    implementation libs.hilt.android
+    implementation libs.hilt.navigation.compose
+    implementation libs.hilt.work
+    kapt libs.hilt.compiler
 
-    implementation "com.google.dagger:hilt-android:$vHilt"
-    implementation "androidx.hilt:hilt-navigation-compose:[1,2["
-    implementation "androidx.hilt:hilt-work:[1,2["
-    kapt "com.google.dagger:hilt-compiler:$vHilt"
+    androidTestImplementation libs.hilt.android.testing
+    kaptAndroidTest libs.hilt.compiler
 
-    androidTestImplementation "com.google.dagger:hilt-android-testing:$vHilt"
-    kaptAndroidTest "com.google.dagger:hilt-compiler:$vHilt"
-
-    testImplementation "com.google.dagger:hilt-android-testing:$vHilt"
-    kaptTest "com.google.dagger:hilt-compiler:$vHilt"
+    testImplementation libs.hilt.android.testing
+    kaptTest libs.hilt.compiler
 }
