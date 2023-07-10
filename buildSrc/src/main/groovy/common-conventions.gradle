@@ -17,7 +17,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = '17'
-        freeCompilerArgs = ['-opt-in=kotlin.RequiresOptIn']
+        freeCompilerArgs = [
+                '-P',
+                'plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true',
+                '-opt-in=kotlin.RequiresOptIn'
+        ]
     }
     buildTypes {
         debug {
