@@ -26,7 +26,7 @@ ksp = "1.8.22-1.0.11"
 detekt = "1.23.0"
 hilt = "2.46.1"
 agp = "8.2.0-alpha11"
-kotlin = "1.8.22"
+kotlin = "1.9.0"
 coroutines = "1.7.2"
 
 [libraries]
