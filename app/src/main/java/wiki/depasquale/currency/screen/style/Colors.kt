@@ -2,14 +2,11 @@ package wiki.depasquale.currency.screen.style
 
 import android.content.Context
 import android.os.Build
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.material3.lightColorScheme
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.foundation.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.platform.*
 
 private val LightPrimary = Color(0xFF9f2c93)
 private val LightOnPrimary = Color(0xFFffffff)
@@ -66,17 +63,10 @@ private val DarkInverseSurface = Color(0xFFe9e0e3)
 @Composable
 fun currencyColors(
     context: Context = LocalContext.current,
-    useDarkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-) = when (useDarkTheme) {
-    true -> when (dynamicColor) {
-        true -> dynamicDarkColorScheme(context)
-        false -> currencyColorsDark
-    }
-    false -> when (dynamicColor) {
-        true -> dynamicLightColorScheme(context)
-        false -> currencyColorsLight
-    }
+    useDarkTheme: Boolean = isSystemInDarkTheme()
+) = when {
+    Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> dynamicLightColorScheme(context)
+    else -> if (useDarkTheme) currencyColorsDark else currencyColorsLight
 }
 
 private val currencyColorsLight = lightColorScheme(

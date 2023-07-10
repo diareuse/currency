@@ -1,6 +1,7 @@
 @file:Suppress("StringLiteralDuplication")
 package wiki.depasquale.currency.screen
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.*
 import androidx.compose.animation.AnimatedContentTransitionScope.*
 import androidx.compose.animation.core.*
@@ -154,6 +155,7 @@ private fun navigateTask(
     return { controller.navigate(route) }
 }
 
+@SuppressLint("RestrictedApi")
 private fun navigateUpTask(controller: NavHostController, fromRoute: String): (() -> Unit)? {
     if (controller.graph.none { it.route == fromRoute }) return null
     if (

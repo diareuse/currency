@@ -45,6 +45,11 @@
                 android:name="wiki.depasquale.currency.platform.InitializerWork"
                 android:value="androidx.startup" />
 
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+
         </provider>
 
     </application>
