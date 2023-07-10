@@ -1,4 +1,5 @@
 @file:Suppress("StringLiteralDuplication")
+
 package wiki.depasquale.currency.screen
 
 import android.annotation.SuppressLint
@@ -46,7 +47,13 @@ fun Navigation(size: WindowSizeClass) {
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NavigationMobile(controller: NavHostController) {
-    AnimatedNavHost(controller, "/favorites") {
+    AnimatedNavHost(
+        controller, "/favorites",
+        enterTransition = { slideInHorizontally { it } },
+        exitTransition = { fadeOut() + slideOutHorizontally() },
+        popEnterTransition = { fadeIn() + slideInHorizontally() },
+        popExitTransition = { slideOutHorizontally { it } }
+    ) {
         composableCard("/favorites") { FavoriteScreen(controller) }
         composableCard("/favorites/history") { HistoryScreen(controller) }
         composableCard("/listing") { ListingScreen(controller) }
@@ -76,7 +83,11 @@ fun NavigationMedium(controller: NavHostController) {
         AnimatedNavHost(
             modifier = Modifier.weight(1f),
             graph = graph,
-            navController = controller
+            navController = controller,
+            enterTransition = { slideInHorizontally { it } },
+            exitTransition = { fadeOut() + slideOutHorizontally() },
+            popEnterTransition = { fadeIn() + slideInHorizontally() },
+            popExitTransition = { slideOutHorizontally { it } }
         )
     }
 }
@@ -177,31 +188,5 @@ private fun NavGraphBuilder.composableCard(
     route = route,
     arguments = arguments,
     deepLinks = deepLinks,
-    enterTransition = {
-        slideIntoContainer(
-            SlideDirection.Left,
-            animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing)
-        )
-    },
-    exitTransition = {
-        slideOutOfContainer(
-            SlideDirection.Left,
-            animationSpec = tween(durationMillis = 500, easing = LinearEasing),
-            targetOffset = { it / 2 }
-        ) + fadeOut()
-    },
-    popEnterTransition = {
-        slideIntoContainer(
-            SlideDirection.Right,
-            animationSpec = tween(durationMillis = 500, easing = LinearEasing),
-            initialOffset = { it / 2 }
-        ) + fadeIn()
-    },
-    popExitTransition = {
-        slideOutOfContainer(
-            SlideDirection.Right,
-            animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing)
-        )
-    },
     content = content
 )
