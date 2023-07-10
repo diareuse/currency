@@ -20,9 +20,9 @@ import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
-import com.google.accompanist.navigation.animation.composable
 import cursola.view.VerticalDivider
 import wiki.depasquale.currency.screen.favorite.FavoriteScreen
 import wiki.depasquale.currency.screen.history.HistoryScreen
@@ -175,7 +175,6 @@ private fun navigateUpTask(controller: NavHostController, fromRoute: String): ((
     return { controller.navigateUp() }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 private fun NavGraphBuilder.composableCard(
     route: String,
     arguments: List<NamedNavArgument> = emptyList(),
