@@ -38,6 +38,4 @@ dependencies {
     releaseImplementation libs.firebase.crashlytics
     releaseImplementation libs.firebase.perf
 
-    implementation libs.accompanist.navigation.animation
-
 }

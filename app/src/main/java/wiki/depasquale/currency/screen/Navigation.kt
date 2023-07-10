@@ -19,19 +19,18 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavDeepLink
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.createGraph
-import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import cursola.view.VerticalDivider
 import wiki.depasquale.currency.screen.favorite.FavoriteScreen
 import wiki.depasquale.currency.screen.history.HistoryScreen
 import wiki.depasquale.currency.screen.listing.ListingScreen
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Navigation(size: WindowSizeClass) {
-    val controller = rememberAnimatedNavController()
+    val controller = rememberNavController()
     val lifecycleOwner = LocalLifecycleOwner.current
     val viewModelStoreOwner = checkNotNull(LocalViewModelStoreOwner.current)
     controller.setLifecycleOwner(lifecycleOwner)
@@ -44,10 +43,9 @@ fun Navigation(size: WindowSizeClass) {
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NavigationMobile(controller: NavHostController) {
-    AnimatedNavHost(
+    NavHost(
         controller, "/favorites",
         enterTransition = { slideInHorizontally { it } },
         exitTransition = { fadeOut() + slideOutHorizontally() },
@@ -60,7 +58,6 @@ fun NavigationMobile(controller: NavHostController) {
     }
 }
 
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NavigationMedium(controller: NavHostController) {
     val startDestination = "/favorites/history"
@@ -80,7 +77,7 @@ fun NavigationMedium(controller: NavHostController) {
                 .imePadding()
                 .navigationBarsPadding()
         )
-        AnimatedNavHost(
+        NavHost(
             modifier = Modifier.weight(1f),
             graph = graph,
             navController = controller,

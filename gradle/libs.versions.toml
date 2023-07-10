@@ -1,5 +1,4 @@
 [versions]
-accompanist = "0.31.5-beta"
 activity = "1.8.0-alpha06"
 appcompat = "1.7.0-alpha02"
 coil = "2.4.0"
@@ -39,7 +38,6 @@ hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", ve
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
-accompanist-navigation-animation = { module = "com.google.accompanist:accompanist-navigation-animation", version.ref = "accompanist" }
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
