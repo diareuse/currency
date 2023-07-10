@@ -18,8 +18,9 @@ class App : Application(), Configuration.Provider {
         DynamicColors.applyToActivitiesIfAvailable(this)
     }
 
-    override fun getWorkManagerConfiguration() = Configuration.Builder()
-        .setWorkerFactory(workerFactory)
-        .build()
+    override val workManagerConfiguration: Configuration
+        get() = Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
 
 }
