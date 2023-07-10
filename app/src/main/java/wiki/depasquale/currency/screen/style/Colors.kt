@@ -65,8 +65,13 @@ fun currencyColors(
     context: Context = LocalContext.current,
     useDarkTheme: Boolean = isSystemInDarkTheme()
 ) = when {
-    Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> dynamicLightColorScheme(context)
-    else -> if (useDarkTheme) currencyColorsDark else currencyColorsLight
+    Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
+        if (useDarkTheme) dynamicDarkColorScheme(context)
+        else dynamicLightColorScheme(context)
+
+    else ->
+        if (useDarkTheme) currencyColorsDark
+        else currencyColorsLight
 }
 
 private val currencyColorsLight = lightColorScheme(
