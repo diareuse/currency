@@ -7,11 +7,11 @@ import cursola.rate.network.ExchangeRateServicePerformance
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.components.SingletonComponent
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 
-@InstallIn(ActivityRetainedComponent::class)
+@InstallIn(SingletonComponent::class)
 @Module
 internal class NetworkModule {
 

@@ -32,6 +32,9 @@ dependencies {
     implementation libs.startup.runtime
     implementation libs.work.runtime
     implementation libs.material
+    implementation libs.slice.builders
+    implementation libs.slice.core
+    implementation libs.slice.view
 
     releaseImplementation platform('com.google.firebase:firebase-bom:32.1.0')
     releaseImplementation libs.firebase.analytics

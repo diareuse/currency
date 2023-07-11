@@ -36,11 +36,11 @@ import cursola.rate.storage.Storage
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityRetainedComponent
+import dagger.hilt.components.SingletonComponent
 import org.jetbrains.annotations.TestOnly
 
 @Module
-@InstallIn(ActivityRetainedComponent::class)
+@InstallIn(SingletonComponent::class)
 internal class ExchangeRateModule {
 
     @Provides
