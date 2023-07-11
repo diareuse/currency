@@ -52,6 +52,16 @@
 
         </provider>
 
+        <provider
+            android:name=".platform.SliceProvider"
+            android:authorities="${applicationId}"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.app.slice.category.SLICE" />
+            </intent-filter>
+        </provider>
+
     </application>
 
 </manifest>

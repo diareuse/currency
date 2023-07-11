@@ -20,6 +20,8 @@ mockito-core = "5.4.0"
 mockito-kotlin = "4.1.0"
 navigation = "2.7.0-beta02"
 room = "2.6.0-alpha02"
+slice = "1.0.0-alpha08"
+slice-core = "1.1.0-alpha02"
 startup = "1.2.0-alpha02"
 work = "2.9.0-alpha01"
 ksp = "1.8.22-1.0.11"
@@ -61,6 +63,9 @@ navigation-compose = { module = "androidx.navigation:navigation-compose", versio
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-core = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+slice-builders = { module = "androidx.slice:slice-builders-ktx", version.ref = "slice" }
+slice-core = { module = "androidx.slice:slice-core", version.ref = "slice-core" }
+slice-view = { module = "androidx.slice:slice-view", version.ref = "slice-core" }
 startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startup" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
 compose-ui-core = { module = "androidx.compose.ui:ui", version.ref = "compose" }
