@@ -1,48 +1,20 @@
 package wiki.depasquale.currency.screen.favorite
 
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.*
+import androidx.compose.ui.draw.*
+import androidx.compose.ui.focus.*
+import androidx.compose.ui.platform.*
+import androidx.compose.ui.res.*
+import androidx.compose.ui.tooling.preview.*
+import androidx.compose.ui.unit.*
 import cursola.rate.view.ConvertedCurrency
-import cursola.rate.view.FavoritesViewModel
 import cursola.view.CurrencyFlag
 import cursola.view.topFadingEdge
 import wiki.depasquale.currency.R
@@ -52,29 +24,30 @@ import java.util.Locale
 
 @Composable
 fun FavoriteScreen(
-    viewModel: FavoritesViewModel,
+    items: List<ConvertedCurrency>,
+    selected: Currency,
+    value: String,
     onNavigateToListing: (() -> Unit)?,
     onNavigateToHistory: (() -> Unit)?,
+    onValueChanged: (String) -> Unit,
+    onItemSelected: (ConvertedCurrency) -> Unit,
     modifier: Modifier = Modifier,
+    manager: FocusManager = LocalFocusManager.current,
 ) {
-    val items by viewModel.items.collectAsState(initial = emptyList())
-    val selected by viewModel.selected.collectAsState()
-    val value by viewModel.value.collectAsState()
-    val manager = LocalFocusManager.current
     FavoriteScreen(
         modifier = modifier,
         items = items,
         value = value,
         selected = selected,
-        onValueChanged = { viewModel.value.value = it },
-        onItemSelected = { viewModel.selected.value = it.currency },
+        onValueChanged = onValueChanged,
+        onItemSelected = onItemSelected,
         onCloseKeyboard = manager::clearFocus,
         onNavigateToListing = onNavigateToListing,
         onNavigateToHistory = onNavigateToHistory
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun FavoriteScreen(
     items: List<ConvertedCurrency>,
