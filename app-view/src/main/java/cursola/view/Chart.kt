@@ -1,23 +1,17 @@
 package cursola.view
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.foundation.layout.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.*
+import androidx.compose.ui.draw.*
+import androidx.compose.ui.geometry.*
+import androidx.compose.ui.graphics.*
+import androidx.compose.ui.layout.*
+import androidx.compose.ui.platform.*
 import cursola.view.chart.HorizontalPointResolver
 import cursola.view.chart.VerticalPointResolver
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 @Composable
@@ -30,6 +24,8 @@ fun <Sample> Chart(
 ) {
     var path by remember { mutableStateOf(Path()) }
     var size by remember { mutableStateOf(initialSize) }
+
+    val view = LocalView.current
 
     LaunchedEffect(samples, size) {
         path = pathCalculator.getPath(samples, size)
@@ -47,6 +43,12 @@ fun <Sample> Chart(
                 )
             }
             .drawWithContent {
+                if (path.isEmpty && view.isInEditMode) {
+                    size = Rect(Offset.Zero, this.size)
+                    path = runBlocking {
+                        pathCalculator.getPath(samples, size)
+                    }
+                }
                 drawPath(path = path, brush = background)
             }
     )
