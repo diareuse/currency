@@ -70,7 +70,7 @@ fun HistoryScreen(
         ) {
             items(items.filterNot { it.currency.currencyCode == "EUR" }, { it.currency }) {
                 CurrencyChartItem(
-                    modifier = Modifier.animateItemPlacement(),
+                    modifier = Modifier.animateItem(fadeInSpec = null, fadeOutSpec = null),
                     currency = it.currency,
                     values = it.values.map(HistoricalViewModel.ChartValue::y).asReversed(),
                     state = scrollState,

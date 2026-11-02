@@ -108,7 +108,7 @@ private fun FavoriteScreen(
                 FavoriteItem(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .animateItemPlacement()
+                        .animateItem(fadeInSpec = null, fadeOutSpec = null)
                         .clickable { onItemSelected(currency) },
                     name = currency.name(locale),
                     value = currency.toString(locale),

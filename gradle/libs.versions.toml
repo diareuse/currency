@@ -1,64 +1,60 @@
 [versions]
-activity = "1.8.2"
-appcompat = "1.7.0-alpha03"
-coil = "2.5.0"
-firebase-analytics = "21.3.0"
-firebase-bom = "32.7.1"
-firebase-crashlytics-plugin = "2.9.5"
-firebase-crashlytics = "18.3.7"
-firebase-perf = "20.3.2"
-compose = "1.6.0-rc01"
-google-services = "4.3.15"
-hilt-android = "2.50"
-hilt-work = "1.1.0"
-hilt-navigation-compose = "1.1.0"
-ktor = "2.3.7"
+activity = "1.13.0"
+appcompat = "1.8.0"
+coil = "2.7.0"
+firebase-bom = "35.1.0"
+firebase-crashlytics-plugin = "3.0.8"
+compose-bom = "2026.09.00"
+google-services = "4.5.0"
+hilt-android = "2.60.1"
+hilt-work = "1.4.0"
+hilt-navigation-compose = "1.4.0"
+ktor = "3.6.1"
 kxml2 = "2.3.0"
-lifecycle = "2.7.0"
-material = "1.11.0"
-material3 = "1.2.0-beta02"
-mockito-core = "5.9.0"
-mockito-kotlin = "5.2.1"
-navigation = "2.7.6"
-room = "2.6.1"
+lifecycle = "2.11.0"
+material = "1.14.0"
+mockito-core = "5.24.0"
+mockito-kotlin = "6.4.0"
+navigation = "2.10.2"
+room = "2.8.5"
 slice = "1.0.0-alpha08"
 slice-core = "1.1.0-alpha02"
-startup = "1.2.0-alpha02"
-work = "2.9.0"
-ksp = "1.9.22-1.0.17"
-detekt = "1.23.1"
-hilt = "2.50"
-agp = "8.2.2"
-kotlin = "1.9.22"
-coroutines = "1.7.3"
+startup = "1.2.0"
+work = "2.12.0"
+ksp = "2.3.13"
+detekt = "1.23.8"
+hilt = "2.60.1"
+agp = "9.5.0"
+kotlin = "2.4.21"
+coroutines = "1.11.0"
 
 [libraries]
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android" }
 hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt-android" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt-android" }
 hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hilt-work" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
-kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }
-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
-firebase-perf = { module = "com.google.firebase:firebase-perf-ktx" }
-compose-foundation = { module = "androidx.compose.foundation:foundation", version.ref = "compose" }
-ktor-serialization-kotlinx-xml = { module = "io.ktor:ktor-serialization-kotlinx-xml", version.ref = "ktor" }
-ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-perf = { module = "com.google.firebase:firebase-perf" }
+compose-foundation = { module = "androidx.compose.foundation:foundation" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 kxml2 = { module = "net.sf.kxml:kxml2", version.ref = "kxml2" }
 lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
-material3-core = { module = "androidx.compose.material3:material3", version.ref = "material3" }
-material3-window = { module = "androidx.compose.material3:material3-window-size-class", version.ref = "material3" }
+material3-core = { module = "androidx.compose.material3:material3" }
+material3-window = { module = "androidx.compose.material3:material3-window-size-class" }
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito-core" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
@@ -69,8 +65,8 @@ slice-builders = { module = "androidx.slice:slice-builders-ktx", version.ref = "
 slice-core = { module = "androidx.slice:slice-core", version.ref = "slice-core" }
 slice-view = { module = "androidx.slice:slice-view", version.ref = "slice-core" }
 startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startup" }
-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose" }
-compose-ui-core = { module = "androidx.compose.ui:ui", version.ref = "compose" }
+compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-ui-core = { module = "androidx.compose.ui:ui" }
 work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 
 [plugins]
@@ -78,6 +74,7 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-lib = { id = "com.android.library", version.ref = "agp" }
 android-app = { id = "com.android.application", version.ref = "agp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
