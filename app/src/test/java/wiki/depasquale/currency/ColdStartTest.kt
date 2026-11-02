@@ -9,6 +9,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.work.NetworkType
 import androidx.work.WorkManager
 import androidx.work.testing.TestListenableWorkerBuilder
+import androidx.work.testing.WorkManagerTestInitHelper
+import org.junit.After
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.Shadows.shadowOf
@@ -23,10 +25,17 @@ import kotlin.test.assertSame
 @RunWith(AndroidJUnit4::class)
 class ColdStartTest {
 
+    private val app = attachedButNotCreatedApp()
+
+    @After
+    fun releaseWorkManager() {
+        WorkManager.getInstance(app).cancelUniqueWork("rate-update").result.get(10, TimeUnit.SECONDS)
+        WorkManagerTestInitHelper.closeWorkDatabase()
+    }
+
     @Test
     fun startup_before_application_onCreate_schedules_one_daily_connected_update_runnable_by_configured_factory() {
         assertFalse(WorkManager.isInitialized(), "WorkManager leaked from another test")
-        val app = attachedButNotCreatedApp()
 
         InitializationProvider().attachInfo(app, ProviderInfo().apply {
             authority = "${app.packageName}.androidx-startup"
@@ -52,7 +61,7 @@ class ColdStartTest {
 
     private fun attachedButNotCreatedApp(): App {
         val base = ApplicationProvider.getApplicationContext<Context>()
-        val app = App()
+        val app = TestApp()
         shadowOf(app).callAttach(object : ContextWrapper(base) {
             override fun getApplicationContext(): Context = app
         })
