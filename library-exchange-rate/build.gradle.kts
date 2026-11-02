@@ -2,7 +2,6 @@ plugins {
     id("library-conventions")
     id("di-conventions")
     id("org.jetbrains.kotlin.plugin.serialization")
-    id("com.google.devtools.ksp")
 }
 
 val schemasDir = "$projectDir/schemas"
@@ -15,6 +14,11 @@ android {
         getByName("androidTest").assets.srcDirs(files(schemasDir))
     }
 
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.all { it.jvmArgs("--add-opens=java.base/jdk.internal.access=ALL-UNNAMED") }
+    }
+
 }
 
 ksp {
@@ -24,6 +28,7 @@ ksp {
 
 dependencies {
 
+    implementation(libs.core.ktx)
     implementation(libs.ktor.client.core)
     implementation(libs.ktor.client.cio)
 
@@ -32,5 +37,8 @@ dependencies {
     ksp(libs.room.compiler)
 
     testImplementation(libs.kxml2)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.androidx.test.ext.junit)
 
 }

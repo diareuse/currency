@@ -1,6 +1,5 @@
 plugins {
     id("library-conventions")
-    id("di-conventions")
     id("compose-conventions")
 }
 

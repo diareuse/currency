@@ -2,13 +2,11 @@
 activity = "1.13.0"
 appcompat = "1.8.0"
 coil = "2.7.0"
+core = "1.18.0"
 firebase-bom = "35.1.0"
 firebase-crashlytics-plugin = "3.0.8"
 compose-bom = "2026.09.00"
 google-services = "4.5.0"
-hilt-android = "2.60.1"
-hilt-work = "1.4.0"
-hilt-navigation-compose = "1.4.0"
 ktor = "3.6.1"
 kxml2 = "2.3.0"
 lifecycle = "2.11.0"
@@ -21,9 +19,12 @@ slice = "1.0.0-alpha08"
 slice-core = "1.1.0-alpha02"
 startup = "1.2.0"
 work = "2.12.0"
+robolectric = "4.17"
+androidx-test-core = "1.7.0"
+androidx-test-ext-junit = "1.3.0"
+spike = "1.0.0-alpha07"
 ksp = "2.3.13"
 detekt = "1.23.8"
-hilt = "2.60.1"
 agp = "9.5.0"
 kotlin = "2.4.21"
 coroutines = "1.11.0"
@@ -31,17 +32,13 @@ coroutines = "1.11.0"
 [libraries]
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt-android" }
-hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt-android" }
-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt-android" }
-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hilt-work" }
-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity" }
 appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "core" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
 coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
@@ -66,14 +63,23 @@ slice-core = { module = "androidx.slice:slice-core", version.ref = "slice-core" 
 slice-view = { module = "androidx.slice:slice-view", version.ref = "slice-core" }
 startup-runtime = { module = "androidx.startup:startup-runtime", version.ref = "startup" }
 compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
+compose-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4" }
 compose-ui-core = { module = "androidx.compose.ui:ui" }
 work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
+work-testing = { module = "androidx.work:work-testing", version.ref = "work" }
+robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
+androidx-test-core = { module = "androidx.test:core-ktx", version.ref = "androidx-test-core" }
+androidx-test-ext-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "androidx-test-ext-junit" }
+spike = { module = "io.github.diareuse:spike", version.ref = "spike" }
+spike-compiler = { module = "io.github.diareuse:spike-compiler", version.ref = "spike" }
+spike-androidx = { module = "io.github.diareuse:spike-androidx", version.ref = "spike" }
+spike-androidx-compose = { module = "io.github.diareuse:spike-androidx-compose", version.ref = "spike" }
+spike-test = { module = "io.github.diareuse:spike-test", version.ref = "spike" }
 android-gradle = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-serialization-gradle = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlin" }
 kotlin-compose-gradle = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
 ksp-gradle = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin", version.ref = "ksp" }
-hilt-gradle = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 detekt-gradle = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 google-services-gradle = { module = "com.google.gms:google-services", version.ref = "google-services" }
 firebase-crashlytics-gradle = { module = "com.google.firebase:firebase-crashlytics-gradle", version.ref = "firebase-crashlytics-plugin" }
@@ -86,7 +92,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 android-lib = { id = "com.android.library", version.ref = "agp" }
 android-app = { id = "com.android.application", version.ref = "agp" }
-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 

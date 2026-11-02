@@ -1,6 +1,6 @@
 package cursola.rate
 
-import cursola.rate.di.ExchangeRateModule
+import cursola.rate.di.historyValue
 import cursola.rate.model.makeExchangeRate
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -14,7 +14,7 @@ internal class HistoryDataSourcePeggingTest : AbstractDataSourceTest() {
     private lateinit var source: HistoryDataSource
 
     override fun prepare() {
-        source = ExchangeRateModule.getInstance().historyValue(network, database)
+        source = historyValue(network, database)
     }
 
     // ---

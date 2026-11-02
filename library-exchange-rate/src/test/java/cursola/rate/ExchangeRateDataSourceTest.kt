@@ -2,7 +2,7 @@ package cursola.rate
 
 import android.database.sqlite.SQLiteConstraintException
 import cursola.rate.database.ExchangeRateStored
-import cursola.rate.di.ExchangeRateModule
+import cursola.rate.di.exchangeRate
 import cursola.rate.model.makeExchangeRate
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
@@ -20,7 +20,7 @@ internal class ExchangeRateDataSourceTest : AbstractDataSourceTest() {
     private lateinit var source: ExchangeRateDataSource
 
     override fun prepare() {
-        source = ExchangeRateModule.getInstance().exchangeRate(network, database)
+        source = exchangeRate(network, database)
     }
 
     // ---

@@ -1,7 +1,7 @@
 package cursola.rate
 
 import cursola.rate.database.ExchangeRateStored
-import cursola.rate.di.ExchangeRateModule
+import cursola.rate.di.conversionRate
 import cursola.rate.model.makeExchangeRate
 import kotlinx.coroutines.test.runTest
 import org.mockito.kotlin.times
@@ -16,7 +16,7 @@ internal class ConversionRateDataSourceTest : AbstractDataSourceTest() {
     private lateinit var source: ConversionRateDataSource
 
     override fun prepare() {
-        source = ExchangeRateModule.getInstance().conversionRate(network, database)
+        source = conversionRate(network, database)
     }
 
     // ---

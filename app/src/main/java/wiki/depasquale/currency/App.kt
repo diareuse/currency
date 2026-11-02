@@ -1,17 +1,14 @@
 package wiki.depasquale.currency
 
 import android.app.Application
-import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import com.google.android.material.color.DynamicColors
-import dagger.hilt.android.HiltAndroidApp
-import javax.inject.Inject
+import wiki.depasquale.currency.di.AppEntryPoint
+import wiki.depasquale.currency.di.invoke
 
-@HiltAndroidApp
 class App : Application(), Configuration.Provider {
 
-    @Inject
-    lateinit var workerFactory: HiltWorkerFactory
+    val graph: AppEntryPoint by lazy { AppEntryPoint(this) }
 
     override fun onCreate() {
         super.onCreate()
@@ -20,7 +17,7 @@ class App : Application(), Configuration.Provider {
 
     override val workManagerConfiguration: Configuration
         get() = Configuration.Builder()
-            .setWorkerFactory(workerFactory)
+            .setWorkerFactory(graph.workerFactory)
             .build()
 
 }
