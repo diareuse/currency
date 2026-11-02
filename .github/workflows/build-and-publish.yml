@@ -23,9 +23,6 @@ jobs:
           echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 --decode > app/google-services.json
           echo "${{ secrets.SERVICE_ACCOUNT_JSON }}" | base64 --decode > service-account.json
 
-      - run: |
-          sed -i "s/versionCode 1/versionCode ${{ github.run_number }}/" buildSrc/src/main/groovy/application-conventions.gradle
-
       - name: Set up JDK
         uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
         with:
@@ -39,7 +36,7 @@ jobs:
         uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
 
       - name: Build with Gradle
-        run: ./gradlew bundleRelease
+        run: ./gradlew bundleRelease -PversionCode=${{ github.run_number }}
 
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
