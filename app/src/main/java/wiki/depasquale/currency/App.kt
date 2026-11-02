@@ -6,9 +6,11 @@ import com.google.android.material.color.DynamicColors
 import wiki.depasquale.currency.di.AppEntryPoint
 import wiki.depasquale.currency.di.invoke
 
-class App : Application(), Configuration.Provider {
+open class App : Application(), Configuration.Provider {
 
-    val graph: AppEntryPoint by lazy { AppEntryPoint(this) }
+    val graph: AppEntryPoint by lazy { createGraph() }
+
+    protected open fun createGraph(): AppEntryPoint = AppEntryPoint(this)
 
     override fun onCreate() {
         super.onCreate()
