@@ -1,0 +1,36 @@
+plugins {
+    id("library-conventions")
+    id("di-conventions")
+    id("org.jetbrains.kotlin.plugin.serialization")
+    id("com.google.devtools.ksp")
+}
+
+val schemasDir = "$projectDir/schemas"
+
+android {
+
+    namespace = "cursola.rate"
+
+    sourceSets {
+        getByName("androidTest").assets.srcDirs(files(schemasDir))
+    }
+
+}
+
+ksp {
+    arg("room.schemaLocation", schemasDir)
+}
+
+
+dependencies {
+
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.cio)
+
+    implementation(libs.room.runtime)
+    implementation(libs.room.core)
+    ksp(libs.room.compiler)
+
+    testImplementation(libs.kxml2)
+
+}

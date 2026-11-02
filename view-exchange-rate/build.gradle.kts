@@ -1,0 +1,18 @@
+plugins {
+    id("library-conventions")
+    id("di-conventions")
+}
+
+android {
+
+    namespace = "cursola.rate.view"
+
+}
+
+dependencies {
+
+    api(project(":library-exchange-rate"))
+
+    api(libs.lifecycle.viewmodel)
+
+}
