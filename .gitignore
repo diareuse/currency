@@ -10,3 +10,4 @@ data
 keystore.properties
 keystore.jks
 google-services.json
+.DS_Store

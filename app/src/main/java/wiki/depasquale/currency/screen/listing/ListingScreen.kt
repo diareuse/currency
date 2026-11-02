@@ -67,7 +67,7 @@ fun ListingScreen(
                 key = ConvertedCurrency::currency
             ) {
                 ListingItem(
-                    modifier = Modifier.animateItemPlacement(),
+                    modifier = Modifier.animateItem(fadeInSpec = null, fadeOutSpec = null),
                     onAddItem = { onAddItem(it.currency) },
                     onRemoveItem = { onRemoveItem(it.currency) },
                     name = it.name(locale),
