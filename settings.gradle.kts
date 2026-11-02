@@ -15,5 +15,6 @@ dependencyResolutionManagement {
 
 include(":app")
 include(":app-view")
+include(":contract")
 include(":library-exchange-rate")
 include(":view-exchange-rate")

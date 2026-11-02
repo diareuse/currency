@@ -19,7 +19,7 @@ class ViewModelRegistrationTest {
         assertEquals(generated, registered)
     }
 
-    private fun spikeViewModelClassNames(): Set<String> = System.getProperty("java.class.path")
+    private fun spikeViewModelClassNames(): Set<String> = System.getProperty("java.class.path").orEmpty()
         .split(File.pathSeparator)
         .map(::File)
         .flatMap(::classEntries)

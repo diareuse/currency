@@ -2,14 +2,24 @@ package wiki.depasquale.currency.di
 
 import android.content.Context
 import androidx.work.WorkerFactory
+import cursola.rate.LatestValueDataSource
+import cursola.rate.convert.AmountParser
+import cursola.rate.convert.CurrencyConverter
+import cursola.rate.convert.RatesQuery
 import spike.EntryPoint
 import spike.lifecycle.viewmodel.ViewModelEntryPoint
-import wiki.depasquale.currency.platform.SliceProvider
+import wiki.depasquale.currency.platform.rates.RatesTable
 
 @EntryPoint
-interface AppEntryPoint : ViewModelEntryPoint, SliceProvider.SliceEntryPoint {
+interface AppEntryPoint : ViewModelEntryPoint {
 
     val workerFactory: WorkerFactory
+    val converter: CurrencyConverter
+    val amountParser: AmountParser
+    val ratesQuery: RatesQuery
+    val ratesTable: RatesTable
+
+    fun latest(): LatestValueDataSource
 
     @EntryPoint.Factory
     interface Factory {

@@ -40,6 +40,7 @@ ksp {
 dependencies {
 
     implementation(project(":app-view"))
+    implementation(project(":contract"))
     implementation(project(":view-exchange-rate"))
 
     implementation(libs.activity.compose)
@@ -49,9 +50,6 @@ dependencies {
     implementation(libs.work.runtime)
     implementation(libs.spike.androidx.compose)
     implementation(libs.material)
-    implementation(libs.slice.builders)
-    implementation(libs.slice.core)
-    implementation(libs.slice.view)
 
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.test.core)

@@ -1,11 +1,11 @@
 package wiki.depasquale.currency.di
 
 import androidx.lifecycle.ViewModel
-import cursola.rate.ConversionRateDataSource
 import cursola.rate.ExchangeRateDataSource
 import cursola.rate.FavoriteDataSource
 import cursola.rate.HistoryDataSource
 import cursola.rate.LatestValueDataSource
+import cursola.rate.convert.CurrencyConverter
 import cursola.rate.view.FavoritesViewModel
 import cursola.rate.view.HistoricalViewModel
 import cursola.rate.view.ListingViewModel
@@ -19,10 +19,10 @@ import spike.lifecycle.viewmodel.ViewModelKey
 @Include(bindTo = BindTarget.Map)
 @ViewModelKey(FavoritesViewModel::class)
 internal fun favoritesViewModel(
-    conversion: ConversionRateDataSource,
+    converter: CurrencyConverter,
     favorite: FavoriteDataSource,
     latest: LatestValueDataSource
-): ViewModel = spikeViewModelFavoritesViewModel(conversion, favorite, latest)
+): ViewModel = spikeViewModelFavoritesViewModel(converter, favorite, latest)
 
 @Include(bindTo = BindTarget.Map)
 @ViewModelKey(HistoricalViewModel::class)

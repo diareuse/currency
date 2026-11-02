@@ -1,5 +1,7 @@
 package cursola.rate.view
 
+import cursola.rate.convert.CurrencyConverterDefault
+import cursola.rate.convert.RatesTimestamp
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.advanceTimeBy
@@ -9,6 +11,7 @@ import org.mockito.kotlin.any
 import org.mockito.kotlin.eq
 import org.mockito.kotlin.whenever
 import java.util.Currency
+import java.util.Date
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 
@@ -16,7 +19,8 @@ internal class FavoritesViewModelTest : AbstractViewModelTest<FavoritesViewModel
 
     override fun prepare(): FavoritesViewModel {
         setMainDispatcher()
-        return FavoritesViewModel(conversion, favorite, latest)
+        val converter = CurrencyConverterDefault(conversion, favorite, RatesTimestamp { Date(0) })
+        return FavoritesViewModel(converter, favorite, latest)
     }
 
     // ---
@@ -69,7 +73,7 @@ internal class FavoritesViewModelTest : AbstractViewModelTest<FavoritesViewModel
         ).thenReturn(5.0)
         viewModel.value.value = "32.3"
         val expected = listOf(
-            ConvertedCurrency(Currency.getInstance("USD"), 387.59999999999997, true),
+            ConvertedCurrency(Currency.getInstance("USD"), 387.6, true),
             ConvertedCurrency(Currency.getInstance("CZK"), 161.5, true),
         )
         val actual = viewModel.items.first()
