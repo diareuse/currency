@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Cursola</string>
+    <string name="permission_read_rates_label">read Cursola exchange rates</string>
+    <string name="permission_read_rates_description">Allows the app to read exchange rates and conversions from Cursola.</string>
     <string name="favorites_headline">Your favorites</string>
     <string name="edit">Edit</string>
     <string name="search_cta">Search here…</string>
