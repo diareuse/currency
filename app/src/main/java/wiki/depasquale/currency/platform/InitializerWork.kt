@@ -8,7 +8,6 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import androidx.work.WorkManagerInitializer
 import java.util.concurrent.TimeUnit
 
 @Keep
@@ -27,7 +26,6 @@ class InitializerWork : Initializer<Unit> {
         manager.enqueueUniquePeriodicWork("rate-update", ExistingPeriodicWorkPolicy.KEEP, request)
     }
 
-    override fun dependencies() =
-        listOf(WorkManagerInitializer::class.java)
+    override fun dependencies(): List<Class<out Initializer<*>>> = emptyList()
 
 }

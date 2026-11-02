@@ -7,7 +7,6 @@ import androidx.compose.material3.windowsizeclass.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
 import androidx.compose.ui.unit.*
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -16,6 +15,7 @@ import cursola.rate.view.FavoritesViewModel
 import cursola.rate.view.HistoricalViewModel
 import cursola.rate.view.ListingViewModel
 import cursola.view.VerticalDivider
+import spike.lifecycle.viewmodel.compose.spikeViewModel
 import wiki.depasquale.currency.screen.favorite.FavoriteScreen
 import wiki.depasquale.currency.screen.history.HistoryScreen
 import wiki.depasquale.currency.screen.listing.ListingScreen
@@ -90,7 +90,7 @@ private fun FavoriteScreen(
     onNavigateToHistory: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val viewModel = hiltViewModel<FavoritesViewModel>()
+    val viewModel = spikeViewModel<FavoritesViewModel>()
     val items by viewModel.items.collectAsState(initial = emptyList())
     val selected by viewModel.selected.collectAsState()
     val value by viewModel.value.collectAsState()
@@ -111,7 +111,7 @@ private fun ListingScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val viewModel = hiltViewModel<ListingViewModel>()
+    val viewModel = spikeViewModel<ListingViewModel>()
     val items by viewModel.items.collectAsState(initial = emptyList())
     ListingScreen(
         modifier = modifier,
@@ -127,7 +127,7 @@ private fun HistoryScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val viewModel = hiltViewModel<HistoricalViewModel>()
+    val viewModel = spikeViewModel<HistoricalViewModel>()
     val items by viewModel.items.collectAsState()
     HistoryScreen(
         items = items,

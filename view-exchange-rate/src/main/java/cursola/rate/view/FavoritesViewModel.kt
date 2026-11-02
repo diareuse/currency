@@ -6,7 +6,6 @@ import cursola.rate.ConversionRateDataSource
 import cursola.rate.FavoriteDataSource
 import cursola.rate.LatestValueDataSource
 import cursola.rate.view.util.repeatingFlow
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
@@ -14,12 +13,12 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import spike.lifecycle.viewmodel.SpikeViewModel
 import java.util.Currency
-import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
-@HiltViewModel
-class FavoritesViewModel @Inject internal constructor(
+@SpikeViewModel
+class FavoritesViewModel internal constructor(
     private val conversion: ConversionRateDataSource,
     private val favorite: FavoriteDataSource,
     private val latest: LatestValueDataSource

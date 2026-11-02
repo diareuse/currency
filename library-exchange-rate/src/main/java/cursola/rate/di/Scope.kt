@@ -1,6 +1,6 @@
 package cursola.rate.di
 
-import javax.inject.Qualifier
+import spike.Qualifier
 
 @Qualifier
 annotation class ScopeOf90Days

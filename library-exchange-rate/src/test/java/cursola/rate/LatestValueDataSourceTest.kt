@@ -1,6 +1,6 @@
 package cursola.rate
 
-import cursola.rate.di.ExchangeRateModule
+import cursola.rate.di.latestValue
 import org.junit.Test
 import org.mockito.kotlin.verify
 import kotlin.test.assertEquals
@@ -10,7 +10,7 @@ internal class LatestValueDataSourceTest : AbstractDataSourceTest() {
     private lateinit var source: LatestValueDataSource
 
     override fun prepare() {
-        source = ExchangeRateModule.getInstance().latestValue(storage, analytics)
+        source = latestValue(storage, analytics)
     }
 
     // ---

@@ -1,6 +1,6 @@
 package cursola.rate
 
-import cursola.rate.di.ExchangeRateModule
+import cursola.rate.di.favorites
 import cursola.rate.model.makeFavorite
 import cursola.rate.util.nextCurrency
 import kotlinx.coroutines.test.runTest
@@ -14,7 +14,7 @@ internal class FavoriteDataSourceTest : AbstractDataSourceTest() {
     private lateinit var source: FavoriteDataSource
 
     override fun prepare() {
-        source = ExchangeRateModule.getInstance().favorites(database, analytics)
+        source = favorites(database, analytics)
     }
 
     // ---

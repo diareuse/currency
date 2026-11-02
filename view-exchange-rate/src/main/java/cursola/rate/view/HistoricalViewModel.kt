@@ -5,19 +5,18 @@ import androidx.lifecycle.viewModelScope
 import cursola.rate.ExchangeRate
 import cursola.rate.FavoriteDataSource
 import cursola.rate.HistoryDataSource
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
+import spike.lifecycle.viewmodel.SpikeViewModel
 import java.util.Currency
 import java.util.Date
-import javax.inject.Inject
 
-@HiltViewModel
-class HistoricalViewModel @Inject internal constructor(
+@SpikeViewModel
+class HistoricalViewModel internal constructor(
     private val favorite: FavoriteDataSource,
     private val history: HistoryDataSource
 ) : ViewModel() {

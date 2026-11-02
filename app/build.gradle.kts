@@ -11,6 +11,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
+        unitTests.all { it.jvmArgs("--add-opens=java.base/jdk.internal.access=ALL-UNNAMED") }
+    }
+
     packaging {
         resources {
             pickFirsts += listOf(
@@ -25,6 +30,10 @@ android {
 
 }
 
+ksp {
+    arg("spike.viewmodel.enabled", "false")
+}
+
 dependencies {
 
     implementation(project(":app-view"))
@@ -35,10 +44,17 @@ dependencies {
     implementation(libs.navigation.compose)
     implementation(libs.startup.runtime)
     implementation(libs.work.runtime)
+    implementation(libs.spike.androidx.compose)
     implementation(libs.material)
     implementation(libs.slice.builders)
     implementation(libs.slice.core)
     implementation(libs.slice.view)
+
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.androidx.test.ext.junit)
+    testImplementation(libs.work.testing)
+    testImplementation(libs.compose.ui.test.junit4)
 
     releaseImplementation(platform(libs.firebase.bom))
     releaseImplementation(libs.firebase.analytics)

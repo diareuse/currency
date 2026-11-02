@@ -5,11 +5,13 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
 import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.core.view.WindowCompat
-import dagger.hilt.android.AndroidEntryPoint
+import spike.compose.LocalViewModelEntryPointFactory
+import wiki.depasquale.currency.di.appGraph
+import wiki.depasquale.currency.di.viewModelEntryPointFactory
 import wiki.depasquale.currency.screen.style.CurrencyTheme
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
@@ -17,9 +19,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
+        val viewModels = appGraph.viewModelEntryPointFactory
         setContent {
-            CurrencyTheme {
-                Navigation(calculateWindowSizeClass(activity = this))
+            CompositionLocalProvider(LocalViewModelEntryPointFactory provides viewModels) {
+                CurrencyTheme {
+                    Navigation(calculateWindowSizeClass(activity = this))
+                }
             }
         }
     }

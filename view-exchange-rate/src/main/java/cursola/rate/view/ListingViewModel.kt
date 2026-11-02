@@ -4,16 +4,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cursola.rate.ExchangeRateDataSource
 import cursola.rate.FavoriteDataSource
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import spike.lifecycle.viewmodel.SpikeViewModel
 import java.util.Currency
-import javax.inject.Inject
 
-@HiltViewModel
-class ListingViewModel @Inject internal constructor(
+@SpikeViewModel
+class ListingViewModel internal constructor(
     private val exchange: ExchangeRateDataSource,
     private val favorite: FavoriteDataSource
 ) : ViewModel() {
