@@ -74,7 +74,7 @@ fun currencyColors(
         else currencyColorsLight
 }
 
-private val currencyColorsLight = lightColorScheme(
+internal val currencyColorsLight = lightColorScheme(
     primary = LightPrimary,
     onPrimary = LightOnPrimary,
     primaryContainer = LightPrimaryContainer,
@@ -102,7 +102,7 @@ private val currencyColorsLight = lightColorScheme(
     inverseSurface = LightInverseSurface,
 )
 
-private val currencyColorsDark = darkColorScheme(
+internal val currencyColorsDark = darkColorScheme(
     primary = DarkPrimary,
     onPrimary = DarkOnPrimary,
     primaryContainer = DarkPrimaryContainer,

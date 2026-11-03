@@ -51,12 +51,15 @@ dependencies {
     implementation(libs.work.runtime)
     implementation(libs.spike.androidx.compose)
     implementation(libs.material)
+    implementation(libs.glance.appwidget)
+    implementation(libs.glance.material3)
 
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.test.core)
     testImplementation(libs.androidx.test.ext.junit)
     testImplementation(libs.work.testing)
     testImplementation(libs.compose.ui.test.junit4)
+    testImplementation(libs.glance.appwidget.testing)
 
     releaseImplementation(platform(libs.firebase.bom))
     releaseImplementation(libs.firebase.analytics)

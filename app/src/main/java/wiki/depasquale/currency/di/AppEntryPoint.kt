@@ -12,7 +12,7 @@ import wiki.depasquale.currency.platform.link.LaunchDestinationParser
 import wiki.depasquale.currency.platform.rates.RatesTable
 
 @EntryPoint
-interface AppEntryPoint : ViewModelEntryPoint, TileEntryPoint {
+interface AppEntryPoint : ViewModelEntryPoint, TileEntryPoint, WidgetEntryPoint {
 
     val workerFactory: WorkerFactory
     val converter: CurrencyConverter
