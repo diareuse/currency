@@ -1,6 +1,7 @@
 package cursola.rate
 
 import java.util.Currency
+import kotlin.coroutines.cancellation.CancellationException
 
 internal class ConversionRateDataSourceErrorReducer(
     private vararg val sources: ConversionRateDataSource
@@ -11,6 +12,8 @@ internal class ConversionRateDataSourceErrorReducer(
         for (source in sources)
             try {
                 return source.get(from, to)
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Throwable) {
                 e.printStackTrace()
                 latestError = e

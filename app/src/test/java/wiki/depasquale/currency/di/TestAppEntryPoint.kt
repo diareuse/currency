@@ -8,12 +8,14 @@ import cursola.rate.ExchangeRateError
 import cursola.rate.FavoriteDataSource
 import cursola.rate.HistoryDataSource
 import kotlinx.coroutines.awaitCancellation
+import kotlinx.coroutines.delay
 import spike.EntryPoint
 import spike.Include
 import spike.Singleton
 import spike.test.Replaces
 import java.util.Currency
 import java.util.Date
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 
 @EntryPoint
@@ -45,8 +47,12 @@ class FixedExchangeRateDataSource : ExchangeRateDataSource {
     @Volatile
     var failure: Throwable? = null
 
+    @Volatile
+    var latency: Duration = Duration.ZERO
+
     override suspend fun get(): List<ExchangeRate> {
         if (hanging) awaitCancellation()
+        delay(latency)
         failure?.let { throw it }
         return rates
     }

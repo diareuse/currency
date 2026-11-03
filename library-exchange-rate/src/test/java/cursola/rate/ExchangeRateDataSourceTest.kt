@@ -11,9 +11,11 @@ import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import java.io.IOException
 import java.util.Currency
+import kotlin.coroutines.cancellation.CancellationException
 import kotlin.test.assertContains
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 internal class ExchangeRateDataSourceTest : AbstractDataSourceTest() {
 
@@ -51,6 +53,12 @@ internal class ExchangeRateDataSourceTest : AbstractDataSourceTest() {
         whenever(network.get()).thenThrow(IOException())
         val result = source.get()
         assertEquals(emptyList(), result)
+    }
+
+    @Test
+    fun get_propagates_cancellation_instead_of_trying_next_source() = runTest {
+        whenever(network.get()).thenThrow(CancellationException("cancelled"))
+        assertFailsWith<CancellationException> { source.get() }
     }
 
     @Test

@@ -23,12 +23,15 @@ import wiki.depasquale.cursola.contract.CurrencyContract.Currencies
 import wiki.depasquale.cursola.contract.CurrencyContract.LatestRates
 import java.io.IOException
 import java.util.Currency
+import java.util.concurrent.CancellationException
 import java.util.Date
 import java.util.Locale
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import kotlin.time.Duration.Companion.milliseconds
 
 @RunWith(AndroidJUnit4::class)
 class RatesProviderTest {
@@ -154,6 +157,54 @@ class RatesProviderTest {
         graph.exchangeRates.failure = SQLiteException("disk I/O error")
 
         assertEveryPathIsEmpty()
+    }
+
+    @Test
+    fun every_path_is_empty_when_rates_fail_with_database_infrastructure_state_error() {
+        graph.exchangeRates.failure = IllegalStateException("Cannot perform this operation because the connection pool has been closed.")
+
+        assertEveryPathIsEmpty()
+    }
+
+    @Test
+    fun every_path_is_empty_when_rates_fail_with_a_foreign_cancellation() {
+        graph.exchangeRates.failure = CancellationException("cancelled elsewhere")
+
+        assertEveryPathIsEmpty()
+    }
+
+    @Test
+    fun query_is_empty_and_hands_back_a_clean_thread_when_the_binder_thread_is_interrupted_while_waiting() {
+        graph.exchangeRates.hanging = true
+
+        Thread.currentThread().interrupt()
+        val count = query(Currencies.CONTENT_URI).use { it.count }
+
+        assertEquals(0, count)
+        assertFalse(Thread.currentThread().isInterrupted)
+    }
+
+    @Test
+    fun query_after_an_interrupted_query_on_the_same_thread_returns_rows() {
+        graph.exchangeRates.hanging = true
+        Thread.currentThread().interrupt()
+        query(Currencies.CONTENT_URI).close()
+        graph.exchangeRates.hanging = false
+        graph.exchangeRates.latency = 1.milliseconds
+
+        val count = query(Currencies.CONTENT_URI).use { it.count }
+
+        assertEquals(3, count)
+    }
+
+    @Test
+    fun query_is_empty_and_hands_back_a_clean_thread_when_rates_are_interrupted() {
+        graph.exchangeRates.failure = InterruptedException("blocking read interrupted")
+
+        val count = query(Currencies.CONTENT_URI).use { it.count }
+
+        assertEquals(0, count)
+        assertFalse(Thread.currentThread().isInterrupted)
     }
 
     @Test
