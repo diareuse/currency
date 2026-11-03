@@ -7,6 +7,7 @@ firebase-bom = "35.1.0"
 firebase-crashlytics-plugin = "3.0.8"
 compose-bom = "2026.09.00"
 google-services = "4.5.0"
+glance = "1.2.0"
 ktor = "3.6.1"
 kxml2 = "2.3.0"
 icu4j = "78.3"
@@ -43,6 +44,9 @@ coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-perf = { module = "com.google.firebase:firebase-perf" }
+glance-appwidget = { module = "androidx.glance:glance-appwidget", version.ref = "glance" }
+glance-material3 = { module = "androidx.glance:glance-material3", version.ref = "glance" }
+glance-appwidget-testing = { module = "androidx.glance:glance-appwidget-testing", version.ref = "glance" }
 compose-foundation = { module = "androidx.compose.foundation:foundation" }
 ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }

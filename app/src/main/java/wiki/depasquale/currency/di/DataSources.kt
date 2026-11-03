@@ -9,6 +9,8 @@ import cursola.rate.di.ExchangeRateLibrary
 import spike.Include
 import wiki.depasquale.currency.platform.FavoriteDataSourceNotifying
 import wiki.depasquale.currency.platform.FavoritesChangedListener
+import wiki.depasquale.currency.platform.LatestValueChangedListener
+import wiki.depasquale.currency.platform.LatestValueDataSourceNotifying
 
 @Include
 internal fun conversionRate(@ExchangeRateLibrary source: ConversionRateDataSource): ConversionRateDataSource = source
@@ -26,4 +28,7 @@ internal fun favorite(
 internal fun history(@ExchangeRateLibrary source: HistoryDataSource): HistoryDataSource = source
 
 @Include
-internal fun latestValue(@ExchangeRateLibrary source: LatestValueDataSource): LatestValueDataSource = source
+internal fun latestValue(
+    @ExchangeRateLibrary source: LatestValueDataSource,
+    changed: LatestValueChangedListener
+): LatestValueDataSource = LatestValueDataSourceNotifying(source, changed)

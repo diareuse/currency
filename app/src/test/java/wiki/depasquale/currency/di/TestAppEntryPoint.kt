@@ -8,6 +8,10 @@ import cursola.rate.ExchangeRateError
 import cursola.rate.FavoriteDataSource
 import cursola.rate.HistoryDataSource
 import cursola.rate.di.ExchangeRateLibrary
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.delay
 import spike.EntryPoint
@@ -16,8 +20,11 @@ import spike.Singleton
 import spike.test.Replaces
 import wiki.depasquale.currency.platform.FavoriteDataSourceNotifying
 import wiki.depasquale.currency.platform.FavoritesChangedListener
+import wiki.depasquale.currency.platform.widget.WidgetUpdater
 import java.util.Currency
 import java.util.Date
+import java.util.concurrent.CopyOnWriteArrayList
+import java.util.concurrent.atomic.AtomicInteger
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
@@ -25,11 +32,14 @@ import kotlin.time.Duration.Companion.seconds
 @EntryPoint
 interface TestAppEntryPoint : AppEntryPoint {
 
+    val widgetUpdates: RecordingWidgetUpdater
+    val widgetUpdateFailures: UncaughtWidgetUpdateFailures
     val exchangeRates: FixedExchangeRateDataSource
     val favorites: FavoriteDataSource
     val textConversionDeadline: AdjustableTextConversionDeadline
     val quickRateDeadline: AdjustableQuickRateDeadline
     val favoriteReadFailure: FavoriteReadFailure
+    val favoritesWidgetDeadline: AdjustableFavoritesWidgetDeadline
 
     @EntryPoint.Factory
     interface Factory {
@@ -129,6 +139,57 @@ class AdjustableQuickRateDeadline {
 @Replaces(QuickRateDeadline::class)
 internal fun adjustableQuickRateDeadline(deadline: AdjustableQuickRateDeadline) =
     QuickRateDeadline(deadline.value)
+
+@Singleton
+@Include
+class AdjustableFavoritesWidgetDeadline {
+
+    @Volatile
+    var value: Duration = 2.seconds
+
+}
+
+@Include
+@Replaces(FavoritesWidgetDeadline::class)
+internal fun adjustableFavoritesWidgetDeadline(deadline: AdjustableFavoritesWidgetDeadline) =
+    FavoritesWidgetDeadline(deadline.value)
+
+@Singleton
+@Include
+class RecordingWidgetUpdater : WidgetUpdater {
+
+    private val count = AtomicInteger()
+
+    val updates: Int get() = count.get()
+
+    @Volatile
+    var failure: Throwable? = null
+
+    override suspend fun update() {
+        count.incrementAndGet()
+        failure?.let { throw it }
+    }
+
+}
+
+@Singleton
+@Include
+@Replaces(WidgetSessions::class)
+internal fun recordingWidgetSessions(recording: RecordingWidgetUpdater) = WidgetSessions(recording)
+
+@Singleton
+@Include
+class UncaughtWidgetUpdateFailures {
+
+    val errors: MutableList<Throwable> = CopyOnWriteArrayList()
+
+}
+
+@Include
+@Replaces(WidgetUpdateScope::class)
+internal fun immediateWidgetUpdateScope(failures: UncaughtWidgetUpdateFailures) = WidgetUpdateScope(
+    CoroutineScope(SupervisorJob() + Dispatchers.Unconfined + CoroutineExceptionHandler { _, error -> failures.errors += error })
+)
 
 @Include
 @Replaces(HistoryDataSource::class)
