@@ -2,5 +2,6 @@
 <resources>
 
     <bool name="light_mode">true</bool>
+    <bool name="app_functions_enabled">false</bool>
 
 </resources>

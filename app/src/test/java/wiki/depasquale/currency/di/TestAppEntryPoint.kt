@@ -40,6 +40,7 @@ interface TestAppEntryPoint : AppEntryPoint {
     val quickRateDeadline: AdjustableQuickRateDeadline
     val favoriteReadFailure: FavoriteReadFailure
     val favoritesWidgetDeadline: AdjustableFavoritesWidgetDeadline
+    val appFunctionsDeadline: AdjustableAppFunctionsDeadline
 
     @EntryPoint.Factory
     interface Factory {
@@ -153,6 +154,20 @@ class AdjustableFavoritesWidgetDeadline {
 @Replaces(FavoritesWidgetDeadline::class)
 internal fun adjustableFavoritesWidgetDeadline(deadline: AdjustableFavoritesWidgetDeadline) =
     FavoritesWidgetDeadline(deadline.value)
+
+@Singleton
+@Include
+class AdjustableAppFunctionsDeadline {
+
+    @Volatile
+    var value: Duration = 3.seconds
+
+}
+
+@Include
+@Replaces(AppFunctionsDeadline::class)
+internal fun adjustableAppFunctionsDeadline(deadline: AdjustableAppFunctionsDeadline) =
+    AppFunctionsDeadline(deadline.value)
 
 @Singleton
 @Include

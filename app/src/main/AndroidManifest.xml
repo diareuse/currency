@@ -82,6 +82,33 @@
 
         </service>
 
+        <service
+            android:name=".platform.functions.CurrencyAppFunctionsService"
+            android:enabled="@bool/app_functions_enabled"
+            android:exported="true"
+            android:permission="android.permission.BIND_APP_FUNCTION_SERVICE"
+            tools:targetApi="36">
+
+            <intent-filter>
+
+                <action android:name="android.app.appfunctions.AppFunctionService" />
+
+            </intent-filter>
+
+            <property
+                android:name="android.app.appfunctions.schema"
+                android:value="app_functions_schema.xsd" />
+
+            <property
+                android:name="android.app.appfunctions"
+                android:value="currency_functions-v1.xml" />
+
+            <property
+                android:name="android.app.appfunctions.v2"
+                android:value="currency_functions.xml" />
+
+        </service>
+
         <receiver
             android:name=".platform.widget.FavoritesWidgetReceiver"
             android:exported="true"

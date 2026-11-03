@@ -35,6 +35,7 @@ android {
 
 ksp {
     arg("spike.viewmodel.enabled", "false")
+    arg("appfunctions:generateV1Xml", "true")
 }
 
 dependencies {
@@ -53,6 +54,8 @@ dependencies {
     implementation(libs.material)
     implementation(libs.glance.appwidget)
     implementation(libs.glance.material3)
+    implementation(libs.appfunctions)
+    ksp(libs.appfunctions.compiler)
 
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.test.core)
@@ -60,6 +63,7 @@ dependencies {
     testImplementation(libs.work.testing)
     testImplementation(libs.compose.ui.test.junit4)
     testImplementation(libs.glance.appwidget.testing)
+    testImplementation(libs.appfunctions.testing)
 
     releaseImplementation(platform(libs.firebase.bom))
     releaseImplementation(libs.firebase.analytics)
