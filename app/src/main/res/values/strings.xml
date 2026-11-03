@@ -19,4 +19,7 @@
     <string name="shortcut_history_label">History</string>
     <string name="shortcut_pair_removed">Currency removed from favorites</string>
     <string name="shortcut_pair_label">%1$s → %2$s</string>
+    <string name="tile_label">Exchange rate</string>
+    <string name="tile_no_pair">Add two favorites</string>
+    <string name="tile_unavailable">Rates unavailable</string>
 </resources>
