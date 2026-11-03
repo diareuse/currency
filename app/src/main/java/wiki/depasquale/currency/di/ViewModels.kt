@@ -6,9 +6,13 @@ import cursola.rate.FavoriteDataSource
 import cursola.rate.HistoryDataSource
 import cursola.rate.LatestValueDataSource
 import cursola.rate.convert.CurrencyConverter
+import cursola.rate.convert.MoneyFormat
+import cursola.rate.convert.TextConversion
+import cursola.rate.view.ConvertTextViewModel
 import cursola.rate.view.FavoritesViewModel
 import cursola.rate.view.HistoricalViewModel
 import cursola.rate.view.ListingViewModel
+import cursola.rate.view.spikeViewModelConvertTextViewModel
 import cursola.rate.view.spikeViewModelFavoritesViewModel
 import cursola.rate.view.spikeViewModelHistoricalViewModel
 import cursola.rate.view.spikeViewModelListingViewModel
@@ -37,3 +41,10 @@ internal fun listingViewModel(
     exchange: ExchangeRateDataSource,
     favorite: FavoriteDataSource
 ): ViewModel = spikeViewModelListingViewModel(exchange, favorite)
+
+@Include(bindTo = BindTarget.Map)
+@ViewModelKey(ConvertTextViewModel::class)
+internal fun convertTextViewModel(
+    conversion: TextConversion,
+    format: MoneyFormat
+): ViewModel = spikeViewModelConvertTextViewModel(conversion, format)

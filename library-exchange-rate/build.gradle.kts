@@ -37,6 +37,7 @@ dependencies {
     ksp(libs.room.compiler)
 
     testImplementation(libs.kxml2)
+    testImplementation(libs.icu4j)
     testImplementation(libs.robolectric)
     testImplementation(libs.androidx.test.core)
     testImplementation(libs.androidx.test.ext.junit)

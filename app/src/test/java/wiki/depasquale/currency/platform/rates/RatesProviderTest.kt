@@ -190,6 +190,7 @@ class RatesProviderTest {
         Thread.currentThread().interrupt()
         query(Currencies.CONTENT_URI).close()
         graph.exchangeRates.hanging = false
+        // Must stay non-zero: a query that never suspends never reads a leftover interrupt flag.
         graph.exchangeRates.latency = 1.milliseconds
 
         val count = query(Currencies.CONTENT_URI).use { it.count }

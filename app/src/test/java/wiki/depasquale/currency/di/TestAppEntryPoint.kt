@@ -17,12 +17,14 @@ import java.util.Currency
 import java.util.Date
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 @EntryPoint
 interface TestAppEntryPoint : AppEntryPoint {
 
     val exchangeRates: FixedExchangeRateDataSource
     val favorites: FavoriteDataSource
+    val textConversionDeadline: AdjustableTextConversionDeadline
 
     @EntryPoint.Factory
     interface Factory {
@@ -81,6 +83,20 @@ class FixedConversionRateDataSource(
 @Include
 @Replaces(BinderTimeout::class)
 fun shortBinderTimeout() = BinderTimeout(100.milliseconds)
+
+@Singleton
+@Include
+class AdjustableTextConversionDeadline {
+
+    @Volatile
+    var value: Duration = 5.seconds
+
+}
+
+@Include
+@Replaces(TextConversionDeadline::class)
+internal fun adjustableTextConversionDeadline(deadline: AdjustableTextConversionDeadline) =
+    TextConversionDeadline(deadline.value)
 
 @Include
 @Replaces(HistoryDataSource::class)
