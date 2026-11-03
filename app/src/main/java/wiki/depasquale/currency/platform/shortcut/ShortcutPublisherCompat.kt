@@ -1,19 +1,16 @@
 package wiki.depasquale.currency.platform.shortcut
 
-import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
-import androidx.core.net.toUri
 import wiki.depasquale.currency.R
 import wiki.depasquale.currency.platform.link.CurrencyPair
-import wiki.depasquale.currency.platform.link.toConvertLink
+import wiki.depasquale.currency.platform.link.ConverterLaunchIntent
 
 class ShortcutPublisherCompat(
     private val context: Context,
-    private val target: Class<out Activity>
+    private val launchIntent: ConverterLaunchIntent
 ) : ShortcutPublisher {
 
     override fun publish(pairs: List<CurrencyPair>) {
@@ -24,9 +21,7 @@ class ShortcutPublisherCompat(
     }
 
     private fun toShortcut(rank: Int, pair: CurrencyPair): ShortcutInfoCompat {
-        val intent = Intent(Intent.ACTION_VIEW, pair.toConvertLink().toUri())
-            .setClass(context, target)
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+        val intent = launchIntent.create(pair)
         val label = context.getString(R.string.shortcut_pair_label, pair.from.currencyCode, pair.to.currencyCode)
         return ShortcutInfoCompat.Builder(context, pair.shortcutId())
             .setShortLabel(label)
