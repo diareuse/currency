@@ -6,6 +6,7 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.work.testing.TestListenableWorkerBuilder
+import cursola.rate.view.ConvertTextViewModel
 import cursola.rate.view.FavoritesViewModel
 import cursola.rate.view.HistoricalViewModel
 import cursola.rate.view.ListingViewModel
@@ -29,7 +30,12 @@ class AppGraphTest {
     @Test
     fun app_graph_registers_every_screen_view_model() {
         assertEquals(
-            setOf(FavoritesViewModel::class, HistoricalViewModel::class, ListingViewModel::class),
+            setOf(
+                ConvertTextViewModel::class,
+                FavoritesViewModel::class,
+                HistoricalViewModel::class,
+                ListingViewModel::class
+            ),
             app.appGraph.viewModels.keys
         )
     }

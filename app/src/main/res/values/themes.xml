@@ -13,4 +13,6 @@
 
     <style name="Theme.Currency" parent="Theme.Currency.Foundation.Compat"></style>
 
+    <style name="Theme.Currency.Dialog" parent="Theme.Material3.DayNight.Dialog.Alert" />
+
 </resources>
