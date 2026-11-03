@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_convert"
+        android:shortcutId="convert"
+        android:shortcutShortLabel="@string/shortcut_convert_label">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="currency://convert"
+            android:targetClass="wiki.depasquale.currency.screen.MainActivity"
+            android:targetPackage="wiki.depasquale.cursola" />
+
+    </shortcut>
+
+    <shortcut
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_history"
+        android:shortcutId="history"
+        android:shortcutShortLabel="@string/shortcut_history_label">
+
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="currency://history"
+            android:targetClass="wiki.depasquale.currency.screen.MainActivity"
+            android:targetPackage="wiki.depasquale.cursola" />
+
+    </shortcut>
+
+</shortcuts>

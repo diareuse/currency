@@ -8,6 +8,7 @@ import cursola.rate.convert.CurrencyConverter
 import cursola.rate.convert.RatesQuery
 import spike.EntryPoint
 import spike.lifecycle.viewmodel.ViewModelEntryPoint
+import wiki.depasquale.currency.platform.link.LaunchDestinationParser
 import wiki.depasquale.currency.platform.rates.RatesTable
 
 @EntryPoint
@@ -18,6 +19,7 @@ interface AppEntryPoint : ViewModelEntryPoint {
     val amountParser: AmountParser
     val ratesQuery: RatesQuery
     val ratesTable: RatesTable
+    val launchDestinations: LaunchDestinationParser
 
     fun latest(): LatestValueDataSource
 
