@@ -23,10 +23,18 @@ class RatesProvider : ContentProvider() {
     ): Cursor {
         require(selection.isNullOrEmpty()) { "Selection is not supported" }
         require(sortOrder.isNullOrEmpty()) { "Sort order is not supported" }
-        val rows = runBlocking { table.rows(uri) }.project(projection?.toList())
+        val rows = rowsOf(uri).project(projection?.toList())
         return MatrixCursor(rows.columns.toTypedArray(), rows.rows.size).apply {
             rows.rows.forEach { addRow(it) }
         }
+    }
+
+    private fun rowsOf(uri: Uri) = try {
+        runBlocking { table.rows(uri) }
+    } catch (_: InterruptedException) {
+        RatesRows(table.columns(uri), emptyList())
+    } finally {
+        Thread.interrupted()
     }
 
     override fun getType(uri: Uri) = table.type(uri)

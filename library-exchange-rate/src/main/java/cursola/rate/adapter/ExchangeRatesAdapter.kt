@@ -17,17 +17,14 @@ import java.util.Locale
 
 class ExchangeRatesAdapter {
 
-    private val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-    private val xml = XmlAdapter(formatter)
-    private val parser = XmlPullParserFactory.newInstance().newPullParser()
+    private val parsers = XmlPullParserFactory.newInstance()
 
-    suspend fun adapt(stream: InputStream): List<ExchangeRate> {
+    suspend fun adapt(stream: InputStream): List<ExchangeRate> = withContext(Dispatchers.IO) {
+        val parser = parsers.newPullParser()
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, true)
         parser.setInput(stream, null)
         parser.nextTag()
-        return withContext(Dispatchers.IO) {
-            xml.adapt(parser)
-        }
+        XmlAdapter(SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)).adapt(parser)
     }
 
     private class XmlAdapter(

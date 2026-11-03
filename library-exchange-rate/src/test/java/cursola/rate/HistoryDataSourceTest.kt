@@ -12,8 +12,10 @@ import org.mockito.kotlin.whenever
 import java.io.IOException
 import java.util.Currency
 import java.util.Date
+import kotlin.coroutines.cancellation.CancellationException
 import kotlin.test.assertContains
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 internal class HistoryDataSourceTest : AbstractDataSourceTest() {
 
@@ -58,6 +60,12 @@ internal class HistoryDataSourceTest : AbstractDataSourceTest() {
         val result = source.get(currency)
         for (item in items)
             assertContains(result, ExchangeRate(item))
+    }
+
+    @Test
+    fun get_propagates_cancellation_instead_of_trying_next_source() = runTest {
+        whenever(network.get()).thenThrow(CancellationException("cancelled"))
+        assertFailsWith<CancellationException> { source.get(Currency.getInstance("USD")) }
     }
 
     @Test

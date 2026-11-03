@@ -8,8 +8,10 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import java.io.IOException
+import kotlin.coroutines.cancellation.CancellationException
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 
 internal class ConversionRateDataSourceTest : AbstractDataSourceTest() {
 
@@ -48,6 +50,15 @@ internal class ConversionRateDataSourceTest : AbstractDataSourceTest() {
         whenever(rates.get(subject.toCode)).thenReturn(null)
         whenever(network.get()).thenThrow(IOException())
         source.get(subject.fromCurrency, subject.toCurrency)
+    }
+
+    @Test
+    fun get_propagates_cancellation_instead_of_trying_next_source() = runTest {
+        val subject = prepareTest()
+        whenever(network.get()).thenThrow(CancellationException("cancelled"))
+        assertFailsWith<CancellationException> {
+            source.get(subject.fromCurrency, subject.toCurrency)
+        }
     }
 
     @Test
