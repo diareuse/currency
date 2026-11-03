@@ -51,7 +51,7 @@
             android:excludeFromRecents="true"
             android:exported="true"
             android:label="@string/convert_text_label"
-            android:theme="@style/Theme.Currency.Dialog">
+            android:theme="@style/Theme.Currency.Transparent">
 
             <intent-filter>
 

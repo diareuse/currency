@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -29,10 +30,15 @@ class ConvertTextActivity : ComponentActivity() {
             return
         }
         guardAgainstOverlays()
+        enableEdgeToEdge()
         val text = selectedText() ?: run {
             finish()
             return
         }
+        showSheet(text)
+    }
+
+    private fun showSheet(text: CharSequence) {
         val viewModels = appGraph.viewModelEntryPointFactory
         setContent {
             CompositionLocalProvider(LocalViewModelEntryPointFactory provides viewModels) {
@@ -41,7 +47,12 @@ class ConvertTextActivity : ComponentActivity() {
                     val locale = LocalConfiguration.current.locales[0]
                     LaunchedEffect(text, locale) { viewModel.convert(text, locale) }
                     val state by viewModel.state.collectAsState()
-                    ConvertTextScreen(state, onSelect = { select(it.value) }, onOpenApp = ::openApp)
+                    ConvertTextScreen(
+                        state = state,
+                        onSelect = { select(it.value) },
+                        onOpenApp = ::openApp,
+                        onDismiss = ::finish
+                    )
                 }
             }
         }
