@@ -26,7 +26,6 @@ import wiki.depasquale.currency.platform.shortcut.ShortcutPublisher
 import wiki.depasquale.currency.platform.shortcut.ShortcutPublisherCompat
 import wiki.depasquale.currency.platform.shortcut.ShortcutRefresh
 import wiki.depasquale.currency.platform.shortcut.ShortcutRefreshSerialized
-import wiki.depasquale.currency.platform.tile.TileListeningRequest
 import wiki.depasquale.currency.platform.widget.WidgetUpdater
 import wiki.depasquale.currency.screen.MainActivity
 
@@ -54,12 +53,10 @@ internal fun shortcutRefresh(
 @Include
 internal fun ratesUpdatedListener(
     shortcuts: ShortcutRefresh,
-    tile: TileListeningRequest,
     widget: WidgetUpdater
 ): RatesUpdatedListener = RatesUpdatedListenerComposite(
     listOf(
         RatesUpdatedListenerErrorBoundary(shortcuts::refresh),
-        RatesUpdatedListenerErrorBoundary(tile),
         RatesUpdatedListenerErrorBoundary(widget::update),
     )
 )
@@ -67,11 +64,9 @@ internal fun ratesUpdatedListener(
 @Include
 internal fun favoritesChangedListener(
     shortcuts: ShortcutRefresh,
-    tile: TileListeningRequest,
     widget: WidgetUpdater
 ): FavoritesChangedListener = FavoritesChangedListenerComposite(
     listOf(
-        FavoritesChangedListenerErrorBoundary(FavoritesChangedListenerOnContext(tile, Dispatchers.IO)),
         FavoritesChangedListenerErrorBoundary(FavoritesChangedListenerOnContext(shortcuts::refresh, Dispatchers.IO)),
         FavoritesChangedListenerErrorBoundary(widget::update),
     )

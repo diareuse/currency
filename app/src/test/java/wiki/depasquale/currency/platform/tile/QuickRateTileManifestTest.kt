@@ -18,7 +18,7 @@ class QuickRateTileManifestTest {
     private val app = ApplicationProvider.getApplicationContext<App>()
 
     @Test
-    fun quick_settings_offers_an_exported_active_rate_tile_bound_only_by_the_system() {
+    fun quick_settings_offers_an_exported_non_active_rate_tile_bound_only_by_the_system() {
         val intent = Intent(TileService.ACTION_QS_TILE).setPackage(app.packageName)
 
         val service = app.packageManager.queryIntentServices(intent, PackageManager.GET_META_DATA)
@@ -27,7 +27,7 @@ class QuickRateTileManifestTest {
         assertEquals(QuickRateTileService::class.java.name, service.name)
         assertEquals(true, service.exported)
         assertEquals(Manifest.permission.BIND_QUICK_SETTINGS_TILE, service.permission)
-        assertEquals(true, service.metaData?.getBoolean(TileService.META_DATA_ACTIVE_TILE))
+        assertEquals(false, service.metaData?.getBoolean(TileService.META_DATA_ACTIVE_TILE, true))
         assertNotEquals(0, service.icon)
         assertEquals("Exchange rate", service.loadLabel(app.packageManager).toString())
     }

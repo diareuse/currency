@@ -1,7 +1,6 @@
 package wiki.depasquale.currency.platform.tile
 
 import android.app.PendingIntent
-import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
 import android.service.quicksettings.TileService
@@ -17,11 +16,6 @@ class QuickRateTileService : TileService() {
     private val scope = MainScope()
     private var listening: Job? = null
     private var shown: QuickRate? = null
-
-    override fun onTileAdded() {
-        super.onTileAdded()
-        runCatching { requestListeningState(this, ComponentName(this, javaClass)) }
-    }
 
     override fun onStartListening() {
         super.onStartListening()
