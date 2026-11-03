@@ -25,20 +25,26 @@ class ConvertTextActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (intent.action != Intent.ACTION_PROCESS_TEXT) {
+        val request = request() ?: run {
             finish()
             return
         }
         guardAgainstOverlays()
         enableEdgeToEdge()
-        val text = selectedText() ?: run {
+        val text = request.text() ?: run {
             finish()
             return
         }
-        showSheet(text)
+        showSheet(request, text)
     }
 
-    private fun showSheet(text: CharSequence) {
+    private fun request(): ConvertTextRequest? = when (intent.action) {
+        Intent.ACTION_PROCESS_TEXT -> ProcessTextRequest(this, ::copying)
+        Intent.ACTION_SEND -> SharedTextRequest(intent, ::copying)
+        else -> null
+    }
+
+    private fun showSheet(request: ConvertTextRequest, text: CharSequence) {
         val viewModels = appGraph.viewModelEntryPointFactory
         setContent {
             CompositionLocalProvider(LocalViewModelEntryPointFactory provides viewModels) {
@@ -49,19 +55,13 @@ class ConvertTextActivity : ComponentActivity() {
                     val state by viewModel.state.collectAsState()
                     ConvertTextScreen(
                         state = state,
-                        onSelect = { select(it.value) },
+                        onSelect = { select(request.target(), it.value) },
                         onOpenApp = ::openApp,
                         onDismiss = ::finish
                     )
                 }
             }
         }
-    }
-
-    private fun selectedText(): CharSequence? = try {
-        intent.getCharSequenceExtra(Intent.EXTRA_PROCESS_TEXT) ?: ""
-    } catch (_: RuntimeException) {
-        null
     }
 
     private fun guardAgainstOverlays() {
@@ -71,8 +71,8 @@ class ConvertTextActivity : ComponentActivity() {
         }
     }
 
-    private fun select(value: String) {
-        target().accept(value)
+    private fun select(target: ConvertedValueTarget, value: String) {
+        target.accept(value)
         finish()
     }
 
@@ -81,9 +81,7 @@ class ConvertTextActivity : ComponentActivity() {
         finish()
     }
 
-    private fun target(): ConvertedValueTarget {
-        val readOnly = intent.getBooleanExtra(Intent.EXTRA_PROCESS_TEXT_READONLY, false)
-        if (!readOnly) return ConvertedValueReplacesSelection(this)
+    private fun copying(): ConvertedValueTarget {
         val clipboard = ConvertedValueToClipboard(
             getSystemService(ClipboardManager::class.java),
             getString(R.string.convert_text_label)

@@ -145,6 +145,24 @@ class ConvertTextSheetTest {
     }
 
     @Test
+    fun pressing_back_closes_the_shared_text_sheet_without_result() {
+        favorites(EUR, GBP)
+        val intent = Intent(Intent.ACTION_SEND)
+            .setClass(app, ConvertTextActivity::class.java)
+            .setType("text/plain")
+            .putExtra(Intent.EXTRA_TEXT, "12 USD")
+
+        ActivityScenario.launchActivityForResult<Activity>(intent).use { scenario ->
+            awaitText("£7.68")
+            val sheet = ShadowDialog.getLatestDialog()
+            sheet.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK))
+            sheet.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_BACK))
+
+            assertClosedWithoutResult(scenario)
+        }
+    }
+
+    @Test
     fun sheet_is_shown_over_a_transparent_full_screen_window_without_a_dialog_frame() {
         launch("12 USD").use { scenario ->
             scenario.onActivity { activity ->
