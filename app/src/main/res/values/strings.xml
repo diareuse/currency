@@ -8,7 +8,7 @@
     <string name="search_cta">Search here…</string>
     <string name="history_footnote">Charts here are showing a 3-month history of any favorite currency in relation to Euro.</string>
     <string name="history_title">History</string>
-    <string name="convert_text_label">Convert</string>
+    <string name="convert_text_label">Show exchange rate</string>
     <string name="convert_text_loading">Converting…</string>
     <string name="convert_text_unparseable">No amount with a currency found in the selected text.</string>
     <string name="convert_text_no_favorites">Add favorite currencies in Cursola to convert into them.</string>
