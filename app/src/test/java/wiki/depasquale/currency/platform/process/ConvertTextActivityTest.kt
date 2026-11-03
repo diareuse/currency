@@ -74,6 +74,16 @@ class ConvertTextActivityTest {
     }
 
     @Test
+    fun process_text_selection_menu_labels_the_convert_activity_distinctly_from_the_system_convert_action() {
+        val intent = Intent(Intent.ACTION_PROCESS_TEXT).setType("text/plain")
+
+        val match = app.packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY)
+            .single { it.activityInfo.packageName == app.packageName }
+
+        assertEquals("Show exchange rate", match.loadLabel(app.packageManager).toString())
+    }
+
+    @Test
     fun selected_code_amount_is_shown_in_every_favorite_rounded_to_its_fraction_digits_and_tapped_one_replaces_selection() {
         favorites(EUR, JPY, GBP)
 
