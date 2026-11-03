@@ -5,6 +5,7 @@ import cursola.rate.FavoriteDataSource
 import cursola.rate.LatestValueDataSource
 import cursola.rate.convert.CurrencyConverter
 import cursola.rate.convert.CurrencyConverterTimeout
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -44,6 +45,7 @@ internal fun favoritesSnapshot(
     return FavoritesSnapshotSourceErrorBoundary(offMain)
 }
 
+// Spike alpha07 truncates guard tables whose last singleton id is 9; this singleton shifts the ids (see GuardTableTest).
 internal data class WidgetSessions(val updater: WidgetUpdater)
 
 @Singleton
@@ -59,7 +61,9 @@ internal data class WidgetUpdateScope(val value: CoroutineScope)
 
 @Singleton
 @Include
-internal fun widgetUpdateScope() = WidgetUpdateScope(CoroutineScope(SupervisorJob() + Dispatchers.IO))
+internal fun widgetUpdateScope() =
+    // Last-resort guard only: updates launched here are already wrapped by WidgetUpdaterErrorBoundary.
+    WidgetUpdateScope(CoroutineScope(SupervisorJob() + Dispatchers.IO + CoroutineExceptionHandler { _, _ -> }))
 
 @Include
 internal fun latestValueChangedListener(widget: WidgetUpdater, scope: WidgetUpdateScope): LatestValueChangedListener =
