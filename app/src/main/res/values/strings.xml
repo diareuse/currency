@@ -15,4 +15,8 @@
     <string name="convert_text_unavailable">Exchange rates are not available right now.</string>
     <string name="convert_text_open_app">Open app</string>
     <string name="convert_text_copied">Copied to clipboard</string>
+    <string name="shortcut_convert_label">Convert</string>
+    <string name="shortcut_history_label">History</string>
+    <string name="shortcut_pair_removed">Currency removed from favorites</string>
+    <string name="shortcut_pair_label">%1$s → %2$s</string>
 </resources>

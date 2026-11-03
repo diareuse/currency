@@ -10,14 +10,15 @@ import spike.Include
 class UpdateWorker(
     context: Context,
     params: WorkerParameters,
-    private val exchangeRate: ExchangeRateDataSource
+    private val exchangeRate: ExchangeRateDataSource,
+    private val ratesUpdated: RatesUpdatedListener
 ) : CoroutineWorker(context, params) {
 
     override suspend fun doWork(): Result {
-        return exchangeRate.runCatching { get() }.fold(
-            onSuccess = { if (it.isEmpty()) Result.retry() else Result.success() },
-            onFailure = { Result.retry() }
-        )
+        val rates = exchangeRate.runCatching { get() }.getOrElse { return Result.retry() }
+        if (rates.isEmpty()) return Result.retry()
+        ratesUpdated.onRatesUpdated()
+        return Result.success()
     }
 
 }

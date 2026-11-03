@@ -45,6 +45,7 @@ dependencies {
 
     implementation(libs.activity.compose)
     implementation(libs.appcompat)
+    implementation(libs.core.ktx)
     implementation(libs.navigation.compose)
     implementation(libs.startup.runtime)
     implementation(libs.work.runtime)
