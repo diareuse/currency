@@ -10,9 +10,7 @@ import wiki.depasquale.currency.platform.tile.QuickRateSource
 import wiki.depasquale.currency.platform.tile.QuickRateSourceErrorBoundary
 import wiki.depasquale.currency.platform.tile.QuickRateSourceOnContext
 import wiki.depasquale.currency.platform.tile.QuickRateSourceTopPair
-import wiki.depasquale.currency.platform.tile.QuickRateTileService
 import wiki.depasquale.currency.platform.tile.RateFormatSignificant
-import wiki.depasquale.currency.platform.tile.TileListeningRequest
 import wiki.depasquale.currency.platform.tile.TileRenderer
 import wiki.depasquale.currency.platform.tile.TileRendererDefault
 import wiki.depasquale.currency.platform.tile.TileRendererErrorBoundary
@@ -49,6 +47,3 @@ internal fun topFavoritePair(favorite: FavoriteDataSource): TopFavoritePair =
 @Include
 internal fun tileRenderer(context: Context): TileRenderer =
     TileRendererErrorBoundary(TileRendererDefault(context, RateFormatSignificant(RATE_SIGNIFICANT_DIGITS)))
-
-@Include
-internal fun tileListeningRequest(context: Context) = TileListeningRequest(context, QuickRateTileService::class.java)
