@@ -19,7 +19,7 @@ jobs:
       - name: Set Java
         uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
         with:
-          java-version: 17
+          java-version: 21
           distribution: temurin
 
       - name: Setup Android SDK
@@ -43,7 +43,7 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@b843ebf9b913146b38da2eaa7aeddf76074ae1ad # v6.1.0
         with:
-          java-version: 17
+          java-version: 21
           distribution: temurin
 
       - name: Setup Android SDK
