@@ -84,7 +84,7 @@ internal class HistoryDataSourceTest : AbstractDataSourceTest() {
     fun get_fromNetwork_savesAllEntriesToDatabase() = runTest {
         // specifically selected currency without pegs
         val currency = Currency.getInstance("CZK")
-        val items = List(10) { makeExchangeRate(currency = currency) }
+        val items = List(10) { makeExchangeRate(currency = currency, rate = it + 1.0) }
         whenever(network.get()).thenReturn(items)
         source.get(currency)
         val rates = database.rates()
