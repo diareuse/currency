@@ -45,6 +45,7 @@ class ConvertTextViewModel internal constructor(
     private data class ConvertTextRequest(val text: String, val locale: Locale)
 
     private fun row(conversion: Conversion, locale: Locale) = ConvertTextRow(
+        currency = conversion.result.currency,
         name = conversion.result.currency.getDisplayName(locale),
         value = format.format(conversion.result, locale)
     )

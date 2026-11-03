@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,6 +25,8 @@ import cursola.view.ExchangeRateItem
 import wiki.depasquale.currency.screen.style.CurrencyTheme
 import java.util.Currency
 import java.util.Locale
+
+const val FavoriteItemTestTag = "favorite-item"
 
 @Composable
 fun FavoriteItem(
@@ -39,6 +42,7 @@ fun FavoriteItem(
                 shape = MaterialTheme.shapes.medium
             )
             .clip(MaterialTheme.shapes.medium)
+            .testTag(FavoriteItemTestTag)
             .then(modifier),
         flag = {
             FavoriteItemFlag(currency = currency)
